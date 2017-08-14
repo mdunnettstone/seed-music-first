@@ -1,0 +1,19 @@
+<div class = "booyah-box col-10 offset-1">
+<h1 class = "text-center">Rooms</h1>
+<div class = "row">
+ <% @rooms.each do |room| %>
+  <div class = "col-md-6">
+  <div class = "card card-1">
+    <div class = "card-header">
+      <b><%= room.name %></b>
+    </div>
+    <div class = "card-block">
+    <p class = "card-text"><%= room.address %></p>
+    <p class = "card-text">Capacity: <%= room.capacity %></p>
+    </div>
+  </div>
+  <br />
+  </div>
+  <br />
+  <% end %>
+</div>
