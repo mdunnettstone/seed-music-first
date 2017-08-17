@@ -1,0 +1,32 @@
+<h1 class = "ml-3"><%= @room.name %></h1>
+<div class = "clear"></div>
+<div class = "container-fluid">
+  <div class = "booyah-box col-10 offset-1">
+      <br />
+    <div class = "row">
+      <div class = "col-md-6">
+        <div class = "card">
+          <div class = "card-header">
+            <h4>Facilities</h4>
+          </div>
+          <div class = "card-block">
+            <p>Capacity: <%= @room.capacity %></p>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class = "col-md-6">
+        <div class = "card">
+          <div class = "card-header">
+            <h4>Location</h4>
+          </div>
+          <div class = "card-block">
+            <p>Address: <%= @room.address %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+</div>
+

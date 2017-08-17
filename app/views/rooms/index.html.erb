@@ -1,21 +1,24 @@
-<div class = "booyah-box col-10 offset-1">
-<div class = "page-header">
-<h1>Rooms</h1>
-</div>
-<div class = "row">
- <% @rooms.each do |room| %>
-  <div class = "col-md-6">
-  <div class = "card card-1">
-    <div class = "card-header">
-      <b><%= room.name %></b>
-    </div>
-    <div class = "card-block">
-    <p class = "card-text"><%= room.address %></p>
-    <p class = "card-text">Capacity: <%= room.capacity %></p>
+<h1 class = "ml-3">Rooms</h1>
+<div class = "clear"></div>
+<div class = "container-fluid">
+  <div class = "booyah-box col-10 offset-1">
+      <br />
+    <div class = "row">
+      <% @rooms.each do |room| %>
+        <div class = "col-md-6">
+          <div class = "card card-1">
+            <div class = "card-header">
+              <b><%= link_to room.name, room_path(room) %></b>
+            </div>
+            <div class = "card-block">
+              <p class = "card-text"><%= room.address %></p>
+              <p class = "card-text">Capacity: <%= room.capacity %></p>
+            </div>
+          </div>
+          <br />
+        </div>
+        <br />
+      <% end %>
     </div>
   </div>
-  <br />
-  </div>
-  <br />
-  <% end %>
 </div>
