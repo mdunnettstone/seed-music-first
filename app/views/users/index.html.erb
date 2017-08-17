@@ -8,10 +8,11 @@
       <div class = "col-md-6">
         <div class = "card card-1">
           <div class = "card-header">
-            <h6><%= user.email %></h6>
+            <h6><%= link_to "#{user.firstname} #{user.surname}", user_path(user) %></h6>
           </div>
           <div class = "card-block">
             <p class = "card-text"><%= user.description %></p>
+            <p class = "card-text text-muted">Email: <%= mail_to user.email, user.email %></p>
           </div>
         </div>
       </div>
