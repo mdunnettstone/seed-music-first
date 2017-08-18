@@ -21,6 +21,25 @@
         </div>
         <br />
       </div>
+    <div class = "col-md-6">
+    <table class = "table table-hover">
+      <thead>
+        <tr>
+          <th>Instrument</th>
+          <th>Genre</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @user.user_instruments.each do |user_instrument| %>
+        <tr>
+          <td><%= user_instrument.instrument.name %></td>
+          <td><%= user_instrument.genre.name %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    </div>
+      </div>
     </div>
   </div>
 </div>

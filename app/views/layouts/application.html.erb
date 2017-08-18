@@ -6,6 +6,17 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- If you want to use the buttons on the bootstrap -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- rippler CSS -->
+    <link rel="stylesheet" href="./css/rippler.min.css">
+
+    <!-- vendor js -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <!-- rippler js -->
+    <script src="./dist/js/jquery.rippler.min.js"></script>
   </head>
 
   <body id = "background-grey">
@@ -26,7 +37,7 @@
           <%= link_to 'People', users_path, class: 'nav-link' %>
         </li>
       </ul>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav float-right">
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link' %>

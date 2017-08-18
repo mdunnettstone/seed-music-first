@@ -1,58 +1,28 @@
-<h2 class = "text-center">Sign up</h2>
+<h1 class = "ml-3">Sign up</h1>
 
+<div class = "booyah-box col-10 offset-1 pt-3">
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <%= f.error_notification %>
 
-<div class = "container">
-  <div class = "row">
-    <div class = "col-10 offset-1 text-center">
+  <h2>Your details</h2>
+  <div class="form-inputs col-md-6">
+    <%= f.input :firstname, required: true, autofocus: true %>
+    <%= f.input :surname, required: true, autofocus: true %>
+    <%= f.input :email, required: true, autofocus: true, hint: "Use your work one" %>
+    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+    <%= f.input :password_confirmation, required: true %>
+  </div>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true %>
-    </div>
+  <h2>Your music</h2>
+  <div class="form-inputs col-md-6">
+    <%= f.association :user_instruments %>
+  </div>
 
-    <br />
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up", class: "btn btn-primary col-12" %>
+  </div>
+<% end %>
 
-    <div class="field">
-      <%= f.label :firstname %><br />
-      <%= f.input :firstname, autofocus: true %>
-    </div>
-
-    <br />
-
-    <div class="field">
-      <%= f.label :surname %><br />
-      <%= f.input :surname, autofocus: true %>
-    </div>
-
-    <br />
-
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "off" %>
-    </div>
-
-    <br />
-
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
-
-    <br />
-
-    <div class="actions">
-      <%= f.submit "Sign up", class: "btn btn-primary" %>
-    </div>
-  <% end %>
-
-  <%= render "devise/shared/links" %>
-
-    </div>
-
-  <br />
+<%= render "devise/shared/links" %>
+<br />
 </div>

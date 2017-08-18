@@ -13,10 +13,12 @@
           <div class = "card-block">
             <p class = "card-text"><%= user.description %></p>
             <p class = "card-text text-muted">Email: <%= mail_to user.email, user.email %></p>
+            <p class = "card-text text-muted">Instruments: <% user.unique_instruments.each do |user_instrument| %><%= user_instrument %>, <% end %></p>
+            <p class = "card-text text-muted">Genres: <% user.unique_genres.each do |user_genre| %><%= user_genre %>, <% end %></p>
           </div>
         </div>
-      </div>
       <br />
+      </div>
       <% end %>
     </div>
     <br />
