@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170817205007) do
+ActiveRecord::Schema.define(version: 20170818131554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 20170817205007) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "room_comments", force: :cascade do |t|
+    t.string  "category"
+    t.text    "message"
+    t.integer "user_id"
+    t.integer "room_id"
+    t.index ["room_id"], name: "index_room_comments_on_room_id", using: :btree
+    t.index ["user_id", "room_id"], name: "index_room_comments_on_user_id_and_room_id", using: :btree
   end
 
   create_table "rooms", force: :cascade do |t|
