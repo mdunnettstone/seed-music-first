@@ -1,27 +1,30 @@
 <h1 class = "ml-3">Sign up</h1>
 
 <div class = "booyah-box col-10 offset-1 pt-3">
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+    <div class="form-inputs col-md-6">
+    <h2>Your details</h2>
+    <%= f.error_notification %>
+      <%= f.input :firstname, required: true, autofocus: true %>
+      <%= f.input :surname, required: true, autofocus: true %>
+      <%= f.input :email, required: true, autofocus: true, hint: "Use your work one" %>
+      <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+      <%= f.input :password_confirmation, required: true %>
+    </div>
 
-  <h2>Your details</h2>
-  <div class="form-inputs col-md-6">
-    <%= f.input :firstname, required: true, autofocus: true %>
-    <%= f.input :surname, required: true, autofocus: true %>
-    <%= f.input :email, required: true, autofocus: true, hint: "Use your work one" %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
-  </div>
+    <div class="form-inputs col-md-6">
+      <h2>Your music</h2> 
+      <%= f.simple_fields_for :user_instrument do |user_instrument| %>
+      <%= user_instrument.collection_select :instrument_id, Instrument.all, :id, :name, prompt: true %>
+      <%= user_instrument.collection_select :genre_id, Genre.all, :id, :name, prompt: true %>
+      <% end %>
+    </div>
 
-  <h2>Your music</h2>
-  <div class="form-inputs col-md-6">
-    <%= f.association :user_instruments %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up", class: "btn btn-primary col-12" %>
-  </div>
-<% end %>
+    <div class = "clear"></div>
+    <div class="form-actions col-12">
+      <%= f.button :submit, "Sign up", class: "btn btn-primary col-12" %>
+    </div>
+  <% end %>
 
 <%= render "devise/shared/links" %>
 <br />

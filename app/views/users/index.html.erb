@@ -6,15 +6,13 @@
     <div class = "row">
       <% @users.each do |user| %>
       <div class = "col-md-6">
-        <div class = "card card-1">
-          <div class = "card-header">
-            <h6><%= link_to "#{user.firstname} #{user.surname}", user_path(user) %></h6>
-          </div>
+        <div class = "card">
+          <div class = "card-header"><b><%= link_to "#{user.firstname} #{user.surname}", user_path(user) %></b></div>
           <div class = "card-block">
             <p class = "card-text"><%= user.description %></p>
             <p class = "card-text text-muted">Email: <%= mail_to user.email, user.email %></p>
-            <p class = "card-text text-muted">Instruments: <% user.unique_instruments.each do |user_instrument| %><%= user_instrument %>, <% end %></p>
-            <p class = "card-text text-muted">Genres: <% user.unique_genres.each do |user_genre| %><%= user_genre %>, <% end %></p>
+            <p class = "card-text text-muted">Instruments: <% user.unique_instruments.each do |instrument| %><span class="badge badge-primary text-center"><%= instrument %></span> <% end %></p>
+            <p class = "card-text text-muted">Genres: <% user.unique_genres.each do |genre| %><span class="badge badge-primary"><%= genre %></span> <% end %></p>
           </div>
         </div>
       <br />
