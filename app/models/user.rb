@@ -1,8 +1,10 @@
 class User < ApplicationRecord
-  has_many :user_instruments
+  has_many :user_instruments, inverse_of: :user, dependent: :destroy
   has_many :user_comments
+
   accepts_nested_attributes_for :user_instruments
-    # Include default devise modules. Others available are:
+
+  # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
