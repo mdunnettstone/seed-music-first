@@ -4,15 +4,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    super
+    resource = build_resource({})
     resource.user_instruments.build
+    respond_with resource
   end
 
   # POST /resource
-  def create
-    super
-    resource.user_instruments.build
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -42,7 +42,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :surname, :user_instrument => [:instrument_id, :genre_id], :user_instruments => [:instrment_id, :genre_id]])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
+      :firstname,
+      :surname,
+      :user_instruments_attributes => [:instrument_id, :genre_id]
+    ])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

@@ -13,10 +13,12 @@
     </div>
 
     <div class="form-inputs col-md-6">
-      <h2>Your music</h2> 
-      <%= f.simple_fields_for :user_instrument do |user_instrument| %>
-      <%= user_instrument.collection_select :instrument_id, Instrument.all, :id, :name, prompt: true %>
-      <%= user_instrument.collection_select :genre_id, Genre.all, :id, :name, prompt: true %>
+      <h2>Your music</h2>
+      <%= f.simple_fields_for :user_instruments do |instrument| %>
+        <p>
+          <%= instrument.input :instrument_id, collection: Instrument.all, label_method: :name, value_method: :id, include_blank: false %>
+          <%= instrument.input :genre_id, collection: Genre.all, label_method: :name, value_method: :id, include_blank: false %>
+        </p>
       <% end %>
     </div>
 
