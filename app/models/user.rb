@@ -8,6 +8,27 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         
+  def self.search(params)
+    search_scope = User.joins(:user_instruments)
+    if params[:name].present?
+      search_scope = search_scope.where("CONCAT(firstname,' ',surname) LIKE ?", "%#{params[:name]}%")
+    end
+    
+    if params[:instrument_id].present?
+      search_scope = search_scope.where(
+        "user_instruments.instrument_id": [params[:instrument_id]
+      )
+    end
+    
+    if params[:genre_id].present?
+      search_scope = search_scope.where(
+        "user_instruments.genre_id": params[:genre_id]
+      )
+    end
+    
+    search_scope.distinct.order(:created_at)
+  end
 
   def unique_instruments
     instruments = []

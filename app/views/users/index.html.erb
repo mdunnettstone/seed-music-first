@@ -1,5 +1,13 @@
 <h1 class = "ml-3">Users</h1>
 <div class = "clear"></div>
+  <div class="col-10 offset-1">
+    <%= form_tag(users_path, method: :get) do %>
+      <%= text_field_tag :name %>
+      <%= select_tag :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name), include_blank: "All" %>
+      <%= select_tag :genre_id, options_from_collection_for_select(Genre.all, :id, :name), include_blank: "All" %> 
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 <div class = "container-fluid">
   <div class = "booyah-box col-10 offset-1">
       <br />
