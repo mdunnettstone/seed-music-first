@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :user_instruments, inverse_of: :user, dependent: :destroy
   has_many :user_comments
+  has_many :booking
 
   accepts_nested_attributes_for :user_instruments
 

@@ -1,0 +1,27 @@
+<%= form_tag(bookings_path, method: :get) do %>
+  <%= text_field_tag :start_date, @start_time.strftime("%Y-%m-%d") %>
+  <%= select_time @start_time, minute_step: 15 %>
+  <%= check_box_tag :anytime %>
+  <%= select_tag :duration, options_for_select([15, 30, 45, 60, 90, 120], @duration_mins) %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+
+<h3><%= @start_time.to_s(:long) %></h3>
+
+<% @rooms.each do |room| %>
+  <div>
+    <h4><%= room.name %></h4>
+    <ul>
+      <% @room_times.each do |room_time| %>
+        <li><%= room_time.strftime("%H:%M") %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% @bookings.each do |booking| %>
+  <p><%= booking.inspect %></p>
+
+
+<% end %>
