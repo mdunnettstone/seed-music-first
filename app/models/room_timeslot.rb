@@ -1,5 +1,5 @@
 class RoomTimeslot < ApplicationRecord
   belongs_to :room
-  has_one :booking
+  belongs_to :booking, required: false
 
 end
