@@ -7,23 +7,23 @@
 
 <h3>Room timeslots</h3>
 <div class = "row">
-  <div class = "col-8">
+  <div class = "col-12 col-md-8">
     <% @room_timeslots.group_by(&:room).each do |room, timeslots| %>
-      <div class = "col-10 offset-1 col-md-5 col-lg-3">
+      <div class = "col-10 offset-1 col-md-5">
         <h4><%= room.name %></h4>
         <ul class = "slot-list">
           <% timeslots.each do |timeslot| %>
             <% if timeslot.booking_id.blank? %>
-              <div class = "col-10 my-2 btn btn-primary selectable" id = <%= "#{timeslot.id}" %>><%= "#{timeslot.slot_start.strftime("%H:%M")} - available" %></div>
+              <div class = "col-12 my-2 btn btn-primary selectable" id = <%= "#{timeslot.id}" %>><%= "#{timeslot.slot_start.strftime("%H:%M")} - available" %></div>
             <% else %>
-              <div class = "col-10 my-2 btn btn-primary" disabled><%= "#{timeslot.slot_start.strftime("%H:%M")} - booked by #{timeslot.booking.user.email}" %></div>
+              <div class = "col-12 my-2 btn btn-primary" disabled><%= "#{timeslot.slot_start.strftime("%H:%M")} - booked by #{timeslot.booking.user.email}" %></div>
             <% end %>
           <% end %>
         </ul>
       </div>
     <% end %>
   </div>
-  <div class = "col-4">
+  <div class = "col-12 col-md-4">
     <div class = "col-8 offset-2">
       <h4>Your booking</h4>
       <div class="card">
@@ -46,12 +46,16 @@ $(function () {
   $('.selectable').click(function(e) {
     $(e.target).toggleClass('active');
     var selected = $("ul.slot-list").find(".active");
-    $.each(selected, function(index, object) {
-      console.log(object.id);
-    });
+    var selectedData = [];
+      $.each(selected, function(index, object) {
+        $.get("/room_timeslots/" + object.id).success( function (data) {
+          selectedData.push(data);
+        });
+      });
+    console.log(selectedData);
   });
 
-  //Updates booking id of all selected roomTimeslots
+  //Creates new booking and updates booking id of all selected roomTimeslots
   $('.update-test').click(function() {
     var userId = this.id;
     $.post("/bookings", {
