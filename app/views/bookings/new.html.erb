@@ -14,9 +14,9 @@
         <ul class = "slot-list">
           <% timeslots.each do |timeslot| %>
             <% if timeslot.booking_id.blank? %>
-              <div class = "col-12 my-2 btn btn-primary selectable" id = <%= "#{timeslot.id}" %>><%= "#{timeslot.slot_start.strftime("%H:%M")} - available" %></div>
+              <li class = "col-12 my-2 btn btn-primary selectable" data-timestart = <%= "#{timeslot.slot_start.strftime("%H:%M")}" %> data-timeend = <%= "#{timeslot.slot_end.strftime("%H:%M")}" %> data-date = <%= "#{timeslot.slot_start.strftime("%m/%d/%Y")}" %> data-room = <%= "#{timeslot.room.name.tr(" ","_")}" %> id = <%= "#{timeslot.id}" %>><%= "#{timeslot.slot_start.strftime("%H:%M")} - available" %></li>
             <% else %>
-              <div class = "col-12 my-2 btn btn-primary" disabled><%= "#{timeslot.slot_start.strftime("%H:%M")} - booked by #{timeslot.booking.user.email}" %></div>
+              <li class = "col-12 my-2 btn btn-primary" disabled><%= "#{timeslot.slot_start.strftime("%H:%M")} - booked by #{timeslot.booking.user.email}" %></li>
             <% end %>
           <% end %>
         </ul>
@@ -30,7 +30,7 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Room: <span class = "bookingroom"></span></li>
           <li class="list-group-item">Date: <span class = "bookingdate"></span></li>
-          <li class="list-group-item">Time: </li>
+          <li class="list-group-item">Time: <span class="bookingtime"></span></li>
         </ul>
       </div>
       <%= link_to 'Continue', '#', class: "btn btn-primary my-2 col-12 update-test", id: current_user.id %>
@@ -40,40 +40,85 @@
 
 <script>
 $(function () {
-  
+  function removeItem(array, item){
+    for(var i in array){
+        if(array[i]==item){
+            array.splice(i,1);
+            break;
+        }
+    }
+  };
 
-  //Adds class of active when clicked
+  //Dealing with all items that are selectable
   $('.selectable').click(function(e) {
-    $(e.target).toggleClass('active');
+    var item = $(e.target);
+    
+    //We're using nextUntil() and prevUntil() on clicked start and end
+    //When clicking either end or start, toggle that class
+    //If nothing's present, put a start down
+    //Otherwise clear everything that's not the start and put a new end down
+    if (item.hasClass("active end")) {
+      item.toggleClass("active end");
+      $("ul.slot-list").find(".active.middle").removeClass("active middle");
+    } else if (item.hasClass("active start")) {
+      item.toggleClass("active start");
+      $("ul.slot-list").find(".active.middle").removeClass("active middle");
+    } else if ($("ul.slot-list").find(".active.start").length === 0) {
+      item.toggleClass('active start');
+    } else {
+      $("ul.slot-list").find(".active.end").removeClass("active end");
+      $("ul.slot-list").find(".active.middle").removeClass("active middle");
+      item.toggleClass('active end');
+    }
+
+    //if the start is after the end, use prevUntil(), filling them all with active middle
+    //otherwise use nextUntil()
+    if ($("ul.slot-list").find(".active").length > 1) {
+      if ($("ul.slot-list").find(".start").prevAll(".end").length > 0) {
+        $(".start").prevUntil(".end").addClass("active middle");
+      } else {
+        $(".start").nextUntil(".end").addClass("active middle");
+      }
+    }
+
+    //Find all those that are selected and take the data to put in stuff
     var selected = $("ul.slot-list").find(".active");
-    var selectedData = [];
-      $.each(selected, function(index, object) {
-        $.get("/room_timeslots/" + object.id).success( function (data) {
-          selectedData.push(data);
-        });
-      });
-    console.log(selectedData);
+    var selectedTimeStart = ($(selected[0]).data("timestart"));
+    var selectedTimeEnd = ($(selected[selected.length-1]).data("timeend"));
+    var selectedRoom = ($(selected[0]).data("room"));
+    var selectedDate = ($(selected[0]).data("date"));
+
+    if (selected.length === 0) {
+      $( ".bookingroom" ).text(" ");
+      $( ".bookingtime" ).text(" ");
+      $( ".bookingdate" ).text(" "); 
+    } else {
+      $( ".bookingroom" ).text(selectedRoom.replace("_", " "));
+      $( ".bookingtime" ).text(selectedTimeStart + " - " + selectedTimeEnd);
+      $( ".bookingdate" ).text(selectedDate);
+    }
   });
 
   //Creates new booking and updates booking id of all selected roomTimeslots
   $('.update-test').click(function() {
     var userId = this.id;
-    $.post("/bookings", {
-      _method: "POST",
-      booking: {
-        user_id: userId
-      }
-    }).success(function(data) {
-      var bookingId = data.id;
-      var selected = $("ul.slot-list").find(".active");
-      $.each(selected, function(index, object) {
-        $.post("/room_timeslots/" + object.id, {
-          _method: "PUT",
-          room_timeslot: {
-            booking_id: bookingId
-          }
-        });
-      });
+    var selected = $("ul.slot-list").find(".active");
+    var selecetdIds = $.map(selected, function(roomTimeSlot) {
+      return roomTimeSlot.id
+    });
+
+    $.ajax({
+      type: "POST",
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+      },
+      url: "/bookings", 
+      data: {
+        room_timeslot_ids: selecetdIds, 
+        booking: {
+          user_id: userId
+        }
+      },
     });
   });
 });

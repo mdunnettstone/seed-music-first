@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!
   def home
 
   end
@@ -21,7 +21,8 @@ class BookingsController < ApplicationController
 
   def create
     booking = Booking.create(booking_params)
-    render json: booking
+    room_timeslots = RoomTimeslot.find(params[:room_timeslot_ids]).each{|timeslot| timeslot.update(booking: booking)}
+    render json: { booking_info: "booked by #{booking.user.email}" }
   end
 
   private
@@ -33,5 +34,3 @@ class BookingsController < ApplicationController
     Time.local(t.year, t.month, t.day, t.hour, t.min/15*15)
   end
 end
-
-
