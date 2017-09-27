@@ -9,14 +9,14 @@
 <div class = "row">
   <div class = "col-12 col-md-8">
     <% @room_timeslots.group_by(&:room).each do |room, timeslots| %>
-      <div class = "col-10 offset-1 col-md-5">
+      <div class = "col-10 offset-1 col-md-5 mb-5">
         <h4><%= room.name %></h4>
         <ul class = "slot-list">
           <% timeslots.each do |timeslot| %>
             <% if timeslot.booking_id.blank? %>
-              <li class = "col-12 my-2 btn btn-primary selectable" data-timestart = <%= "#{timeslot.slot_start.strftime("%H:%M")}" %> data-timeend = <%= "#{timeslot.slot_end.strftime("%H:%M")}" %> data-date = <%= "#{timeslot.slot_start.strftime("%m/%d/%Y")}" %> data-room = <%= "#{timeslot.room.name.tr(" ","_")}" %> id = <%= "#{timeslot.id}" %>><%= "#{timeslot.slot_start.strftime("%H:%M")} - available" %></li>
+              <li class = "col-12 my-2 btn btn-primary selectable" data-timestart = <%= "#{timeslot.slot_start.strftime("%H:%M")}" %> data-timeend = <%= "#{timeslot.slot_end.strftime("%H:%M")}" %> data-date = <%= "#{timeslot.slot_start.strftime("%d/%m/%Y")}" %> data-room = <%= "#{timeslot.room.name.tr(" ","_")}" %> id = <%= "#{timeslot.id}" %>><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li>
             <% else %>
-              <li class = "col-12 my-2 btn btn-primary" disabled><%= "#{timeslot.slot_start.strftime("%H:%M")} - booked by #{timeslot.booking.user.email}" %></li>
+              <span data-toggle="tooltip" data-placement="top" title="Booked by <%= timeslot.booking.user.email %>"><li class = "col-12 my-2 btn btn-primary disabled"><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li></span>
             <% end %>
           <% end %>
         </ul>
@@ -40,22 +40,13 @@
 
 <script>
 $(function () {
-  function removeItem(array, item){
-    for(var i in array){
-        if(array[i]==item){
-            array.splice(i,1);
-            break;
-        }
-    }
-  };
-
   //Dealing with all items that are selectable
   $('.selectable').click(function(e) {
     var item = $(e.target);
     
-    //We're using nextUntil() and prevUntil() on clicked start and end
+    //We're using nextUntil() and prevUntil() on a clicked start and end points
     //When clicking either end or start, toggle that class
-    //If nothing's present, put a start down
+    //If there's not a start present, put a start down
     //Otherwise clear everything that's not the start and put a new end down
     if (item.hasClass("active end")) {
       item.toggleClass("active end");
