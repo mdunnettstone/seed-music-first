@@ -1,7 +1,8 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
   def home
-
+    @bookings = current_user.bookings.sort_by{|booking| [booking.room_timeslots.first.slot_start]}
+    @prepopulated_search = rounded_datetime(Time.now)
   end
 
   def new
@@ -15,14 +16,18 @@ class BookingsController < ApplicationController
     
     search_start         = @searched_start_time - 1.hour
     search_end           = @searched_start_time + 1.hour
-    @room_timeslots      = RoomTimeslot.order(:slot_start).where("(slot_end > ? AND slot_end <= ?) OR (slot_start < ? AND slot_start >= ?)", search_start, search_end, search_end, search_start)
-    @rooms = Room.all
+    @room_timeslots      = RoomTimeslot.order(:room_id, :slot_start).where("(slot_end > ? AND slot_end <= ?) OR (slot_start < ? AND slot_start >= ?)", search_start, search_end, search_end, search_start)
+    @rooms = Room.order(:id)
   end
 
   def create
     booking = Booking.create(booking_params)
     room_timeslots = RoomTimeslot.find(params[:room_timeslot_ids]).each{|timeslot| timeslot.update(booking: booking)}
-    render json: { booking_info: "booked by #{booking.user.email}" }
+    redirect_to booking_confirmation_path(booking)
+  end
+
+  def confirmation
+    @booking = Booking.find(params[:id])
   end
 
   private
@@ -30,7 +35,9 @@ class BookingsController < ApplicationController
   def booking_params
     params.require(:booking).permit(:room_id, :user_id)
   end
+
   def rounded_datetime(t)
     Time.local(t.year, t.month, t.day, t.hour, t.min/15*15)
   end
+
 end

@@ -1,4 +1,31 @@
-<div class = "row">
-  <h1>Search for a booking</h1>
+<h1 class = "ml-3">Search for a booking</h1>
+<div class = "row hero">
+  <div class = "col-10 offset-1 text-center my-10">
+      <%= form_tag(new_booking_path, method: :get) do %>
+        <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"), class: "date", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
+        <%= select_time @prepopulated_search, minute_step: 15 %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
+      <% end %>
+  </div>
+</div>
 
+<div class = "clear"></div>
+
+<h1 class = "ml-3">Your bookings</h1>
+<div class = "container">
+  <div class = "row">
+    <% @bookings.each do |booking| %>
+      <div class="col-12 col-sm-6">
+        <div class="card">
+          <div class="card-block">
+            <h3 class="card-title"><%= "#{booking.time_start.strftime("%H:%M")} - #{booking.time_end.strftime("%H:%M")}" %></h3>
+            <p class = "card-text"><%= booking.time_start.strftime("%d/%m/%Y") %></p>
+            <p class="card-text"><%= booking.room.name %></p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        <br />
+      </div>
+    <% end %>
+  </div>
 </div>

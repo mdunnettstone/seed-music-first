@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :room_comments, only: :create
   end
   resources :users
+  get '/bookings/confirmation/:id', to: 'bookings#confirmation', as: 'booking_confirmation'
   resources :bookings, only: [:new, :create]
 end
