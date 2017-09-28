@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :user_instruments, inverse_of: :user, dependent: :destroy
   has_many :user_comments
-  has_many :booking
+  has_many :bookings
 
   accepts_nested_attributes_for :user_instruments
 
@@ -41,10 +41,6 @@ class User < ApplicationRecord
     end
     instruments.uniq
   end
-
-  # def uninstruments
-  #   user_instruments.instruments.name.uniq
-  # end
 
   def unique_genres
     genres = []
