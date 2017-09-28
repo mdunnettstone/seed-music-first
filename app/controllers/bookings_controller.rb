@@ -20,16 +20,18 @@ class BookingsController < ApplicationController
   end
 
   def create
-    booking = Booking.create(booking_params)
-    room_timeslots = RoomTimeslot.find(params[:room_timeslot_ids]).each{|timeslot| timeslot.update(booking: booking)}
+    byebug
+    booking = Booking.create(user_id: params(:user_id), room_timeslot_ids: params(:room_timeslot_ids))
+    # room_timeslots = RoomTimeslot.find(params[:room_timeslot_ids]).each{|timeslot| timeslot.update(booking: booking)}
     render json: { booking_info: "booked by #{booking.user.email}" }
   end
 
   private
 
-  def booking_params
-    params.require(:booking).permit(:room_id, :user_id)
-  end
+  # def booking_params
+  #   params.require(:booking).permit(:room_timeslot_id)
+  # end
+
   def rounded_datetime(t)
     Time.local(t.year, t.month, t.day, t.hour, t.min/15*15)
   end

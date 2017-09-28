@@ -16,7 +16,7 @@
             <% if timeslot.booking_id.blank? %>
               <li class = "col-12 my-2 btn btn-primary selectable" data-timestart = <%= "#{timeslot.slot_start.strftime("%H:%M")}" %> data-timeend = <%= "#{timeslot.slot_end.strftime("%H:%M")}" %> data-date = <%= "#{timeslot.slot_start.strftime("%d/%m/%Y")}" %> data-room = <%= "#{timeslot.room.name.tr(" ","_")}" %> id = <%= "#{timeslot.id}" %>><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li>
             <% else %>
-              <span data-toggle="tooltip" data-placement="top" title="Booked by <%= timeslot.booking.user.email %>"><li class = "col-12 my-2 btn btn-primary disabled"><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li></span>
+              <span data-toggle="tooltip" data-placement="top" title="Booked by <%= timeslot.booking.users.first.email %>"><li class = "col-12 my-2 btn btn-primary disabled"><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li></span>
             <% end %>
           <% end %>
         </ul>
@@ -103,12 +103,10 @@ $(function () {
       beforeSend: function(xhr) {
         xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
       },
-      url: "/bookings", 
+      url: "/bookings",
       data: {
         room_timeslot_ids: selecetdIds, 
-        booking: {
-          user_id: userId
-        }
+        user_id: userId
       },
     });
   });
