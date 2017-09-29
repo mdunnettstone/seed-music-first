@@ -2,9 +2,9 @@
 <div class = "row hero">
   <div class = "col-10 offset-1 text-center my-10">
       <%= form_tag(new_booking_path, method: :get) do %>
-        <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"), class: "date", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
-        <%= select_time @prepopulated_search, minute_step: 15 %>
-        <%= submit_tag "Search", class: "btn btn-primary" %>
+        <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"), class: "date col-10 col-md-5 mx-1 my-1 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
+        <%= select_time @prepopulated_search, {time_separator: ':', minute_step: 15}, class: "time col-5 col-md-2 mx-1 my-1 d-inline" %>
+        <%= submit_tag "Search", class: "btn btn-primary col-6 col-md-2 form-button d-inline my-1 mx-1" %>
       <% end %>
   </div>
 </div>

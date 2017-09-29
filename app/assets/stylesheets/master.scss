@@ -31,22 +31,22 @@
   margin-top: 100px;
 }
 
-input[type=text].date{
-  width: 50%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
+input.date {
+  height: 40px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
 select.time {
-  width: 20%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
+  height: 40px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  text-align: center;
+}
+
+.form-button {
+  height: 40px;
+  margin: 0px;
 }
