@@ -11,6 +11,12 @@
           </div>
           <div class = "card-block">
             <p>Capacity: <%= @room.capacity %></p>
+            <ul>
+              <% @room.facilities.each do |facility| %>
+                <li><%= facility.full_facility %></li>
+              <% end %>
+            </ul>
+            <%= link_to 'Add a facility', new_room_room_facility_path(current_room), class: "btn btn-primary" %>
           </div>
         </div>
       </div>

@@ -1,0 +1,18 @@
+<h1 class = "ml-3">New facility</h1>
+<div class = "booyah-box col-10 offset-1 pt-3">
+<p>Before creating a new facility, please check that it does not already exist</p>
+
+
+<%= simple_form_for @facility, url: facilities_path do |f| %>
+  <div class="form-inputs">
+    <%= f.input :instrument, collection: Instrument.all, label_method: :name, value_method: :name %>
+    <%= f.input :brand %>
+    <%= f.input :model %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Create", class: 'btn btn-primary col-12' %>
+  </div>
+<% end %>
+<br />
+</div>
