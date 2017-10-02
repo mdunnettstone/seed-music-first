@@ -63,4 +63,11 @@ gem 'devise'
 gem 'simple_form'
 
 gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
-                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+  :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+
+gem 'bootstrap-multiselect_rails', '~> 0.9.4'
+
+gem 'carrierwave', '~> 1.0'
+
+gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+gem 'sweet-alert2-rails'

@@ -5,23 +5,42 @@
 <% end %>
 
 
-<h3>Room timeslots</h3>
 <div class = "row">
   <div class = "col-12 col-md-8">
-    <% @room_timeslots.group_by(&:room).each do |room, timeslots| %>
-      <div class = "col-10 offset-1 col-md-5 mb-5">
-        <h4><%= room.name %></h4>
-        <ul class = "slot-list">
-          <% timeslots.each do |timeslot| %>
-            <% if timeslot.booking_id.blank? %>
-              <li class = "col-12 my-2 btn btn-primary selectable" data-timestart = <%= "#{timeslot.slot_start.strftime("%H:%M")}" %> data-timeend = <%= "#{timeslot.slot_end.strftime("%H:%M")}" %> data-date = <%= "#{timeslot.slot_start.strftime("%d/%m/%Y")}" %> data-room = <%= "#{timeslot.room.name.tr(" ","_")}" %> id = <%= "#{timeslot.id}" %>><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li>
-            <% else %>
-              <span data-toggle="tooltip" data-placement="top" title="Booked by <%= timeslot.booking.user.email %>"><li class = "col-12 my-2 btn btn-primary disabled"><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li></span>
+    <div class = "first-section">
+      <h3>Room timeslots</h3>
+      <% @room_timeslots.group_by(&:room).each do |room, timeslots| %>
+        <div class = "col-10 offset-1 col-md-5 mb-5">
+          <h4><%= room.name %></h4>
+          <ul class = "slot-list">
+            <% timeslots.each do |timeslot| %>
+              <% if timeslot.booking_id.blank? %>
+                <li class = "col-12 my-2 btn btn-primary selectable" data-timestart = <%= "#{timeslot.slot_start.strftime("%H:%M")}" %> data-timeend = <%= "#{timeslot.slot_end.strftime("%H:%M")}" %> data-date = <%= "#{timeslot.slot_start.strftime("%d/%m/%Y")}" %> data-room = <%= "#{timeslot.room.name.tr(" ","_")}" %> id = <%= "#{timeslot.id}" %>><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li>
+              <% else %>
+                <span data-toggle="tooltip" data-placement="top" title="Booked by <%= timeslot.booking.user.email %>"><li class = "col-12 my-2 btn btn-primary disabled"><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li></span>
+              <% end %>
             <% end %>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+    <div class = "second-section">
+      <h3>Users</h3>
+      <% @users.each do |user| %>
+        <div class = "col-md-6">
+          <div class = "card">
+            <div class = "card-header"><b><%= link_to "#{user.firstname} #{user.surname}", user_path(user) %></b></div>
+            <div class = "card-block">
+              <p class = "card-text"><%= user.description %></p>
+              <p class = "card-text text-muted">Email: <%= mail_to user.email, user.email %></p>
+              <p class = "card-text text-muted">Instruments: <% user.unique_instruments.each do |instrument| %><span class="badge badge-primary text-center"><%= instrument %></span> <% end %></p>
+              <p class = "card-text text-muted">Genres: <% user.unique_genres.each do |genre| %><span class="badge badge-primary"><%= genre %></span> <% end %></p>
+            </div>
+          </div>
+        <br />
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class = "col-12 col-md-4">
     <div class = "col-8 offset-2">
@@ -33,7 +52,11 @@
           <li class="list-group-item">Time: <span class="bookingtime"></span></li>
         </ul>
       </div>
-      <%= link_to 'Continue', '#', class: "btn btn-primary my-2 col-12 update-test", id: current_user.id %>
+      <div class = "btn btn-primary continue">Continue</div>
+      <span class = "second-section">
+        <div class = "btn btn-secondary continue second-section">Back</div>
+        <%= link_to 'Book!', '#', class: "btn btn-primary my-2 col-12 update-test", id: current_user.id %>
+      </span>
     </div>
   </div>
 </div>
@@ -90,6 +113,18 @@ $(function () {
     }
   });
 
+  $.fn.extend({
+    toggleText: function(a, b){
+        return this.text(this.text() == b ? a : b);
+    }
+  });
+  $(function() {
+    $(".continue").click(function(){
+      $(".continue").toggle();
+      $(".first-section").slideToggle();
+      $(".second-section").slideToggle();
+    });
+  });
   //Creates new booking and updates booking id of all selected roomTimeslots
   $('.update-test').click(function() {
     var userId = this.id;
@@ -110,6 +145,9 @@ $(function () {
           user_id: userId
         }
       },
+      success: function() {
+        swal("Booking confirmed!", "We'll show you your booking details now", "success")
+      }
     });
   });
 });

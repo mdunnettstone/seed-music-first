@@ -18,6 +18,8 @@ class BookingsController < ApplicationController
     search_end           = @searched_start_time + 1.hour
     @room_timeslots      = RoomTimeslot.order(:room_id, :slot_start).where("(slot_end > ? AND slot_end <= ?) OR (slot_start < ? AND slot_start >= ?)", search_start, search_end, search_end, search_start)
     @rooms = Room.order(:id)
+
+    @users = User.all
   end
 
   def create

@@ -1,5 +1,6 @@
 @import "bootstrap";
 
+
 .booyah-box {
   -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
   -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
@@ -31,14 +32,14 @@
   margin-top: 100px;
 }
 
-input.date {
+input[type=text] {
   height: 40px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-select.time {
+select {
   height: 40px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -49,4 +50,8 @@ select.time {
 .form-button {
   height: 40px;
   margin: 0px;
+}
+
+.second-section {
+  display: none;
 }

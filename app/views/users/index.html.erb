@@ -1,12 +1,13 @@
-<div class="col-10 offset-1">
-  <h1 class = "ml-3">Users</h1>
-
-  <%= form_tag(users_path, method: :get) do %>
-    <%= text_field_tag :name, params[:name] %>
-    <%= select_tag :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name, params[:instrument_id]), multiple: true  %>
-    <%= select_tag :genre_id, options_from_collection_for_select(Genre.all, :id, :name, params[:genre_id]), multiple: true%>
-    <%= submit_tag "Search", class: "btn btn-primary" %>
-  <% end %>
+<div class = "row">
+  <div class = "col-10 offset-1">
+    <h1 class = "ml-3">Users</h1>
+    <%= form_tag(users_path, method: :get ) do %>
+      <%= text_field_tag :name, params[:name], class: "col-4" %>
+      <%= select_tag :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name, params[:instrument_id]), multiple: true, class: "multiselect col-3" %>
+      <%= select_tag :genre_id, options_from_collection_for_select(Genre.all, :id, :name, params[:genre_id]), multiple: true, :class => "multiselect col-3" %>
+      <%= submit_tag "Search", class: "btn btn-primary col-2" %>
+    <% end %>
+  </div>
 </div>
 
 <div class = "container-fluid">
@@ -31,3 +32,9 @@
     <br />
   </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.multiselect').multiselect();
+    });
+</script>
