@@ -147,8 +147,13 @@ $(function () {
       },
       success: function() {
         swal("Booking confirmed!", "We'll show you your booking details now", "success")
+      },
+      error: function(data) {
+        swal("Bad request!", data.errors, "warning")
       }
     });
   });
 });
 </script>
+<script src="jquery.js"></script>
+<script src="jquery.validate.js"></script>

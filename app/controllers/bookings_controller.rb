@@ -24,8 +24,12 @@ class BookingsController < ApplicationController
 
   def create
     booking = Booking.create(booking_params)
-    room_timeslots = RoomTimeslot.find(params[:room_timeslot_ids]).each{|timeslot| timeslot.update(booking: booking)}
-    redirect_to booking_confirmation_path(booking)
+    if booking.valid?
+      room_timeslots = RoomTimeslot.find(params[:room_timeslot_ids]).each{|timeslot| timeslot.update(booking: booking)}
+      redirect_to booking_confirmation_path(booking)
+    else
+      render json: {:errors => booking.errors.full_messages}, :status => :unprocessable_entity
+    end
   end
 
   def confirmation

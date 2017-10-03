@@ -30,7 +30,7 @@
 
       <div class = "clear"></div>
       <div class="form-actions">
-        <%= f.button :submit, "Sign up", class: "btn btn-primary col-12" %>
+        <%= f.submit "Sign up", class: "btn btn-primary col-12" %>
       </div>
     </div> <!-- second section -->
   <% end %>
@@ -39,6 +39,7 @@
 </div>
 <br />
 <br />
+
 
 <script>
   $.fn.extend({
@@ -51,6 +52,16 @@
       $(this).toggleText("Continue", "Back");
       $(".first-section").slideToggle();
       $(".second-section").slideToggle();
+    });
+
+    $("#new_user").validate({
+      rules: {
+        "user[firstname]": {required: true, minlength: 2},
+        "user[surname]": {required: true, minlength: 2},
+        "user[email]": {required: true, email: true},
+        "user[password]": {required: true, minlength: 6},
+        "user[password_confirmation]": {required: true, equalTo: "#user_password"}
+      }
     });
   });
 </script>
