@@ -67,3 +67,12 @@ select {
 label.error {
   color: #FF9494;
 }
+
+.sticky {
+  position: sticky;
+  top: 10px;
+}
+
+.active-user{
+  background: red;
+}

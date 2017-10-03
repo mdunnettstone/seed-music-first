@@ -1,55 +1,55 @@
-<%= form_tag(new_booking_path, method: :get) do %>
-  <%= text_field_tag :start_date, @searched_start_time.strftime("%d-%m-%Y"), "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
-  <%= select_time @searched_start_time, minute_step: 15 %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
-<% end %>
+<div class = "row">
+  <div class = "col-10 offset-1">
+    <%= form_tag(new_booking_path, method: :get) do %>
+      <%= text_field_tag :start_date, @searched_start_time.strftime("%d-%m-%Y"), class: "date col-10 col-md-5 mx-3 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
+      <%= select_time @searched_start_time, minute_step: 15, class: "time col-5 col-md-2 mx-1 d-inline" %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
 
 
 <div class = "row">
   <div class = "col-12 col-md-8">
     <div class = "first-section">
-      <h3>Room timeslots</h3>
-      <% @room_timeslots.group_by(&:room).each do |room, timeslots| %>
+      <h3>Select times</h3>
+      <% @rooms.each do |room| %>
         <div class = "col-10 offset-1 col-md-5 mb-5">
           <h4><%= room.name %></h4>
           <ul class = "slot-list">
-            <% timeslots.each do |timeslot| %>
-              <% if timeslot.booking_id.blank? %>
-                <li class = "col-12 my-2 btn btn-primary selectable" data-timestart = <%= "#{timeslot.slot_start.strftime("%H:%M")}" %> data-timeend = <%= "#{timeslot.slot_end.strftime("%H:%M")}" %> data-date = <%= "#{timeslot.slot_start.strftime("%d/%m/%Y")}" %> data-room = <%= "#{timeslot.room.name.tr(" ","_")}" %> id = <%= "#{timeslot.id}" %>><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li>
+            <% @timeslots.each do |timeslot| %>
+              <% if @bookings.any? {|booking| (booking.start_time..booking.end_time).cover?(timeslot + 1.second) && booking.room_id == room.id}%>
+                <li class = "btn btn-primary col-12 mb-2" disabled data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
               <% else %>
-                <span data-toggle="tooltip" data-placement="top" title="Booked by <%= timeslot.booking.user.email %>"><li class = "col-12 my-2 btn btn-primary disabled"><%= "#{timeslot.slot_start.strftime("%H:%M")} - #{timeslot.slot_end.strftime("%H:%M")}" %></li></span>
+                <li class = "btn btn-primary col-12 mb-2 selectable-timeslot" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
               <% end %>
             <% end %>
           </ul>
         </div>
       <% end %>
     </div>
-    <div class = "second-section">
+    <div class = "second-section users">
       <h3>Users</h3>
+      <%= form_tag(users_path, method: :get, :remote => true) do %>
+        <%= text_field_tag :name, params[:name], class: "col-12" %>
+      <% end %>
       <% @users.each do |user| %>
-        <div class = "col-md-6">
-          <div class = "card">
-            <div class = "card-header"><b><%= link_to "#{user.firstname} #{user.surname}", user_path(user) %></b></div>
-            <div class = "card-block">
-              <p class = "card-text"><%= user.description %></p>
-              <p class = "card-text text-muted">Email: <%= mail_to user.email, user.email %></p>
-              <p class = "card-text text-muted">Instruments: <% user.unique_instruments.each do |instrument| %><span class="badge badge-primary text-center"><%= instrument %></span> <% end %></p>
-              <p class = "card-text text-muted">Genres: <% user.unique_genres.each do |genre| %><span class="badge badge-primary"><%= genre %></span> <% end %></p>
-            </div>
-          </div>
+        <div class = "col-md-6 booyah-box selectable-user my-2" data-userid = "<%= user.id %>" data-username = <%= "#{user.firstname.capitalize}_#{user.surname.capitalize}" %>>
+          <h5><%= "#{user.firstname.capitalize} #{user.surname.capitalize}" %></h5>
         <br />
         </div>
       <% end %>
     </div>
   </div>
   <div class = "col-12 col-md-4">
-    <div class = "col-8 offset-2">
+    <div class = "col-8 offset-2 sticky">
       <h4>Your booking</h4>
       <div class="card">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Room: <span class = "bookingroom"></span></li>
           <li class="list-group-item">Date: <span class = "bookingdate"></span></li>
           <li class="list-group-item">Time: <span class="bookingtime"></span></li>
+          <li class = "list-group-item">People: <span class ="bookingusers">Just you</span></li>
         </ul>
       </div>
       <div class = "btn btn-primary continue">Continue</div>
@@ -64,8 +64,9 @@
 <script>
 $(function () {
   //Dealing with all items that are selectable
-  $('.selectable').click(function(e) {
+  $('.selectable-timeslot').click(function(e) {
     var item = $(e.target);
+    var slots = $("ul.slot-list")
     
     //We're using nextUntil() and prevUntil() on a clicked start and end points
     //When clicking either end or start, toggle that class
@@ -73,22 +74,22 @@ $(function () {
     //Otherwise clear everything that's not the start and put a new end down
     if (item.hasClass("active end")) {
       item.toggleClass("active end");
-      $("ul.slot-list").find(".active.middle").removeClass("active middle");
+      slots.find(".active.middle").removeClass("active middle");
     } else if (item.hasClass("active start")) {
       item.toggleClass("active start");
-      $("ul.slot-list").find(".active.middle").removeClass("active middle");
-    } else if ($("ul.slot-list").find(".active.start").length === 0) {
+      slots.find(".active.middle").removeClass("active middle");
+    } else if (slots.find(".active.start").length === 0) {
       item.toggleClass('active start');
     } else {
-      $("ul.slot-list").find(".active.end").removeClass("active end");
-      $("ul.slot-list").find(".active.middle").removeClass("active middle");
+      slots.find(".active.end").removeClass("active end");
+      slots.find(".active.middle").removeClass("active middle");
       item.toggleClass('active end');
     }
 
     //if the start is after the end, use prevUntil(), filling them all with active middle
     //otherwise use nextUntil()
-    if ($("ul.slot-list").find(".active").length > 1) {
-      if ($("ul.slot-list").find(".start").prevAll(".end").length > 0) {
+    if (slots.find(".active").length > 1) {
+      if (slots.find(".start").prevAll(".end").length > 0) {
         $(".start").prevUntil(".end").addClass("active middle");
       } else {
         $(".start").nextUntil(".end").addClass("active middle");
@@ -96,11 +97,11 @@ $(function () {
     }
 
     //Find all those that are selected and take the data to put in stuff
-    var selected = $("ul.slot-list").find(".active");
+    var selected = slots.find(".active");
     var selectedTimeStart = ($(selected[0]).data("timestart"));
     var selectedTimeEnd = ($(selected[selected.length-1]).data("timeend"));
     var selectedRoom = ($(selected[0]).data("room"));
-    var selectedDate = ($(selected[0]).data("date"));
+    var selectedDate = ($(selected[0]).data("date"))
 
     if (selected.length === 0) {
       $( ".bookingroom" ).text(" ");
@@ -113,18 +114,46 @@ $(function () {
     }
   });
 
-  $.fn.extend({
-    toggleText: function(a, b){
-        return this.text(this.text() == b ? a : b);
+
+  //Slide to select Users
+  $(".continue").click(function(){
+    $(".continue").toggle();
+    $(".first-section").slideToggle();
+    $(".second-section").slideToggle();
+  });
+
+  function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+  }
+
+  //Add active user class, and the find all those with that class
+  $(".selectable-user").click(function(e){
+    var target = $(e.target)
+    if(target.is('div')) {
+      user = target;
+    } else {
+      user = target.parent();
     }
-  });
-  $(function() {
-    $(".continue").click(function(){
-      $(".continue").toggle();
-      $(".first-section").slideToggle();
-      $(".second-section").slideToggle();
+
+    user.toggleClass("active-user");
+    var selectedUsers = $("div.second-section").find(".active-user");
+    var selectedUsernamesDOM = selectedUsers.map(function(){
+      return $(this).data("username");
     });
+    var selectedUserIdsDOM = selectedUsers.map(function(){
+      return $(this).data("userid");
+    });
+
+    selectedUsernames = selectedUsernamesDOM.get();
+    selectedUserIds = selectedUserIdsDOM.get();
+
+    $(".bookingusers").text("You, " + selectedUsernames.join(", "));
+    console.log(selectedUserIds);
+
+    //NOTE: Getting there, except we have some sort of Jquery object instead of an array
   });
+
+
   //Creates new booking and updates booking id of all selected roomTimeslots
   $('.update-test').click(function() {
     var userId = this.id;
@@ -155,5 +184,3 @@ $(function () {
   });
 });
 </script>
-<script src="jquery.js"></script>
-<script src="jquery.validate.js"></script>

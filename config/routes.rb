@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :users
   get '/bookings/confirmation/:id', to: 'bookings#confirmation', as: 'booking_confirmation'
   resources :bookings, only: [:new, :create]
+  get "users/validation/check_email", :controller => "users", :action => "check_email"
 end

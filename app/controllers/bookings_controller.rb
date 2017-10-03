@@ -15,11 +15,12 @@ class BookingsController < ApplicationController
 
     
     search_start         = @searched_start_time - 1.hour
-    search_end           = @searched_start_time + 1.hour
-    @room_timeslots      = RoomTimeslot.order(:room_id, :slot_start).where("(slot_end > ? AND slot_end <= ?) OR (slot_start < ? AND slot_start >= ?)", search_start, search_end, search_end, search_start)
-    @rooms = Room.order(:id)
-
-    @users = User.all
+    search_end           = @searched_start_time + 2.hour
+    
+    @timeslots           = build_room_times(search_start, search_end)
+    @bookings            = Booking.where("(end_time > ? AND end_time <= ?) OR (start_time < ? AND start_time >= ?)", search_start, search_end, search_end, search_start)
+    @rooms               = Room.order(:id)
+    @users               = User.all
   end
 
   def create
@@ -46,4 +47,7 @@ class BookingsController < ApplicationController
     Time.local(t.year, t.month, t.day, t.hour, t.min/15*15)
   end
 
+  def build_room_times(start_time, end_time)
+    [start_time].tap { |array| array << array.last + 15.minutes while array.last < end_time }
+  end
 end
