@@ -17,10 +17,11 @@
       <div class="col-12 col-sm-6">
         <div class="card">
           <div class="card-block">
-            <h3 class="card-title"><%= "#{booking.time_start.strftime("%H:%M")} - #{booking.time_end.strftime("%H:%M")}" %></h3>
-            <p class = "card-text"><%= booking.time_start.strftime("%d/%m/%Y") %></p>
-            <p class="card-text"><%= booking.room.name %></p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h3 class="card-title mt-1"><%= booking.start_time.strftime("%a, %e %b %Y") %></h3>
+            <p class = "card-text"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= "#{booking.start_time.strftime("%H:%M")} - #{booking.end_time.strftime("%H:%M")}" %></p>
+            <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp<%= booking.room.name %></p>
+            <p class = "card-text"><i class="fa fa-users" aria-hidden="true"></i> <%= booking.user_list %></p>
+            <%= link_to 'View booking', booking_path(booking), class: "btn btn-primary" %>
           </div>
         </div>
         <br />

@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
   def home
-    @bookings = current_user.bookings.sort_by{|booking| [booking.room_timeslots.first.slot_start]}
+    @bookings = current_user.bookings.sort_by{|booking| booking.start_time}
     @prepopulated_search = rounded_datetime(Time.now)
   end
 
@@ -24,23 +24,22 @@ class BookingsController < ApplicationController
   end
 
   def create
-    booking = Booking.create(booking_params)
+    booking = current_user.bookings.create(booking_params)
     if booking.valid?
-      room_timeslots = RoomTimeslot.find(params[:room_timeslot_ids]).each{|timeslot| timeslot.update(booking: booking)}
-      redirect_to booking_confirmation_path(booking)
+      redirect_to booking_path(booking)
     else
       render json: {:errors => booking.errors.full_messages}, :status => :unprocessable_entity
     end
   end
 
-  def confirmation
-    @booking = Booking.find(params[:id])
+  def show
+    @booking = Booking.find_by_id(params[:id])
   end
 
   private
 
   def booking_params
-    params.require(:booking).permit(:room_id, :user_id)
+    params.require(:booking).permit(:start_time, :end_time, :room_id, :user_ids)
   end
 
   def rounded_datetime(t)

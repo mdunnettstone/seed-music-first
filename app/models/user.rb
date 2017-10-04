@@ -51,4 +51,8 @@ class User < ApplicationRecord
     end
     genres.uniq
   end
+
+  def fullname
+    "#{self.firstname} #{self.surname}"
+  end
 end

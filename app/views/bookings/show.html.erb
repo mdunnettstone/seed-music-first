@@ -1,0 +1,15 @@
+<h1 class = "col-12 text-center mb-5">You're going to play some music!</h1>
+<h4 class = "col-12 text-center">Your booking</h4>
+<div class = "row justify-content-center">
+  <div class="col-10 col-sm-6 col-md-5 col-lg-3">
+    <div class="card">
+      <div class="card-block">
+        <h3 class="card-title mt-1"><%= @booking.start_time.strftime("%a, %e %b %Y") %></h3>
+        <p class = "card-text"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= "#{@booking.start_time.strftime("%H:%M")} - #{@booking.end_time.strftime("%H:%M")}" %></p>
+        <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp<%= @booking.room.name %></p>
+        <p class = "card-text"><i class="fa fa-users" aria-hidden="true"></i> <%= @booking.user_list %></p>
+      </div>
+    </div>
+    <br />
+  </div>
+</div>

@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     resources :room_facilities, only: [:new, :create]
   end
   resources :users
-  get '/bookings/confirmation/:id', to: 'bookings#confirmation', as: 'booking_confirmation'
-  resources :bookings, only: [:new, :create]
+  resources :bookings, only: [:new, :create, :show]
   get "users/validation/check_email", :controller => "users", :action => "check_email"
 end

@@ -1,4 +1,4 @@
-<div class = "row">
+<div class = "row first-section">
   <div class = "col-10 offset-1">
     <%= form_tag(new_booking_path, method: :get) do %>
       <%= text_field_tag :start_date, @searched_start_time.strftime("%d-%m-%Y"), class: "date col-10 col-md-5 mx-3 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
@@ -21,22 +21,24 @@
               <% if @bookings.any? {|booking| (booking.start_time..booking.end_time).cover?(timeslot + 1.second) && booking.room_id == room.id}%>
                 <li class = "btn btn-primary col-12 mb-2" disabled data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
               <% else %>
-                <li class = "btn btn-primary col-12 mb-2 selectable-timeslot" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
+                <li class = "btn btn-primary col-12 mb-2 selectable-timeslot" data-room = "<%= room.name %>" data-roomid = "<%= room.id %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
               <% end %>
             <% end %>
           </ul>
         </div>
       <% end %>
     </div>
-    <div class = "second-section users">
+    <div class = "second-section users offset-1">
       <h3>Users</h3>
       <%= form_tag(users_path, method: :get, :remote => true) do %>
         <%= text_field_tag :name, params[:name], class: "col-12" %>
       <% end %>
       <% @users.each do |user| %>
-        <div class = "col-md-6 booyah-box selectable-user my-2" data-userid = "<%= user.id %>" data-username = <%= "#{user.firstname.capitalize}_#{user.surname.capitalize}" %>>
-          <h5><%= "#{user.firstname.capitalize} #{user.surname.capitalize}" %></h5>
-        <br />
+        <div class = "col-md-6">
+          <div class = "booyah-box selectable-user my-2" data-userid = "<%= user.id %>" data-username = <%= "#{user.firstname.capitalize}_#{user.surname.capitalize}" %>>
+            <h5 class = "ml-2"><%= user.fullname %></h5>
+          <br />
+          </div>
         </div>
       <% end %>
     </div>
@@ -122,9 +124,6 @@ $(function () {
     $(".second-section").slideToggle();
   });
 
-  function onlyUnique(value, index, self) { 
-    return self.indexOf(value) === index;
-  }
 
   //Add active user class, and the find all those with that class
   $(".selectable-user").click(function(e){
@@ -140,27 +139,43 @@ $(function () {
     var selectedUsernamesDOM = selectedUsers.map(function(){
       return $(this).data("username");
     });
-    var selectedUserIdsDOM = selectedUsers.map(function(){
-      return $(this).data("userid");
-    });
-
     selectedUsernames = selectedUsernamesDOM.get();
-    selectedUserIds = selectedUserIdsDOM.get();
-
     $(".bookingusers").text("You, " + selectedUsernames.join(", "));
-    console.log(selectedUserIds);
-
-    //NOTE: Getting there, except we have some sort of Jquery object instead of an array
   });
 
 
   //Creates new booking and updates booking id of all selected roomTimeslots
   $('.update-test').click(function() {
-    var userId = this.id;
-    var selected = $("ul.slot-list").find(".active");
-    var selecetdIds = $.map(selected, function(roomTimeSlot) {
-      return roomTimeSlot.id
+    //find all selected users
+    var selectedUsers = $("div.second-section").find(".active-user");
+    var selectedUserIdsDOM = selectedUsers.map(function(){
+      return $(this).data("userid");
     });
+    var selectedUserIds = selectedUserIdsDOM.get();
+
+    var slots = $("ul.slot-list").find(".active");
+    var selectedStartsDOM = slots.map(function() {
+      return $(this).data("timestart");
+    });
+    var selectedEndsDOM = slots.map(function() {
+      return $(this).data("timeend");
+    });
+    var selectedDatesDOM = slots.map(function() {
+      return $(this).data("date");
+    })
+    var selectedStarts = selectedStartsDOM.get();
+    var selectedEnds = selectedEndsDOM.get();
+    var selectedDates = selectedDatesDOM.get();
+
+    var selectedStart = selectedStarts[0];
+    var selectedEnd   = selectedEnds[selectedEnds.length - 1];
+    var selectedDateStart = selectedDates[0];
+    var selectedDateEnd = selectedDates[selectedDates.length -1];
+    var selectedRoom = ($(slots[0]).data("roomid"));
+    console.log(selectedDateStart + " " + selectedStart);
+    console.log(selectedDateEnd + " " + selectedEnd);
+    console.log(selectedRoom);
+    console.log(selectedUserIds);
 
     $.ajax({
       type: "POST",
@@ -169,10 +184,12 @@ $(function () {
       },
       url: "/bookings", 
       data: {
-        room_timeslot_ids: selecetdIds, 
         booking: {
-          user_id: userId
-        }
+          start_time: selectedDateStart + " " + selectedStart,
+          end_time: selectedDateEnd + " " + selectedEnd,
+          room_id: selectedRoom,
+          user_ids: selectedUserIds
+        },
       },
       success: function() {
         swal("Booking confirmed!", "We'll show you your booking details now", "success")

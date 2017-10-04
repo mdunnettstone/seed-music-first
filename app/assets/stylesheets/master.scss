@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "font-awesome";
 
 
 .booyah-box {
@@ -7,7 +8,8 @@
   box-shadow: 1px 1px 2px 0 #d0d0d0;
   background: #fff;
   border: 1px solid #ccc;
-  border-color: #e4e4e4 #bebebd #bebebd #e4e4e4;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 #background-grey {
@@ -74,5 +76,5 @@ label.error {
 }
 
 .active-user{
-  background: red;
+  background: #f1f1f1;
 }
