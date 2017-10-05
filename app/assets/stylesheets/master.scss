@@ -1,6 +1,9 @@
 @import "bootstrap";
 @import "font-awesome";
 
+$primary:#FF0072;
+$second:#428bca;
+$disabled:#C0C0C0;
 
 .booyah-box {
   -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
@@ -75,6 +78,102 @@ label.error {
   top: 10px;
 }
 
-.active-user{
-  background: #f1f1f1;
+a.bttn-primary {
+  color:$primary;
+  text-decoration:none;
+  -webkit-transition:0.25s all ease;
+  transition:0.25s ease all;
+  &:hover {
+    color:#FFF;
+  }
+  &:focus {
+    color:#FFF;
+  }
+}
+
+.bttn-primary {
+  color:$primary;
+  text-decoration:none;
+  -webkit-transition:0.25s all ease;
+  transition:0.25s ease all;
+  &:hover {
+    color:#FFF;
+  }
+  &:focus {
+    color:#FFF;
+  }
+  cursor: pointer;
+  font-size:18px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  display:inline-block;
+  text-align:center;
+  font-weight:bold;
+  padding:10px 0px;
+  border:3px solid $primary;
+  border-radius:2px;
+  position:relative;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.1);
+  &:before {
+    -webkit-transition:0.25s all ease;
+    transition:0.25s all ease;
+    position:absolute;
+    top:0;
+    left:50%;
+    right:50%;
+    bottom:0;
+    opacity:0;
+    content:'';
+    background-color:$primary;
+    z-index:-2;
+  }
+  &:hover {
+    &:before {
+      -webkit-transition:0.25s all ease;
+      transition:0.25s all ease;
+      left:0;
+      right:0;
+      opacity:1;
+    }
+  }
+  &:focus {
+    &:before {
+      transition:0.15s all ease;
+      left:0;
+      right:0;
+      opacity:1;
+    }
+  }
+}
+
+.timeslot, .user-box {
+  color:$second;
+  text-decoration:none;
+  cursor: pointer;
+  font-size:12px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  text-align:center;
+  font-weight:bold;
+  padding:5px 5px;
+  border:2px solid $second;
+  border-radius:2px;
+  position:relative;
+}
+
+.timeslot.active, .user-box.active-user {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.1);
+  color: white;
+  background-color: $second;
+}
+
+.timeslot.disabled, .timeslot.disabled-temp {
+  border: 2px solid $disabled;
+  color: $disabled;
+  pointer: default;
+}
+
+#slot-list li {
+  display: inline-block;
+  list-style-type: none;
 }

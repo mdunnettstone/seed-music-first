@@ -14,8 +14,8 @@ class BookingsController < ApplicationController
     @searched_start_time = rounded_datetime(parsed_datetime)
 
     
-    search_start         = @searched_start_time - 1.hour
-    search_end           = @searched_start_time + 2.hour
+    search_start         = @searched_start_time - 30.minute
+    search_end           = @searched_start_time + 90.minute
     
     @timeslots           = build_room_times(search_start, search_end)
     @bookings            = Booking.where("(end_time > ? AND end_time <= ?) OR (start_time < ? AND start_time >= ?)", search_start, search_end, search_end, search_start)
@@ -39,7 +39,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:start_time, :end_time, :room_id, :user_ids)
+    params.require(:booking).permit!
   end
 
   def rounded_datetime(t)
