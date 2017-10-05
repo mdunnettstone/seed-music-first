@@ -1,4 +1,4 @@
-<h1 class = "ml-3">Search for a booking</h1>
+<h1 class = "ml-3">Book a music room</h1>
 <div class = "row hero">
   <div class = "col-10 offset-1 text-center my-10">
       <%= form_tag(new_booking_path, method: :get) do %>
@@ -10,22 +10,44 @@
 </div>
 
 <div class = "clear"></div>
-<h1 class = "ml-3">Your bookings</h1>
+<h1 class = "offset-md-1 ml-1">Your bookings</h1>
 <div class = "container">
   <div class = "row">
-    <% @bookings.each do |booking| %>
-      <div class="col-12 col-sm-6">
-        <div class="card">
-          <div class="card-block">
-            <h3 class="card-title mt-1"><%= booking.start_time.strftime("%a, %e %b %Y") %></h3>
-            <p class = "card-text"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= "#{booking.start_time.strftime("%H:%M")} - #{booking.end_time.strftime("%H:%M")}" %></p>
-            <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp<%= booking.room.name %></p>
-            <p class = "card-text"><i class="fa fa-users" aria-hidden="true"></i> <%= booking.user_list %></p>
-            <%= link_to 'View booking', booking_path(booking), class: "btn btn-primary" %>
+    <h3 class = "ml-1"><%= "Upcoming bookings (#{@bookings.length})" %></h3>
+    <div class = "col-12">
+      <% @bookings.each do |booking| %>
+        <div class="col-12 col-sm-6">
+          <div class="card">
+            <div class="card-block">
+              <h3 class="card-title mt-1"><%= booking.start_time.strftime("%a, %e %b %Y") %></h3>
+              <p class = "card-text"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= "#{booking.start_time.strftime("%H:%M")} - #{booking.end_time.strftime("%H:%M")}" %></p>
+              <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp<%= booking.room.name %></p>
+              <p class = "card-text"><i class="fa fa-users" aria-hidden="true"></i> <%= booking.user_list %></p>
+              <%= link_to 'View booking', booking_path(booking), class: "btn btn-primary" %>
+            </div>
           </div>
+          <br />
         </div>
-        <br />
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class = "row">
+    <h3 class = "ml-1"><%= "Previous bookings (#{@previous_bookings.length})"%></h3>
+    <div class = "col-12">
+      <% @previous_bookings.each do |booking| %>
+        <div class="col-12 col-sm-6">
+          <div class="card">
+            <div class="card-block">
+              <h3 class="card-title mt-1"><%= booking.start_time.strftime("%a, %e %b %Y") %></h3>
+              <p class = "card-text"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= "#{booking.start_time.strftime("%H:%M")} - #{booking.end_time.strftime("%H:%M")}" %></p>
+              <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp<%= booking.room.name %></p>
+              <p class = "card-text"><i class="fa fa-users" aria-hidden="true"></i> <%= booking.user_list %></p>
+              <%= link_to 'View booking', booking_path(booking), class: "btn btn-primary" %>
+            </div>
+          </div>
+          <br />
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

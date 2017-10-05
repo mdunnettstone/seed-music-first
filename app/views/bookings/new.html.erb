@@ -1,74 +1,91 @@
-<div class = "row first-section">
-  <div class = "col-10 offset-1">
-    <%= form_tag(new_booking_path, method: :get) do %>
-      <%= text_field_tag :start_date, @searched_start_time.strftime("%d-%m-%Y"), class: "date col-12 col-md-5 mx-md-2 mb-1 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
-      <%= select_time @searched_start_time, minute_step: 15, class: "time col-5 col-md-2 mx-1 d-inline" %>
-      <%= submit_tag "Search", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
-
-
-<div class = "row">
-  <div class = "col-12 col-md-8">
-    <div class = "first-section">
-      <h3 class = "ml-2 ml-md-3">Select times</h3>
-      <% @rooms.each do |room| %>
-        <div class = "offset-1 mb-5">
-          <h4><%= room.name %></h4>
-          <ul class = "slot-list" id = "slot-list">
-            <% @timeslots.each do |timeslot| %>
-              <% if @bookings.any? {|booking| (booking.start_time..booking.end_time).cover?(timeslot + 1.second) && booking.room_id == room.id}%>
-                <li class = "timeslot my-2 disabled" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
-              <% else %>
-                <li class = "timeslot my-2 selectable-timeslot" data-room = "<%= room.name %>" data-roomid = "<%= room.id %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
-              <% end %>
-            <% end %>
-          </ul>
-        </div>
+<div class = "container">
+  <div class = "row first-section">
+    <div class = "col-12">
+      <h3 class = "d-inline"><%= "#{@searched_start_time.strftime("%A, %e %b %Y")}, around #{@searched_start_time.strftime("%H:%M")}" %></h3>
+      <a class = "toggle-form btn btn-secondary mb-3 ml-3"><i class="fa fa-random" aria-hidden="true"></i> Change</a>
+    </div>
+    <div class = "clear"></div>
+    <div class = "col-10 offset-1 search-form-show-hide">
+      <%= form_tag(new_booking_path, method: :get) do %>
+        <%= text_field_tag :start_date, @searched_start_time.strftime("%d-%m-%Y"), class: "date col-12 col-md-5 mx-md-2 mb-1 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
+        <%= select_time @searched_start_time, minute_step: 15, class: "time col-5 col-md-2 mx-1 d-inline" %>
+        <%= submit_tag "Search", class: "btn btn-primary" %>
       <% end %>
     </div>
-    <div class = "second-section users offset-1">
-      <h3 class = "ml-2 ml-md-3">Users</h3>
-      <%= form_tag(users_path, method: :get, :remote => true) do %>
-        <%= text_field_tag :name, params[:name], class: "col-12" %>
-      <% end %>
-      <% @users.each do |user| %>
-        <div class = "col-md-6">
-          <div class = "user-box selectable-user my-2" data-userid = "<%= user.id %>" data-username = <%= "#{user.firstname}_#{user.surname}" %>>
-            <h5 class = "ml-2 mb-1"><%= user.fullname %></h5>
-          <br />
+  </div>
+
+  <div class = "row">
+    <div class = "col-12 col-md-8">
+      <div class = "first-section">
+        <div class = "booyah-box">
+          <% @rooms.each do |room| %>
+            <div class = "mb-5">
+              <h4 class = "ml-4"><%= room.name %></h4>
+              <ul class = "slot-list" id = "slot-list">
+                <% @timeslots.each do |timeslot| %>
+                  <% if @bookings.any? {|booking| (booking.start_time..booking.end_time).cover?(timeslot + 1.second) && booking.room_id == room.id}%>
+                    <li class = "timeslot my-2 disabled" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
+                  <% else %>
+                    <li class = "timeslot my-2 selectable-timeslot" data-room = "<%= room.name %>" data-roomid = "<%= room.id %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+            <div class = "col-10 offset-1">
+              <hr class = "hr-grey">
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class = "second-section users offset-1">
+        <h3 class = "ml-2 ml-md-3 d-inline">Users</h3>
+        <a class = "toggle-user-form btn btn-secondary mb-3 ml-3"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
+          <div class = "col-12">
+            <div class = "user-form-show-hide mb-2">
+              <%= form_tag(users_path, method: :get, :remote => true) do %>
+                <%= text_field_tag :name, params[:name], class: "col-12", :placeholder => "Search for a user" %>
+              <% end %>
+            </div>
+        <div class = "row booyah-box">
+            <% @users.each do |user| %>
+              <div class = "col-md-6">
+                <div class = "user-box selectable-user my-2" data-userid = "<%= user.id %>" data-username = <%= "#{user.firstname}_#{user.surname}" %>>
+                  <h5 class = "ml-2 mb-1"><%= user.fullname %></h5>
+                <br />
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
-  <div class = "col-12 col-md-4">
-    <div class = "row sticky">
-      <div class = "col-8 offset-2">
-        <h3>Your booking</h3>
-        <div class = "row">
-          <span class = "second-section col-12">
-            <div class = "col-12 btn btn-secondary continue">< Back</div>
-          </span>
-        </div>
-        <div class="card my-2">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Room: <span class = "bookingroom"></span></li>
-            <li class="list-group-item">Date: <span class = "bookingdate"></span></li>
-            <li class="list-group-item">Time: <span class="bookingtime"></span></li>
-            <li class = "list-group-item">People: <span class ="bookingusers">Just you</span></li>
-          </ul>
-        </div>
-        <div class = "row">
-          <span class = "first-section col-12 ml-0">
-            <div class = "bttn-primary continue col-12">Continue ></div>
-          </span>
-        </div>
-        <div class = "row">
-          <span class = "second-section col-12">
-            <%= link_to 'Book!', '#', class: "bttn-primary update-test col-12", id: current_user.id %>
-          </span>
+    <div class = "col-12 col-md-4">
+      <div class = "row sticky">
+        <div class = "col-8 offset-2">
+          <h3>Your booking</h3>
+          <div class = "row">
+            <span class = "second-section col-12">
+              <div class = "col-12 btn btn-secondary continue">< Back</div>
+            </span>
+          </div>
+          <div class="card my-2">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Room: <span class = "bookingroom"></span></li>
+              <li class="list-group-item">Date: <span class = "bookingdate"></span></li>
+              <li class="list-group-item">Time: <span class="bookingtime"></span></li>
+              <li class = "list-group-item">People: <span class ="bookingusers">Just you</span></li>
+            </ul>
+          </div>
+          <div class = "row">
+            <span class = "first-section col-12 ml-0">
+              <div class = "bttn-primary continue col-12 px-0">Continue ></div>
+            </span>
+          </div>
+          <div class = "row">
+            <span class = "second-section col-12">
+              <%= link_to 'Book!', '#', class: "bttn-primary update-test col-12", id: current_user.id %>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -146,6 +163,15 @@ $(function () {
     }
   });
 
+  //Toggle search form
+  $(".toggle-form").click(function() {
+    $(".search-form-show-hide").slideToggle();
+  });
+
+  //Toggle user-search form
+  $(".toggle-user-form").click(function() {
+    $(".user-form-show-hide").slideToggle();
+  });
 
   //Slide to select Users
   $(".continue").click(function(){
@@ -201,10 +227,6 @@ $(function () {
     var selectedDateStart = selectedDates[0];
     var selectedDateEnd = selectedDates[selectedDates.length -1];
     var selectedRoom = ($(slots[0]).data("roomid"));
-    console.log(selectedDateStart + " " + selectedStart);
-    console.log(selectedDateEnd + " " + selectedEnd);
-    console.log(selectedRoom);
-    console.log(selectedUserIds);
 
     $.ajax({
       type: "POST",
