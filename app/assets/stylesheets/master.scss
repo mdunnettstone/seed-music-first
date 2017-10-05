@@ -4,6 +4,7 @@
 $primary:#FF0072;
 $second:#428bca;
 $disabled:#C0C0C0;
+$background:#F5F5F5;
 
 .booyah-box {
   -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
@@ -16,7 +17,7 @@ $disabled:#C0C0C0;
 }
 
 #background-grey {
-  background-color: #F5F5F5;
+  background-color: $background;
 }
 
 .clear {
@@ -76,6 +77,7 @@ label.error {
 .sticky {
   position: sticky;
   top: 10px;
+  z-index: 3;
 }
 
 a.bttn-primary {

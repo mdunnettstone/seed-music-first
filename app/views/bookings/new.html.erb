@@ -1,44 +1,78 @@
 <div class = "container">
+  <div class = "row sticky background-grey">
+    <div class = "col-10 offset-1 col-md-6 offset-md-3">
+      <div class = "row booyah-box pb-1 pb-md-3">
+        <div class = "col-12 col-md-6 mt-1 mt-md-3">
+          <i class="fa fa-map-marker" aria-hidden="true"></i> Room: <b><span class = "bookingroom">Please select</span></b>
+        </div>
+        <div class = "col-12 col-md-6 mt-1 mt-md-3">
+          <i class="fa fa-calendar" aria-hidden="true"></i> Date: <b><span class = "bookingdate">Please select</span></b>
+        </div>
+        <div class = "col-12 col-md-6 mt-1 mt-md-3">
+          <i class="fa fa-clock-o" aria-hidden="true"></i> Time: <b><span class = "bookingtime">Please select</span></b>
+        </div>
+        <div class = "col-12 col-md-6 mt-1 mt-md-3">
+          <i class="fa fa-users" aria-hidden="true"></i> Users: <b><span class = "bookingusers">Please select</span></b>
+        </div>
+      </div>
+      <div class = "clear"></div>
+      <div class = "row">
+        <span class = "first-section col-12">
+          <div class = "btn btn-primary continue first-continue col-6 pull-right mt-2 disabled">Continue ></div>
+        </span>
+        <span class = "second-section col-6">
+          <div class = "btn btn-secondary col-12 mt-2 continue">< Back</div>
+        </span>
+        <span class = "second-section col-6">
+          <%= link_to 'Book!', '#', class: "btn btn-primary update-test col-12 mt-2", id: current_user.id %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class = "clear my-4"></div>
   <div class = "row first-section">
-    <div class = "col-12">
+    <div class = "col-12 col-md-8 offset-md-2">
       <h3 class = "d-inline"><%= "#{@searched_start_time.strftime("%A, %e %b %Y")}, around #{@searched_start_time.strftime("%H:%M")}" %></h3>
       <a class = "toggle-form btn btn-secondary mb-3 ml-3"><i class="fa fa-random" aria-hidden="true"></i> Change</a>
-    </div>
-    <div class = "clear"></div>
-    <div class = "col-10 offset-1 search-form-show-hide">
-      <%= form_tag(new_booking_path, method: :get) do %>
-        <%= text_field_tag :start_date, @searched_start_time.strftime("%d-%m-%Y"), class: "date col-12 col-md-5 mx-md-2 mb-1 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
-        <%= select_time @searched_start_time, minute_step: 15, class: "time col-5 col-md-2 mx-1 d-inline" %>
-        <%= submit_tag "Search", class: "btn btn-primary" %>
-      <% end %>
+      <div class = "search-form-show-hide">
+        <%= form_tag(new_booking_path, method: :get) do %>
+          <%= text_field_tag :start_date, @searched_start_time.strftime("%d-%m-%Y"), class: "date col-12 col-md-5 mx-md-2 mb-1 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
+          <%= select_time @searched_start_time, minute_step: 15, class: "time col-5 col-md-3 mx-1 d-inline" %>
+          <%= submit_tag "Search", class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
   </div>
 
   <div class = "row">
-    <div class = "col-12 col-md-8">
+    <div class = "col-12 col-md-8 offset-md-2">
       <div class = "first-section">
-        <div class = "booyah-box">
+        <div class = "booyah-box py-2">
           <% @rooms.each do |room| %>
-            <div class = "mb-5">
-              <h4 class = "ml-4"><%= room.name %></h4>
-              <ul class = "slot-list" id = "slot-list">
-                <% @timeslots.each do |timeslot| %>
-                  <% if @bookings.any? {|booking| (booking.start_time..booking.end_time).cover?(timeslot + 1.second) && booking.room_id == room.id}%>
-                    <li class = "timeslot my-2 disabled" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
-                  <% else %>
-                    <li class = "timeslot my-2 selectable-timeslot" data-room = "<%= room.name %>" data-roomid = "<%= room.id %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
+          <div class = "row">
+            <div class = "col-12">
+              <div class = "mb-3">
+                <h4 class = "ml-4"><%= room.name %></h4>
+                <ul class = "slot-list" id = "slot-list">
+                  <% @timeslots.each do |timeslot| %>
+                    <% if @bookings.any? {|booking| (booking.start_time..booking.end_time).cover?(timeslot + 1.second) && booking.room_id == room.id}%>
+                      <li class = "timeslot my-2 disabled col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
+                    <% else %>
+                      <li class = "timeslot my-2 selectable-timeslot col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-roomid = "<%= room.id %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </ul>
+                </ul>
+              </div>
             </div>
             <div class = "col-10 offset-1">
               <hr class = "hr-grey">
             </div>
+          </div>
           <% end %>
         </div>
       </div>
-      <div class = "second-section users offset-1">
-        <h3 class = "ml-2 ml-md-3 d-inline">Users</h3>
+      <div class = "second-section users">
+        <h3 class = "d-inline">Users</h3>
         <a class = "toggle-user-form btn btn-secondary mb-3 ml-3"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
           <div class = "col-12">
             <div class = "user-form-show-hide mb-2">
@@ -49,7 +83,7 @@
         <div class = "row booyah-box">
             <% @users.each do |user| %>
               <div class = "col-md-6">
-                <div class = "user-box selectable-user my-2" data-userid = "<%= user.id %>" data-username = <%= "#{user.firstname}_#{user.surname}" %>>
+                <div class = "user-box selectable-user my-3" data-userid = "<%= user.id %>" data-username = <%= "#{user.firstname}" %>>
                   <h5 class = "ml-2 mb-1"><%= user.fullname %></h5>
                 <br />
                 </div>
@@ -59,36 +93,7 @@
         </div>
       </div>
     </div>
-    <div class = "col-12 col-md-4">
-      <div class = "row sticky">
-        <div class = "col-8 offset-2">
-          <h3>Your booking</h3>
-          <div class = "row">
-            <span class = "second-section col-12">
-              <div class = "col-12 btn btn-secondary continue">< Back</div>
-            </span>
-          </div>
-          <div class="card my-2">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Room: <span class = "bookingroom"></span></li>
-              <li class="list-group-item">Date: <span class = "bookingdate"></span></li>
-              <li class="list-group-item">Time: <span class="bookingtime"></span></li>
-              <li class = "list-group-item">People: <span class ="bookingusers">Just you</span></li>
-            </ul>
-          </div>
-          <div class = "row">
-            <span class = "first-section col-12 ml-0">
-              <div class = "bttn-primary continue col-12 px-0">Continue ></div>
-            </span>
-          </div>
-          <div class = "row">
-            <span class = "second-section col-12">
-              <%= link_to 'Book!', '#', class: "bttn-primary update-test col-12", id: current_user.id %>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
 </div>
 
@@ -152,13 +157,15 @@ $(function () {
       var selectedDate = ($(selected[0]).data("date"))
 
       if (selected.length === 0) {
-        $( ".bookingroom" ).text(" ");
-        $( ".bookingtime" ).text(" ");
-        $( ".bookingdate" ).text(" "); 
+        $( ".bookingroom" ).text("Please select");
+        $( ".bookingtime" ).text("Please select");
+        $( ".bookingdate" ).text("Please select");
+        $( ".first-continue").addClass("disabled");
       } else {
         $( ".bookingroom" ).text(selectedRoom.replace("_", " "));
         $( ".bookingtime" ).text(selectedTimeStart + " - " + selectedTimeEnd);
         $( ".bookingdate" ).text(selectedDate);
+        $( ".first-continue").removeClass("disabled");
       }
     }
   });
