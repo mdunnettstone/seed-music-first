@@ -1,24 +1,31 @@
 <h1 class = "ml-3">Rooms</h1>
-<div class = "clear"></div>
 <div class = "container-fluid">
-  <div class = "booyah-box col-10 offset-1">
-      <br />
-    <div class = "row">
-      <% @rooms.each do |room| %>
-        <div class = "col-md-6">
-          <div class = "card card-1">
-            <div class = "card-header">
-              <b><%= link_to room.name, room_path(room) %></b>
-            </div>
-            <div class = "card-block">
-              <p class = "card-text"><%= room.address %></p>
-              <p class = "card-text">Capacity: <%= room.capacity %></p>
-            </div>
+  <div class="alert alert-info mb-1" role="alert">
+    See facilities, upcoming bookings and leave us a comment about the room
+  </div>
+  <div class = "col-12">
+    <hr class = "mt-3 mb-1">
+  </div>
+  <div class = "row">
+    <% @rooms.each do |room| %>
+      <div class = "col-md-6 my-2">
+        <div class = "col-12 booyah-box pb-3">
+          <% if room.photo.present? %>
+            <%= image_tag(room.photo, class: "col-12 full-page-image px-0 mt-3 image-fluid") %>
+          <% end %>
+          <h3><%= link_to room.name, room_path(room) %></h3>
+          <div class = "col-12">
+            <hr class = "mt-0 mb-3">
           </div>
-          <br />
+          <p><i class="fa fa-users" aria-hidden="true"></i> Capacity: <%= room.capacity %></p>
+          <% room.facilities.each do |facility| %>
+            <span class = "badge badge-default"><%= facility.full_facility %></span>
+          <% end %>
+          <% if @user_bookings.any? {|booking| booking.room == room} %>
+            <!-- Count them and say "you have x upcoming bookings here" -->
+          <% end %>
         </div>
-        <br />
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>

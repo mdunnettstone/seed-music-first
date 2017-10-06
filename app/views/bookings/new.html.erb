@@ -84,7 +84,10 @@
             <% @users.each do |user| %>
               <div class = "col-md-6">
                 <div class = "user-box selectable-user my-3" data-userid = "<%= user.id %>" data-username = <%= "#{user.firstname}" %>>
-                  <h5 class = "ml-2 mb-1"><%= user.fullname %></h5>
+                  <h5 class = "ml-2 mb-2"><%= user.fullname %></h5>
+                  <% user.unique_instruments.each do |instrument| %>
+                    <span class = "badge badge-primary"><%= instrument %></span>
+                  <% end %>
                 <br />
                 </div>
               </div>
