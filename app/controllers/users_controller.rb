@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.search(search_params)
-    @recent_bookings = Booking.where("(start_time > ?)", Time.now - 6.month)
+    @recent_bookings = Booking.where("(start_time > ?)", Time.now - 6.month).order(:start_time)
 
 
     respond_to do |format|
@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
+    @user_recent_bookings = Booking.where("(start_time > ? AND start_time < ?)", Time.now - 6.month, Time.now)
+    @user_future_bookings = Booking.where("(start_time > ?)", Time.now)
   end
 
   def check_email
