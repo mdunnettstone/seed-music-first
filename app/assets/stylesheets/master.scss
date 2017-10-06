@@ -16,6 +16,14 @@ $background:#F5F5F5;
   box-sizing: border-box;
 }
 
+.top-half-booyah-box {
+  background-color: #0099CC;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
 #background-grey {
   background-color: $background;
 }
@@ -193,8 +201,23 @@ a.bttn-primary {
   display: none;
 }
 
-
-
 .hr-grey {
   color: grey;
+}
+
+.green-text, .green-text a {
+  color: green;
+}
+
+.user-image-circle {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border-color: grey;
+  border: 2px solid $disabled;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }

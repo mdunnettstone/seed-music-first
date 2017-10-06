@@ -1,43 +1,74 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<!-- Currently doesn't work on submit. Error messages uphelpful. Check vs. original devise form -->
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<h1 class = "ml-3">Edit your profile</h1>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+<div class = "booyah-box col-10 offset-1 col-md-6 col-lg-4 offset-md-3 offset-lg-4 pt-3 mb-5">
+  <div class = "first-section">
+    <%= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+      <div class="form-inputs">
+        <h2>Your details</h2>
+        <%= f.error_notification %>
+          <%= f.input :firstname, required: true, autofocus: true %>
+          <%= f.input :surname, required: true, autofocus: true %>
+          <%= f.input :email, required: true, autofocus: true, hint: "Use your work one" %>
+          <%= f.input :password, required: true, hint: ("Don't want to change it? Leave it blank.") %>
+          <%= f.input :password_confirmation, required: true %>
+          <%= f.input :avatar %>
+      </div>
+    </div> <!-- first section -->
+    <div class = "btn btn-primary continue">Continue</div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div class = "second-section">
+      <div class="form-inputs">
+        <h2>Your music</h2>
+        <%= f.simple_fields_for :user_instruments do |instrument| %>
+          <p>
+            <%= instrument.input :instrument_id, collection: Instrument.all, label_method: :name, value_method: :id, include_blank: false %>
+            <%= instrument.input :genre_id, collection: Genre.all, label_method: :name, value_method: :id, include_blank: false %>
+          </p>
+        <% end %>
+        <%= f.input :description, autofocus: true, hint: "Say a few words about what you like to play and, if you wish to, an indicator of your level" %>
+      </div>
+
+      <div class = "clear"></div>
+      <div class="form-actions">
+        <%= f.submit "Update my profile", class: "btn btn-primary col-12" %>
+      </div>
+    </div> <!-- second section -->
   <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+  <%= render "devise/shared/links" %>
+  <br />
+</div>
+<br />
+<br />
 
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+
+<script>
+  $.fn.extend({
+    toggleText: function(a, b){
+        return this.text(this.text() == b ? a : b);
+    }
+  });
+  $(function() {
+    $(".continue").click(function(e){
+      $(this).toggleText("Continue", "Back");
+      $(".first-section").slideToggle();
+      $(".second-section").slideToggle();
+    });
+
+    $("#new_user").validate({
+      rules: {
+        "user[firstname]": {required: true, minlength: 2},
+        "user[surname]": {required: true, minlength: 2},
+        "user[email]": {required: true, email: true, remote: "/users/validation/check_email" },
+        "user[password]": {required: true, minlength: 6},
+        "user[password_confirmation]": {required: true, equalTo: "#user_password"}
+      }
+    });
+  });
+</script>

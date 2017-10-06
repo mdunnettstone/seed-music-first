@@ -1,38 +1,79 @@
-<div class = "row">
-  <div class = "col-10 offset-1">
-    <h1 class = "ml-3">Users</h1>
-    <%= form_tag(users_path, method: :get ) do %>
-      <%= text_field_tag :name, params[:name], class: "col-4" %>
-      <%= select_tag :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name, params[:instrument_id]), multiple: true, class: "multiselect col-3" %>
-      <%= select_tag :genre_id, options_from_collection_for_select(Genre.all, :id, :name, params[:genre_id]), multiple: true, :class => "multiselect col-3" %>
-      <%= submit_tag "Search", class: "btn btn-primary col-2" %>
+<!-- Largely ok, but multi-select doesn't work and look ugly -->
+
+<h1 class = "ml-3">Users</h1>
+<div class="alert alert-info mb-1 col-10 offset-1" role="alert">
+  Find people to play music with. <strong>Search or filter</strong> by instrument and genre.
+</div>
+<div class = "col-12">
+  <hr class = "mt-3 mb-1">
+</div>
+<div class = "container">
+  <div class = "row">
+    <%= form_tag(users_path, method: :get, class: "col-12" ) do %>
+      <%= text_field_tag :name, params[:name], placeholder: "Search users by name", class: "col-12 col-md-4" %>
+      <%= select_tag :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name, params[:instrument_id]), multiple: true, class: "multiselect col-5 col-md-3" %>
+      <%= select_tag :genre_id, options_from_collection_for_select(Genre.all, :id, :name, params[:genre_id]), multiple: true, :class => "multiselect col-6 col-md-3" %>
+      <%= submit_tag "Search", class: "btn btn-primary col-12 col-md-2" %>
+    <% end %>
+  </div>
+  <div class = "row">
+    <% @users.each do |user| %>
+      <div class = "col-md-6 mb-5">
+        <div class = "booyah-box col-10 offset-1 px-0">
+          <%= link_to user_path(user) do %>
+            <div class = "top-half-booyah-box mx-0 text-center">
+              <% if user.avatar.present? %>
+                <%= image_tag(user.avatar, class: "user-image-circle my-3") %>
+              <% else %>
+                <%= image_tag('placeholder-user-profile.png', class: "user-image-circle my-3") %>
+              <% end %>
+              <h3 class = "mt-0"><%= user.fullname %></h3>
+            </div>
+          <% end %>
+          <div class = "row">
+            <div class = "col-12">
+              <h4 class = "ml-3 mb-1">Instruments:</h4>
+              <div class = "col-11 offset-1">
+                <% user.unique_instruments.each do |instrument| %>
+                  <span class = "badge badge-default"><%= instrument %></span>
+                <% end %>
+              </div>
+            </div>  
+          </div>
+          <div class = "row">
+            <div class = "col-12">
+              <h4 class = "ml-3 mb-1">Genres:</h4>
+              <div class = "col-11 offset-1">
+                <% user.unique_genres.each do |genre| %>
+                  <span class = "badge badge-default"><%= genre %></span>
+                <% end %>
+              </div>
+            </div>  
+          </div>
+          <div class = "row">
+            <div class = "col-12">
+              <hr class = "my-2">
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-12">
+              <% user_recent_bookings = [] %>
+              <% @recent_bookings.each do |booking| %>
+                <% if booking.users.any?{|booking_user| booking_user.id == user.id } %>
+                  <% user_recent_bookings << booking %>
+                <% end %>
+              <% end %>
+              <p class = "green-text ml-3"><i class="fa fa-calendar" aria-hidden="true"></i><strong> <%= user_recent_bookings.length %></strong> bookings in past 6 months</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
     <% end %>
   </div>
 </div>
 
-<div class = "container-fluid">
-  <div class = "booyah-box col-10 offset-1">
-      <br />
-    <div class = "row">
-      <% @users.each do |user| %>
-      <div class = "col-md-6">
-        <div class = "card">
-          <div class = "card-header"><b><%= link_to "#{user.firstname} #{user.surname}", user_path(user) %></b></div>
-          <div class = "card-block">
-            <p class = "card-text"><%= user.description %></p>
-            <p class = "card-text text-muted">Email: <%= mail_to user.email, user.email %></p>
-            <p class = "card-text text-muted">Instruments: <% user.unique_instruments.each do |instrument| %><span class="badge badge-primary text-center"><%= instrument %></span> <% end %></p>
-            <p class = "card-text text-muted">Genres: <% user.unique_genres.each do |genre| %><span class="badge badge-primary"><%= genre %></span> <% end %></p>
-          </div>
-        </div>
-      <br />
-      </div>
-      <% end %>
-    </div>
-    <br />
-  </div>
-</div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.multiselect').multiselect();

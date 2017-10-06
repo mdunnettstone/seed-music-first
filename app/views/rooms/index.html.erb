@@ -21,8 +21,17 @@
           <% room.facilities.each do |facility| %>
             <span class = "badge badge-default"><%= facility.full_facility %></span>
           <% end %>
-          <% if @user_bookings.any? {|booking| booking.room == room} %>
-            <!-- Count them and say "you have x upcoming bookings here" -->
+          <% user_room_bookings = [] %>
+          <% @user_bookings.each do |booking| %>
+            <% if booking.room == room %>
+              <% user_room_bookings << booking %>
+            <% end %>
+          <% end %>
+          <% if user_room_bookings.length > 0 %>
+            <div class = "col-12">
+              <hr class = "my-3">
+            </div>
+            <p class = "green-text mb-0"><i class="fa fa-calendar" aria-hidden="true"></i> You have <%= link_to "#{user_room_bookings.length} upcoming bookings", root_path %>  in this room</p>
           <% end %>
         </div>
       </div>

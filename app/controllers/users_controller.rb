@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.search(search_params)
+    @recent_bookings = Booking.where("(start_time > ?)", Time.now - 6.month)
+
 
     respond_to do |format|
       format.html
