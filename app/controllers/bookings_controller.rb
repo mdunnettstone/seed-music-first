@@ -37,6 +37,16 @@ class BookingsController < ApplicationController
     @booking = Booking.find_by_id(params[:id])
   end
 
+  def destroy
+    @booking = Booking.find_by_id(params[:id])
+    if @booking.users.any? {|user| user == current_user}
+      @booking.destroy
+      redirect_to root_path
+    else
+      return render text: 'Not Allowed', status: :forbidden
+    end
+  end
+
   private
 
   def booking_params

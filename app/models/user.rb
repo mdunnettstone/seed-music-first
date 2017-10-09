@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :user_instruments, inverse_of: :user, dependent: :destroy
   has_many :user_comments
-  has_many :user_bookings
+  has_many :user_bookings, dependent: :destroy
   has_many :bookings, through: :user_bookings
   mount_uploader :avatar, AvatarUploader
 

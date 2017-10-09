@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     resources :room_facilities, only: [:new, :create]
   end
   resources :users
-  resources :bookings, only: [:new, :create, :show]
+  resources :bookings
   get "users/validation/check_email", :controller => "users", :action => "check_email"
 end

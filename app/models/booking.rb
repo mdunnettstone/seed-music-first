@@ -1,5 +1,5 @@
 class Booking < ApplicationRecord
-  has_many :user_bookings
+  has_many :user_bookings, dependent: :destroy
   has_many :users, through: :user_bookings
   belongs_to :room
   # belongs_to :room, through: :room_timelots

@@ -234,6 +234,9 @@ a.bttn-primary {
   color: green;
 }
 
+.grey-text, .grey-text a {
+  color: grey;
+}
 .user-image-circle {
   display: inline-block;
   width: 150px;
@@ -245,4 +248,8 @@ a.bttn-primary {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+}
+
+.default-hidden {
+  display: none;
 }

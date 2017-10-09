@@ -1,5 +1,5 @@
 <h1 class = "ml-3">Rooms</h1>
-<div class = "container-fluid">
+<div class = "container">
   <div class="alert alert-info mb-1" role="alert">
     See facilities, upcoming bookings and leave us a comment about the room
   </div>
@@ -8,31 +8,44 @@
   </div>
   <div class = "row">
     <% @rooms.each do |room| %>
-      <div class = "col-md-6 my-2">
-        <div class = "col-12 booyah-box pb-3">
-          <% if room.photo.present? %>
-            <%= image_tag(room.photo, class: "col-12 full-page-image px-0 mt-3 image-fluid") %>
-          <% end %>
-          <h3><%= link_to room.name, room_path(room) %></h3>
-          <div class = "col-12">
-            <hr class = "mt-0 mb-3">
-          </div>
-          <p><i class="fa fa-users" aria-hidden="true"></i> Capacity: <%= room.capacity %></p>
-          <% room.facilities.each do |facility| %>
-            <span class = "badge badge-default"><%= facility.full_facility %></span>
-          <% end %>
-          <% user_room_bookings = [] %>
-          <% @user_bookings.each do |booking| %>
-            <% if booking.room == room %>
-              <% user_room_bookings << booking %>
-            <% end %>
-          <% end %>
-          <% if user_room_bookings.length > 0 %>
-            <div class = "col-12">
-              <hr class = "my-3">
+      <div class = "col-md-6 mb-5">
+        <div class = "booyah-box col-10 offset-1 px-0">
+          <%= link_to room_path(room) do %>
+            <div class = "top-half-booyah-box mx-0 text-center">
+              <% if room.photo.present? %>
+                <%= image_tag(room.photo, class: "user-image-circle my-3") %>
+              <% else %>
+                <%= image_tag('instruments_placeholder.jpg', class: "user-image-circle my-3") %> 
+              <% end %>
+              <h3 class = "mt-0"><%= room.name %></h3>
             </div>
-            <p class = "green-text mb-0"><i class="fa fa-calendar" aria-hidden="true"></i> You have <%= link_to "#{user_room_bookings.length} upcoming bookings", root_path %>  in this room</p>
           <% end %>
+          <div class = "row">
+            <div class = "col-12">
+              <h4 class = "ml-3 mb-1">Facilities:</h4>
+              <div class = "col-11 offset-1 my-2">
+                <p><i class="fa fa-users" aria-hidden="true"></i> Capacity: <%= room.capacity %></p>
+                <% room.facilities.each do |facility| %>
+                  <span class = "badge badge-default"><%= facility.full_facility %></span>
+                <% end %>
+              </div>
+                <% user_room_bookings = [] %>
+                <% @user_bookings.each do |booking| %>
+                  <% if booking.room == room %>
+                    <% user_room_bookings << booking %>
+                  <% end %>
+                <% end %>
+                <% if user_room_bookings.length > 0 %>
+                  <div class = "col-12">
+                    <hr class = "my-3">
+                  </div>
+              <h4 class = "ml-3 mb-1">Bookings:</h4>
+                  <div class = "col-11 offset-1 my-2">
+                    <p class = "green-text mb-0"><i class="fa fa-calendar" aria-hidden="true"></i> You have <%= link_to "#{user_room_bookings.length} upcoming bookings", root_path %>  in this room</p>
+                  </div>
+              <% end %>
+              </div>
+            </div>
         </div>
       </div>
     <% end %>
