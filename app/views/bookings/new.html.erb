@@ -77,21 +77,13 @@
           <div class = "col-12">
             <div class = "user-form-show-hide mb-2">
               <%= form_tag(users_path, method: :get, :remote => true) do %>
-                <%= text_field_tag :name, params[:name], class: "col-12", :placeholder => "Search for a user" %>
+                <%= text_field_tag :name, '', class: "col-12", :placeholder => "Search for a user" %>
+                <%= submit_tag "Search" %>
               <% end %>
             </div>
-        <div class = "row booyah-box">
-            <% @users.each do |user| %>
-              <div class = "col-md-6">
-                <div class = "user-box selectable-user my-3" data-userid = "<%= user.id %>" data-username = <%= "#{user.firstname}" %>>
-                  <h5 class = "ml-2 mb-2"><%= user.fullname %></h5>
-                  <% user.unique_instruments.each do |instrument| %>
-                    <span class = "badge badge-primary"><%= instrument %></span>
-                  <% end %>
-                <br />
-                </div>
-              </div>
-            <% end %>
+            <div class = "row booyah-box" id="potato">
+              <%= render partial: "booking_user", collection: @users, as: :booking_user %>
+            </div>
           </div>
         </div>
       </div>

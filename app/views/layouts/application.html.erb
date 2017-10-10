@@ -40,7 +40,7 @@
                 <i class="fa fa-smile-o" aria-hidden="true"></i> &nbsp<%= current_user.firstname %>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <%= link_to '#', class: "dropdown-item" do %>
+                <%= link_to user_path(current_user), class: "dropdown-item" do %>
                   <i class="fa fa-user" aria-hidden="true"></i> Profile
                 <% end %>
                 <a class="dropdown-item" href="#">Another action</a>

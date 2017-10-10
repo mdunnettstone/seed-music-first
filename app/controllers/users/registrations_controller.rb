@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     resource = build_resource({})
-    resource.user_instruments.build
+    3.times { resource.user_instruments.build }
     respond_with resource
   end
 

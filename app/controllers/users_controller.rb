@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.xml { render :xml => @users.to_xml }
+      format.js
     end
   end
 

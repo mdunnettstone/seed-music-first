@@ -1,0 +1,9 @@
+<div class = "col-md-6">
+  <div class = "user-box selectable-user my-3" data-userid = "<%=booking_user.id %>" data-username = <%= "#{booking_user.firstname}" %>>
+    <h5 class = "ml-2 mb-2"><%= booking_user.fullname %></h5>
+    <% booking_user.unique_instruments.each do |instrument| %>
+      <span class = "badge badge-primary"><%= instrument %></span>
+    <% end %>
+   <br />
+  </div>
+</div>
