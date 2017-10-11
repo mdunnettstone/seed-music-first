@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+%w(harp piano guitar drums violin trumpet kazoo).each do |instrument_name|
+  Instrument.create(name: instrument_name)
+end
+
+%w(jazz rock classical country hiphop).each do |genre_name|
+  Genre.create(name: genre_name)
+end

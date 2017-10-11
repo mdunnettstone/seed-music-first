@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     resource = build_resource({})
-    3.times { resource.user_instruments.build }
+    resource.user_instruments.build
     respond_with resource
   end
 
@@ -45,6 +45,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: [
       :firstname,
       :surname,
+      :description,
       :user_instruments_attributes => [:instrument_id, :genre_id]
     ])
   end
