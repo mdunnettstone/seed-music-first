@@ -81,7 +81,13 @@
                 <%= submit_tag "Search" %>
               <% end %>
             </div>
-            <div class = "row booyah-box" id="potato">
+            <h4>Selected Users</h4>
+
+            <!-- This is where the work is needed -->
+
+            <div class = "row selected-users">
+            </div>
+            <div class = "row booyah-box" id="users-for-selection">
               <%= render partial: "booking_user", collection: @users, as: :booking_user %>
             </div>
           </div>
@@ -183,7 +189,7 @@ $(function () {
 
 
   //Add active user class, and the find all those with that class
-  $(".selectable-user").click(function(e){
+  $(document).on('click', '.selectable-user', {}, function(e){
     var target = $(e.target)
     if(target.is('div')) {
       user = target;
@@ -191,13 +197,46 @@ $(function () {
       user = target.parent();
     }
 
-    user.toggleClass("active-user");
-    var selectedUsers = $("div.second-section.users").find(".active-user");
-    var selectedUsernamesDOM = selectedUsers.map(function(){
-      return $(this).data("username").replace("_", " ");
-    });
-    var selectedUsernames = selectedUsernamesDOM.get();
-    $(".bookingusers").text("You, " + selectedUsernames.join(", "));
+    if($(user).hasClass("active-user")) {
+      $(user).removeClass("active-user");
+      var clickedUserId = $(user).data("userid");
+      var userBox = $('[data-selecteduserid="' + clickedUserId + '"]');
+      console.log(userBox);
+      userBox.remove();
+
+    } else {
+      $(user).addClass("active-user");
+      var clickedUserId = $(user).data("userid");
+      var clickedUserName = $(user).data("username");
+      console.log(clickedUserId);
+      console.log(clickedUserName);
+
+      var userForSelected = '<div class="alert alert-default my-0 selected-user alert-dismissible col-md-4 align-middle fade show" role="alert" data-selecteduserid = "' + clickedUserId + '"> <button type="button" class="close selected-user-close" data-selectedidtoclose="' + clickedUserId + '" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span></button><strong>' + clickedUserName + '</strong></div>'
+
+      $(".selected-users").append(userForSelected);
+    };
+    // console.log(user);
+    // user.toggleClass("active-user");
+    // var selectedUsers = $("div.second-section.users").find(".active-user");
+    // var selectedUsernamesDOM = selectedUsers.map(function(){
+    //   return $(this).data("username").replace("_", " ");
+    // });
+    // var selectedUsernames = selectedUsernamesDOM.get();
+    // $(".bookingusers").text("You, " + selectedUsernames.join(", "));
+    // $(".selected-users").append(selectedUser);
+  });
+
+  $(document).on('click', '.selected-user-close', {}, function(e) {
+    var target = $(e.target)
+    if (target.is('span')) {
+      user = target.parent();
+    } else {
+      user = target;
+    }
+    var clickedUserId = $(user).data("selectedidtoclose");
+    console.log(clickedUserId);
+    var userBox = $("#users-for-selection").find('[data-userid="' + clickedUserId + '"]');
+    userBox.removeClass("active-user");
   });
 
 

@@ -1,1 +1,9 @@
-$('#potato').html("<%= escape_javascript(render partial: "bookings/booking_user", collection: @users, as: :booking_user) %>");
+$('#users-for-selection').html("<%= escape_javascript(render partial: "bookings/booking_user", collection: @users, as: :booking_user) %>");
+
+
+//For each returned result, if you can find the id in selected users, add a class of active-user
+$('.user-box').each(function (index) {
+  if ($(".selected-users").find('[data-selecteduserid="' + $(this).data("userid") + '"]').length > 0) {
+    $(this).addClass("active-user");
+  };
+});

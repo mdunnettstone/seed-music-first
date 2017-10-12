@@ -16,7 +16,7 @@ class User < ApplicationRecord
     search_scope = User.joins(:user_instruments)
 
     if params[:name].present?
-      search_scope = search_scope.where("CONCAT(firstname,' ',surname) LIKE ?", "%#{params[:name]}%")
+      search_scope = search_scope.where("lower(CONCAT(firstname,' ',surname)) LIKE lower(?)", "%#{params[:name]}%")
     end
 
     if params[:instrument_id].present?
@@ -55,13 +55,4 @@ class User < ApplicationRecord
   def fullname
     "#{self.firstname} #{self.surname}"
   end
-
-  ## LAME ATTEMPT AT BEING ABLE TO CALL user.avatar REGARDLESS OF ITS PRESENCE
-  # def profile_pic
-  #   if avatar.present?
-  #   else
-  #     avatar = image_url('placeholder-user-profile.png')
-  #   end
-  #   return avatar
-  # end
 end
