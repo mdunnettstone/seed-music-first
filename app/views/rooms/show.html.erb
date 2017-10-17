@@ -53,15 +53,19 @@
               </div>
             <% end %>
           <% else %>
-            <div class="alert alert-warning" role="alert">
-              <strong>Oh no!</strong> You have no upcoming bookings in this room :(
+            <div class = "row">
+              <div class="alert alert-warning col-10 offset-1" role="alert">
+                <strong>Oh no!</strong> You have no upcoming bookings in this room :(
+              </div>
             </div>
           <% end %>
         </div>
       </div>
       <br />
       <!-- Large modal -->
-      <button class="btn btn-primary col-10 offset-1" data-toggle="modal" data-target=".bd-example-modal-lg">Tell us about this room</button>
+      <div class = "row">
+        <button class="btn btn-primary col-10 offset-1" data-toggle="modal" data-target=".bd-example-modal-lg">Tell us about this room</button>
+      </div>
       <div class = "clear"></div>
       <br />
     </div>

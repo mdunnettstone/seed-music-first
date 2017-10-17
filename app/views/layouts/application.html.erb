@@ -44,7 +44,7 @@
                   <i class="fa fa-user" aria-hidden="true"></i> Profile
                 <% end %>
                 <a class="dropdown-item" href="#">Another action</a>
-                <%= link_to destroy_user_session_path, class: "dropdown-item" do %>
+                <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
                   <i class="fa fa-sign-out" aria-hidden="true"></i> Sign out
                 <% end %>
               </div>

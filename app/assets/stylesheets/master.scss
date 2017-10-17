@@ -17,11 +17,10 @@ $background:#F5F5F5;
 }
 
 .top-half-booyah-box {
-  background-color: #0099CC;
+  background: linear-gradient(to right, #F7971E 0%, #FFD200 100%);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
   color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
 }
 
 .top-half-booyah-box-secondary {
@@ -30,6 +29,10 @@ $background:#F5F5F5;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+.min-height-n {
+  min-height: 50px;
 }
 
 #background-grey {
@@ -59,8 +62,8 @@ $background:#F5F5F5;
   box-shadow: 0px 3px 8px #2a2a2a;
 }
 
-.my-10 {
-  margin-top: 100px;
+.pt-10 {
+  padding-top: 80px;
 }
 
 input[type=text] {
@@ -135,60 +138,27 @@ a.bttn-primary {
   }
 }
 
-.bttn-primary {
-  color:$primary;
-  text-decoration:none;
-  -webkit-transition:0.25s all ease;
-  transition:0.25s ease all;
-  &:hover {
-    color:#FFF;
-  }
-  &:focus {
-    color:#FFF;
-  }
-  cursor: pointer;
-  font-size:18px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  display:inline-block;
-  text-align:center;
-  font-weight:bold;
-  padding:10px 0px;
-  border:3px solid $primary;
-  border-radius:2px;
-  position:relative;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.1);
-  &:before {
-    -webkit-transition:0.25s all ease;
-    transition:0.25s all ease;
-    position:absolute;
-    top:0;
-    left:50%;
-    right:50%;
-    bottom:0;
-    opacity:0;
-    content:'';
-    background-color:$primary;
-    z-index:-2;
-  }
-  &:hover {
-    &:before {
-      -webkit-transition:0.25s all ease;
-      transition:0.25s all ease;
-      left:0;
-      right:0;
-      opacity:1;
-    }
-  }
-  &:focus {
-    &:before {
-      transition:0.15s all ease;
-      left:0;
-      right:0;
-      opacity:1;
-    }
-  }
+.btn {
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  border-radius: 10px;
 }
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-image: linear-gradient(to right, #ffc107 0%, #ffca28 51%, #ffe082 100%) !important;
+    border: none !important;
+}
+
+.btn-primary:hover {
+  background-position: right center !important;
+}
+
 
 .timeslot, .user-box {
   color:$second;
@@ -226,6 +196,12 @@ a.bttn-primary {
   display: none;
 }
 
+.selected-user {
+  margin: auto;
+  padding: 2px;
+  height: 40px;
+}
+
 .hr-grey {
   color: grey;
 }
@@ -237,6 +213,11 @@ a.bttn-primary {
 .grey-text, .grey-text a {
   color: grey;
 }
+
+.white-text {
+  color: white;
+}
+
 .user-image-circle {
   display: inline-block;
   width: 150px;
@@ -248,6 +229,12 @@ a.bttn-primary {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+}
+
+.user-image-circle:hover {
+  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  box-shadow: 1px 1px 2px 0 #d0d0d0;
 }
 
 .default-hidden {

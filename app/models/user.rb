@@ -20,14 +20,14 @@ class User < ApplicationRecord
     end
 
     if params[:instrument_id].present?
-      params[:instrument_id].reject! { |id| id.blank? }
+      params[:instrument_id].reject!{ |id| id.blank? }
       search_scope = search_scope.where(
         "user_instruments.instrument_id": params[:instrument_id]
       )
     end
 
     if params[:genre_id].present?
-      params[:genre_id].reject! { |id| id.blank? }
+      # params[:genre_id].reject! { |id| id.blank? }
       search_scope = search_scope.where(
         "user_instruments.genre_id": params[:genre_id]
       )

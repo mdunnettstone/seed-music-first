@@ -4,6 +4,7 @@ class BookingsController < ApplicationController
     @bookings = current_user.bookings.where("(start_time > ?)", Time.now).sort_by{|booking| booking.start_time}
     @previous_bookings = current_user.bookings.where("(start_time < ?)", Time.now).sort_by{|booking| booking.end_time}.reverse!
     @prepopulated_search = rounded_datetime(Time.now)
+    @relevant_users = User.search(:genre_id => current_user.user_instruments.sample.genre.id)
   end
 
   def new
