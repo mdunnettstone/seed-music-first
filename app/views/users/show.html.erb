@@ -15,34 +15,36 @@
 
       <!-- Music box -->
       <div class = "col-12 col-md-6 mb-2">
-        <div class = "col-10 offset-1 booyah-box my-4 text-left px-0">
+        <div class = "col-10 offset-1 my-4 text-left px-0">
           <div class = "top-half-booyah-box-secondary">
-            <h3 class = "text-center mt-3 ml-0"><%= @user.firstname %>'s Music</h3>
+            <h4 class = "text-center mt-3 ml-0"><%= @user.firstname %>'s Music</h4>
           </div>
-          <% if @user.description.present? %>
-            <div class = "col-12">
-              <h4 class = "ml-0 mb-1">Description:</h4>
+          <div class = "bottom-half-booyah-box">
+            <% if @user.description.present? %>
+              <div class = "col-12">
+                <h4 class = "ml-0 mb-1">Description:</h4>
+                <div class = "col-11 offset-1 px-0">
+                  <p><%= @user.description %></p>
+                </div>
+              </div> 
+            <% end %>
+            <div class = "col-12 pt-2">
+              <h4 class = "ml-0 mt-0 mb-1">Instruments:</h4>
               <div class = "col-11 offset-1 px-0">
-                <p><%= @user.description %></p>
-              </div>
-            </div> 
-          <% end %>
-          <div class = "col-12">
-            <h4 class = "ml-0 mb-1">Instruments:</h4>
-            <div class = "col-11 offset-1 px-0">
-              <% @user.unique_instruments.each do |instrument| %>
-                <span class = "badge badge-default"><%= instrument %></span>
-              <% end %>
-            </div> 
-          </div>
-          <div class = "col-12">
-            <h4 class = "ml-0 mb-1">Genres:</h4>
-            <div class = "col-11 offset-1 px-0">
-              <% @user.unique_genres.each do |genre| %>
-                <span class = "badge badge-default"><%= genre %></span>
-              <% end %>
+                <% @user.unique_instruments.each do |instrument| %>
+                  <span class = "badge badge-default"><%= instrument %></span>
+                <% end %>
+              </div> 
             </div>
-            <br class = "my-1"/>
+            <div class = "col-12">
+              <h4 class = "ml-0 mb-1">Genres:</h4>
+              <div class = "col-11 offset-1 px-0">
+                <% @user.unique_genres.each do |genre| %>
+                  <span class = "badge badge-default"><%= genre %></span>
+                <% end %>
+              </div>
+              <br class = "my-1"/>
+            </div>
           </div>
         </div>
       </div>
@@ -51,7 +53,7 @@
       <div class = "col-12 col-md-6 mb-2">
         <div class = "col-10 offset-1 booyah-box my-4 text-left px-0">
           <div class = "top-half-booyah-box-secondary">
-            <h3 class = "text-center mt-3 ml-0"><%= @user.firstname %>'s Activity</h3>
+            <h4 class = "text-center mt-3 ml-0"><%= @user.firstname %>'s Activity</h4>
           </div>
           <div class = "col-10 offset-1 mt-2">
             <p class = "green-text"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></i> <strong><%= @user_recent_bookings.length %></strong> bookings in past 6 months</p>

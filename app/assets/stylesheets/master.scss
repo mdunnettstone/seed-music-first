@@ -1,35 +1,150 @@
 @import "bootstrap";
 @import "font-awesome";
+@import url('https://fonts.googleapis.com/css?family=Baloo+Chettan|Lato');
 
-$primary:#FF0072;
-$second:#428bca;
 $disabled:#C0C0C0;
-$background:#F5F5F5;
+$background:#f6f7fa;
+$mint-light:#5ed1b3;
+$mint-dark:#4bc2a2;
+$pink: #ED1566;
+$yellow:#fabc0f;
+$blue: #2989ce;
+$charcoal:#263030;
+$light-grey:#e3e3e3;
+$white:#ffffff;
+$header-font:'Baloo Chettan', cursive;
+$text-font: 'Lato', sans-serif;
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $header-font;
+}
+
+p {
+  font-family: $text-font;
+}
+
+.background-white {
+  background: white;
+}
+
+.background-mint {
+  background: $mint-dark;
+}
+
+.background-pink {
+  background: $pink;
+}
+
+.background-yellow {
+  background: $yellow;
+}
+
+.text-yellow {
+  color: $yellow;
+}
+
+.text-mint, .text-mint a {
+  color: $mint-dark;
+}
+
+.text-pink, .text-pink a {
+  color: $pink;
+}
+
+.text-green, .text-green a {
+  color: green;
+}
+
+.text-grey, .text-grey a {
+  color: grey;
+}
+
+.text-white {
+  color: white;
+}
+
+.underline {
+  text-decoration: underline;
+}
 
 .booyah-box {
-  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
-  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
-  box-shadow: 1px 1px 2px 0 #d0d0d0;
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-.top-half-booyah-box {
-  background: linear-gradient(to right, #F7971E 0%, #FFD200 100%);
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  color: white;
-}
-
-.top-half-booyah-box-secondary {
-  background-color: #e0e0e0;
-  color: black;
+.booyah-box-grey {
+  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  box-shadow: 1px 1px 2px 0 #d0d0d0;
+  background: #eceff1;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+.top-half-booyah-box {
+  background-color: $blue;
+  border: 1px solid #ccc;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  box-sizing: border-box;
+  color: white;
+  text-decoration: none;
+}
+
+.bottom-half-booyah-box {
+  border: 1px solid #ccc;
+  border-top: none;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-sizing: border-box;
+}
+
+.top-half-booyah-box-secondary {
+  background-color: $pink;
+  border: 1px solid #ccc;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  box-sizing: border-box;
+  color: white;
+  text-decoration: none;
+}
+
+li.sm-bulleted-list {
+  font-size: 130%;
+  font-family: $text-font;
+  list-style: none;
+  color: grey;
+}
+
+li.sm-bulleted-list:before {
+  content: '\2022';
+  display: block;
+  position: relative;
+  max-width: 0;
+  max-height: 0;
+  left: -25px;
+  top: 0;
+  color: rgb(250,188,15);
+  font-size: 20px;
+}
+
+span.numbered {
+  background: rgb(250,188,15);
+  border-radius: 0.8em;
+  -moz-border-radius: 0.8em;
+  -webkit-border-radius: 0.8em;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.4em;
+  margin-right: 5px;
+  text-align: center;
+  width: 1.4em; 
+}
+
 
 .min-height-n {
   min-height: 50px;
@@ -44,13 +159,34 @@ $background:#F5F5F5;
 }
 
 .hero {
-  background: image_url('hero.jpg') no-repeat center center fixed;
+  background: image_url('SM_Hero.svg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 270px;
-  box-shadow: 0px 3px 8px #2a2a2a;
+  height: 100%;
+}
+
+.super-hero {
+  background: image_url('SM_Hero.svg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  font-family: $header-font;
+}
+
+.super-hero h1 {
+  font-size: 400%;
+}
+
+h1.mega-title {
+  font-size: 300%;
+}
+.frosty {
+  border: #solid 10px #000;
+  background-color: rgba(105,105,105,0.5);
 }
 
 .full-page-image {
@@ -64,6 +200,11 @@ $background:#F5F5F5;
 
 .pt-10 {
   padding-top: 80px;
+}
+
+.my-10 {
+  margin-top: 70px;
+  margin-bottom: 70px;
 }
 
 input[type=text] {
@@ -125,65 +266,92 @@ label.error {
   z-index: 3;
 }
 
-a.bttn-primary {
-  color:$primary;
-  text-decoration:none;
-  -webkit-transition:0.25s all ease;
-  transition:0.25s ease all;
-  &:hover {
-    color:#FFF;
-  }
-  &:focus {
-    color:#FFF;
-  }
-}
-
 .btn {
-  padding: 10px;
   text-align: center;
-  text-transform: uppercase;
-  transition: 0.5s;
-  background-size: 200% auto;
-  border-radius: 10px;
+  transition: 0.5s !important;
+  font-weight: bold !important;
 }
 
 .btn-primary,
 .btn-primary:active,
 .btn-primary:visited,
 .btn-primary:focus {
-    background-image: linear-gradient(to right, #ffc107 0%, #ffca28 51%, #ffe082 100%) !important;
-    border: none !important;
+    background-color: $mint-dark !important;
+    border: 2px solid $mint-dark !important;
 }
 
 .btn-primary:hover {
-  background-position: right center !important;
+  background-color: darken($mint-dark, 5%) !important;
+  border-color: darken($mint-dark, 5%) !important;
+}
+
+.btn-pink,
+.btn-pink:active,
+.btn-pink:visited,
+.btn-pink:focus {
+    background-color: $pink !important;
+    border: 2px solid $pink !important;
+    color: white !important;
+}
+
+.btn-pink:hover {
+  background-color: darken($pink, 5%) !important;
+  border-color: darken($pink, 5%) !important;
+}
+
+.btn-yellow,
+.btn-yellow:active,
+.btn-yellow:visited,
+.btn-yellow:focus {
+    background-color: $yellow !important;
+    border: 2px solid $yellow !important;
+    color: white !important;
+}
+
+.btn-yellow:hover {
+  background-color: darken($yellow, 5%) !important;
+  border-color: darken($yellow, 5%) !important;
+}
+
+.btn-secondary,
+.btn-secondary:active,
+.btn-secondary:visited,
+.btn-secondary:focus {
+    border: 2px solid $mint-dark !important;
+    color: $mint-dark !important;
+}
+
+.border-top-grey {
+  border-top: 2px solid $light-grey;
 }
 
 
 .timeslot, .user-box {
-  color:$second;
+  color: $mint-dark;
+  background-color: white;
   text-decoration:none;
   cursor: pointer;
   font-size:12px;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
   text-align:center;
   font-weight:bold;
-  padding:5px 5px;
-  border:2px solid $second;
-  border-radius:2px;
+  padding:10px 10px;
+  border:2px solid $mint-dark;
+  border-radius: 4px;
   position:relative;
 }
 
 .timeslot.active, .user-box.active-user {
-  box-shadow: 0 2px 10px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 0 $mint-light;
+  border-color: $mint-dark;
+  top: 1px;
   color: white;
-  background-color: $second;
+  background-color: $mint-dark;
 }
 
 .timeslot.disabled, .timeslot.disabled-temp {
   border: 2px solid $disabled;
-  color: $disabled;
+  background-color: $disabled;
+  color: white;
   pointer: default;
 }
 
@@ -192,7 +360,7 @@ a.bttn-primary {
   list-style-type: none;
 }
 
-.search-form-show-hide, .user-form-show-hide {
+.search-form-show-hide, .user-form-show-hide, .show-hide {
   display: none;
 }
 
@@ -204,18 +372,6 @@ a.bttn-primary {
 
 .hr-grey {
   color: grey;
-}
-
-.green-text, .green-text a {
-  color: green;
-}
-
-.grey-text, .grey-text a {
-  color: grey;
-}
-
-.white-text {
-  color: white;
 }
 
 .user-image-circle {

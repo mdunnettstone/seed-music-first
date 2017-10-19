@@ -1,30 +1,34 @@
 <h1 class = "ml-3">Sign up</h1>
 
 <div class = "booyah-box col-10 offset-1 col-md-6 col-lg-4 offset-md-3 offset-lg-4 pt-3 mb-5">
-  <div class = "first-section">
-    <%= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+  <%= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+    <div class = "first-section">
       <div class="form-inputs">
         <h2>Your details</h2>
         <%= f.error_notification %>
-          <%= f.input :firstname, required: true, autofocus: true %>
-          <%= f.input :surname, required: true, autofocus: true %>
-          <%= f.input :email, required: true, autofocus: true, hint: "Use your work one" %>
-          <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-          <%= f.input :password_confirmation, required: true %>
-          <%= f.input :avatar %>
+        <%= f.input :firstname, required: true, autofocus: true %>
+        <%= f.input :surname, required: true %>
+        <%= f.input :email, required: true, hint: "Use your work one" %>
+        <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+        <%= f.input :password_confirmation, required: true %>
+        <%= f.input :avatar %>
       </div>
     </div> <!-- first section -->
+
     <div class = "btn btn-primary continue">Continue</div>
 
     <div class = "second-section">
       <div class="form-inputs">
         <h2>Your music</h2>
-        <%= f.simple_fields_for :user_instruments do |instrument| %>
-          <p>
-            <%= instrument.input :instrument_id, collection: Instrument.all, label_method: :name, value_method: :id, include_blank: false %>
-            <%= instrument.input :genre_id, collection: Genre.all, label_method: :name, value_method: :id, include_blank: false %>
-          </p>
-        <% end %>
+        <div class="all_instrument_fields">
+          <%= f.simple_fields_for :user_instruments do |instrument| %>
+            <div class="instrument_field"/>
+              <%= instrument.input :instrument_id, collection: Instrument.all, label_method: :name, value_method: :id, include_blank: false %>
+              <%= instrument.input :genre_id, collection: Genre.all, label_method: :name, value_method: :id, include_blank: false %>
+            </div>
+          <% end %>
+        </div>
+        <p><a href="#" class="add_instrument_field">+ add instrument</a></p>
         <%= f.input :description, autofocus: true, hint: "Say a few words about what you like to play and, if you wish to, an indicator of your level" %>
       </div>
 
@@ -37,9 +41,6 @@
   <%= render "devise/shared/links" %>
   <br />
 </div>
-<br />
-<br />
-
 
 <script>
   $.fn.extend({
@@ -47,7 +48,34 @@
         return this.text(this.text() == b ? a : b);
     }
   });
+
   $(function() {
+    // initial starting index depends on number of fields on the page
+    var instrumentIndex = $('.instrument_field').length - 1;
+
+    $(".add_instrument_field").click(function(evt) {
+      evt.preventDefault();
+      instrumentIndex++;
+
+      // clone the labels and select fields
+      var newFields = $('.instrument_field').first().clone().appendTo( ".all_instrument_fields" );
+      // change the select field names and ids
+      newFields.find("select").each(function(index) {
+        newId   = $(this).attr("id").replace(/0/g, instrumentIndex);
+        newName = $(this).attr("name").replace(/0/g, instrumentIndex);
+        $(this).attr("id", newId);
+        $(this).attr("name", newName);
+      });
+
+      // change the label fors
+      newFields.find("label").each(function(index) {
+        newFor = $(this).attr("for").replace(/0/g, instrumentIndex);
+        $(this).attr("for", newFor);
+      });
+
+      return false;
+    });
+
     $(".continue").click(function(e){
       $(this).toggleText("Continue", "Back");
       $(".first-section").slideToggle();

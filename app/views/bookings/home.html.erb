@@ -1,84 +1,116 @@
-<h1 class = "ml-3">Book a music room</h1>
-
 <div class = "hero">
-  <div class = "row pt-10">
-    <div class = "col-2 col-md-10 offset-md-1 text-left">
-      <div class = "col-10 col-md-5 mt-4 my-md-0 px-md-0"><span class = "white-text badge badge-default">Date:</span></div>
-      <div class = "col-10 col-md-4 my-5 my-md-0 px-md-2"><span class = "white-text badge badge-default">Time:</span></div>
-    </div>
-  <div class = "col-10 col-md-10 offset-md-1 text-center">
-      <%= form_tag(new_booking_path, method: :get) do %>
-        <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"),  class: "date col-10 col-md-5 mx-1 my-1 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
-        <%= select_time @prepopulated_search, {:time_separator => ":", :minute_step => 15}, class: "time col-5 col-md-2 mx-1 my-1 d-inline" %>
-        <%= submit_tag "Search", class: "btn btn-primary col-6 col-md-2 form-button d-inline my-1 mx-1" %>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class = "clear"></div>
-<h1 class = "offset-md-1 ml-1">Your bookings</h1>
-<div class = "container">
-  <div class = "row">
-    <h3 class = "ml-1"><%= "Upcoming bookings (#{@bookings.length})" %></h3>
-    <div class = "col-12">
-      <% @bookings.each do |booking| %>
-        <div class="col-12 col-sm-6">
-          <div class="card">
-            <div class="card-block">
-              <h3 class="card-title mt-1"><%= booking.start_time.strftime("%a, %e %b %Y") %></h3>
-              <p class = "card-text"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= "#{booking.start_time.strftime("%H:%M")} - #{booking.end_time.strftime("%H:%M")}" %></p>
-              <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp<%= booking.room.name %></p>
-              <p class = "card-text"><i class="fa fa-users" aria-hidden="true"></i> <%= booking.user_list %></p>
-              <%= link_to 'View booking', booking_path(booking), class: "btn btn-primary" %>
-            </div>
-          </div>
-          <br />
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class = "clear"></div>
-<h1 class = "offset-md-1 ml-1"><%= "Other #{current_user.user_instruments.first.genre.name} musicians" %></h1>
-<div class = "container">
-  <div class = "row">
-    <% @relevant_users.each do |user| %>
-      <div class = "col-md-6 mb-5">
-        <div class = "booyah-box col-10 offset-1 px-0">
-          <%= link_to user_path(user) do %>
-            <div class = "top-half-booyah-box mx-0 text-center">
-              <% if user.avatar.present? %>
-                <%= image_tag(user.avatar, class: "user-image-circle my-3") %>
-              <% else %>
-                <%= image_tag('placeholder-user-profile.png', class: "user-image-circle my-3") %>
-              <% end %>
-              <h3 class = "mt-0"><%= user.fullname %></h3>
-            </div>
+  <div class = "container">
+    <div class = "row my-10">
+      <div class = "col-12 col-md-6 text-right">
+        <h1 class = "text-white mega-title">Book a music room</h1>
+      </div>
+      <div class = "col-12 col-md-6">
+        <div class = "row">
+          <%= form_tag(new_booking_path, method: :get, class: "col-12 col-md-6 frosty pb-2") do %>
+            <h3 class = "mb-1 mt-0"><span class = "badge">Date</span></h3>
+            <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"),  class: "date col-12 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today, "data-date-min-date" => Date.today %>
+            <h3 class = "mb-1 mt-2"><span class = "badge">Time</span></h3>
+            <%= select_time @prepopulated_search, {:time_separator => ":", :minute_step => 15}, class: "time col-3 pr-0 pl-0 mx-0 d-inline" %>
+            <%= submit_tag "Search", class: "btn btn-primary col form-button d-inline my-1" %>
           <% end %>
-          <div class = "row">
-            <div class = "col-12">
-              <h4 class = "ml-3 mb-1">Instruments:</h4>
-              <div class = "col-11 offset-1">
-                <% user.unique_instruments.each do |instrument| %>
-                  <span class = "badge badge-default"><%= instrument %></span>
-                <% end %>
-              </div>
-            </div>  
-          </div>
-          <div class = "row">
-            <div class = "col-12">
-              <h4 class = "ml-3 mb-1">Genres:</h4>
-              <div class = "col-11 offset-1 mb-2">
-                <% user.unique_genres.each do |genre| %>
-                  <span class = "badge badge-default"><%= genre %></span>
-                <% end %>
-              </div>
-            </div>  
-          </div>
         </div>
       </div>
-    <% end %>
+    </div>
+  </div>
+</div>
+
+<div class = "clear"></div>
+<div class = "container my-0">
+  <div class = "row my-0">
+    <h1>Your bookings</h1>
+  </div>
+</div>
+<div class = "container">
+  <div class = "row">
+    <h3><%= "Upcoming bookings (#{@bookings.length})" %></h3>
+    <div class = "col-12">
+      <div class = "row">
+        <% @bookings.each do |booking| %>
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="booyah-box">
+              <div class = "row">
+                <div class = "col-12">
+                  <h3 class="mt-1 ml-2"><%= booking.start_time.strftime("%a, %e %b %Y") %></h3><div class = "clear"></div>
+                </div>
+                <div class = "col-2 text-center">
+                  <i class="fa fa-clock-o ml-2" aria-hidden="true"></i>
+                </div>
+                <div class = "col-10">
+                  <%= "#{booking.start_time.strftime("%H:%M")} - #{booking.end_time.strftime("%H:%M")}" %>
+                </div>
+                <div class = "col-2 text-center">
+                  <i class="fa fa-map-marker ml-2" aria-hidden="true"></i>
+                </div>
+                <div class = "col-10">
+                  <%= booking.room.name %>
+                </div>
+                <div class = "col-2 text-center">
+                  <i class="fa fa-users ml-2" aria-hidden="true"></i>
+                </div>
+                <div class = "col-10">
+                  <%= booking.user_list %>
+                </div>
+                  <%= link_to 'View booking', booking_path(booking), class: "btn btn-pink col-10 offset-1 my-2" %>
+              </div>
+            </div>
+            <br />
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class = "clear"></div>
+<div class = "background-white">
+  <div class = "container my-0">
+    <div class = "row my-0">
+      <h1><%= "Other #{current_user.user_instruments.first.genre.name} musicians" %></h1>
+    </div>
+  </div>
+  <div class = "container">
+    <div class = "row">
+      <% @relevant_users.each do |user| %>
+        <div class = "col-sm-6 col-md-4 mb-5">
+          <%= link_to user_path(user) do %>
+            <div class = "top-half-booyah-box text-center">
+              <% if user.avatar.present? %>
+                <%= image_tag(user.avatar, class: "user-image-circle my-5") %>
+              <% else %>
+                <%= image_tag('placeholder-user-profile.png', class: "user-image-circle my-5") %>
+              <% end %>
+              <h3 class = "mt-2 mb-4"><%= user.fullname %></h3>
+            </div>
+          <% end %>
+          <div class = "bottom-half-booyah-box">
+            <div class = "row">
+              <div class = "col-12">
+                <h4 class = "ml-3 mb-1">Instruments:</h4>
+                <div class = "col-11 offset-1">
+                  <% user.unique_instruments.each do |instrument| %>
+                    <span class = "badge badge-default"><%= instrument %></span>
+                  <% end %>
+                </div>
+              </div>  
+            </div>
+            <div class = "row">
+              <div class = "col-12">
+                <h4 class = "ml-3 mb-1">Genres:</h4>
+                <div class = "col-11 offset-1 mb-2">
+                  <% user.unique_genres.each do |genre| %>
+                    <span class = "badge badge-default"><%= genre %></span>
+                  <% end %>
+                </div>
+              </div>  
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
