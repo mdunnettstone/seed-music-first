@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :room_facilities, only: [:new, :create]
     end
     resources :facilities, only: [:new, :create]
+    resources :bookings, only: [:index]
     get "/dashboard", :controller => "static_pages", :action => "dashboard"
     resources :room_comments, only: [:index]
   end

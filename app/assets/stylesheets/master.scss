@@ -8,6 +8,7 @@ $mint-light:#5ed1b3;
 $mint-dark:#4bc2a2;
 $pink: #ED1566;
 $yellow:#fabc0f;
+$purple: #666389;
 $blue: #2989ce;
 $charcoal:#263030;
 $light-grey:#e3e3e3;
@@ -39,6 +40,10 @@ p {
   background: $yellow !important;
 }
 
+.background-purple {
+  background: $purple !important;
+}
+
 .text-yellow {
   color: $yellow !important;
 }
@@ -49,6 +54,10 @@ p {
 
 .text-pink, .text-pink a {
   color: $pink !important;
+}
+
+.text-purple, .text-purple a {
+  color: $purple !important;
 }
 
 .text-green, .text-green a {
@@ -168,6 +177,15 @@ span.numbered {
 
 .hero {
   background: image_url('SM_Hero.svg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}
+
+.room-user-hero {
+  background: image_url('SM_Hero_small.svg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

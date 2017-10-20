@@ -6,63 +6,79 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!-- vendor js -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
   </head>
 
   <body id = "background-grey">
-    <nav class="navbar navbar-toggleable-sm navbar-light bg-faded mb-0">
-      <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon mt-0"></span>
-      </button>
-      <%= link_to 'Seed Music', root_path, class: 'navbar-brand' %>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-sm-0">
-          <li class="nav-item">
-            <%= link_to rooms_path, class: 'nav-link mx-1' do %>
-              <i class="fa fa-map-marker" aria-hidden="true"></i> Rooms
-            <% end %>
-          </li>
-          <li class="nav-item">
-            <%= link_to users_path, class: 'nav-link mx-1' do %>
-              <i class="fa fa-users" aria-hidden="true"></i> People
-            <% end %>
-          </li>
-        </ul>
-        <ul class="navbar-nav float-right">
-          <% if user_signed_in? %>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-smile-o" aria-hidden="true"></i> &nbsp<%= current_user.firstname %>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <%= link_to user_path(current_user), class: "dropdown-item" do %>
-                  <i class="fa fa-user" aria-hidden="true"></i> Profile
-                <% end %>
-                <a class="dropdown-item" href="#">Another action</a>
-                <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
-                  <i class="fa fa-sign-out" aria-hidden="true"></i> Sign out
-                <% end %>
-              </div>
-            </li>
-          <% else %>
+    <div id="flex-content-container">
+      <nav class="navbar navbar-toggleable-sm navbar-light bg-faded mb-0">
+        <button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon mt-0"></span>
+        </button>
+        <%= link_to 'Seed Music', root_path, class: 'navbar-brand' %>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-sm-0">
             <li class="nav-item">
-              <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
+              <%= link_to rooms_path, class: 'nav-link mx-1' do %>
+                <i class="fa fa-map-marker" aria-hidden="true"></i> Rooms
+              <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+              <%= link_to users_path, class: 'nav-link mx-1' do %>
+                <i class="fa fa-users" aria-hidden="true"></i> People
+              <% end %>
             </li>
-          <% end %>
-        </ul>
+          </ul>
+          <ul class="navbar-nav float-right">
+            <% if user_signed_in? %>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-smile-o" aria-hidden="true"></i> &nbsp<%= current_user.firstname %>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <%= link_to user_path(current_user), class: "dropdown-item" do %>
+                    <i class="fa fa-user" aria-hidden="true"></i> Profile
+                  <% end %>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+                    <i class="fa fa-sign-out" aria-hidden="true"></i> Sign out
+                  <% end %>
+                </div>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+      <% if notice.present? %>
+        <p class="alert alert-info alert-autodismiss col-10 offset-1"><%= notice %></p>
+      <% end %>
+      <% if alert.present? %>
+        <p class="alert alert-danger alert-autodismiss col-10 offset-1"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+    </div>
+    <div id="footer">
+      <div class="container">
+        <b>Useful links</b>
+        <br />
+        <%= link_to 'Admin dashboard', admin_dashboard_path %>
       </div>
-    </nav>
-    <% if notice.present? %>
-      <p class="alert alert-info col-10 offset-1"><%= notice %></p>
-    <% end %>
-    <% if alert.present? %>
-      <p class="alert alert-danger col-10 offset-1"><%= alert %></p>
-    <% end %>
-    <%= yield %>
+    </div>
   </body>
 </html>
+
+<script>
+  window.setTimeout(function() {
+    $(".alert-autodismiss").fadeTo(500, 0).slideUp(600, function(){
+        $(this).remove(); 
+    });
+  }, 1000);
+</script>
