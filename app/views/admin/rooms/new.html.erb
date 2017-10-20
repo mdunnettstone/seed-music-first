@@ -1,0 +1,17 @@
+<div class = "container">
+  <div class = "booyah-box col-10 offset-1 col-md-6 offset-md-3 pt-3">
+    <h1 class = "">New room</h1>
+    <%= simple_form_for @room, url: admin_rooms_path do |f| %>
+      <div class="form-inputs">
+        <%= f.input :name, hint: "Must be unique" %>
+        <%= f.input :address %>
+        <%= f.input :capacity, collection: 1..20 %>
+        <%= f.input :photo %>
+      </div>
+      <div class="form-actions">
+        <%= f.button :submit, "Create", class: 'btn btn-primary col-12' %>
+      </div>
+    <% end %>
+    <br />
+  </div>
+</div>

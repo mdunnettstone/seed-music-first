@@ -1,0 +1,60 @@
+<div class = "container">
+  <div class = "row">
+    <h2 class = "col-12">Admin dashboard</h2>
+    <h4 class = "col-12">Admin privileges</h5>
+    <div class = "col-12 col-sm-6 col-md-4">
+      <h6>Rooms</h6>
+      <%= link_to new_admin_room_path, class: "btn btn-primary mb-2 col-12" do %>
+        <i class="fa fa-plus" aria-hidden="true"></i> Add a room
+      <% end %>
+      <%= link_to '#', class: "btn btn-secondary mb-2 col-12" do %>
+        <i class="fa fa-quote-left" aria-hidden="true"></i> View all room comments
+      <% end %>
+    </div>
+    <div class = "col-12 col-sm-6 col-md-4">
+      <h6>Users</h6>
+      <%= link_to '#', class: "btn btn-primary mb-2 col-12" do %>
+        <i class="fa fa-users" aria-hidden="true"></i> Manage user access
+      <% end %>
+    </div>
+    <div class = "col-12 col-sm-6 col-md-4">
+      <h6>Bookings</h6>
+      <%= link_to '#', class: "btn btn-primary mb-2 col-12" do %>
+        <i class="fa fa-calendar" aria-hidden="true"></i> View all bookings
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div class = "container">
+  <div class = "row">
+    <h4 class = "col-12">Usage statistics</h4>
+    <div class = "col-6 col-md-4">
+      <div class = "booyah-box background-mint text-center py-3">
+        <h2 class = "text-white"><%= @users.length %></h2>
+        <p class = "text-white">Users</p>
+      </div>
+    </div>
+    <div class = "col-6 col-md-4">
+      <div class = "booyah-box background-pink text-center py-3">
+        <h2 class = "text-white"><%= @recent_bookings.length %></h2>
+        <p class = "text-white">Bookings in past 3 months</p>
+      </div>
+    </div>
+    <div class = "col-6 col-md-4">
+      <div class = "booyah-box background-yellow text-center py-3">
+        <h2><%= @upcoming_bookings.length %></h2>
+        <p>Upcoming bookings</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class = "row">
+  <div class = "col-md-6">
+    <div class = "col-12 booyah-box">
+    <canvas id="TotalUsers" width="50%" height="50%"></canvas>
+  </div>
+</div>
