@@ -7,7 +7,7 @@
 </div>
 <div class = "container">
   <div class="btn btn-secondary col-10 offset-1 toggle-search mt-2"><i class="fa fa-filter" aria-hidden="true"></i> Filter</div>
-  <div class = "search-and-filter default-hidden">
+  <div class = "search-and-filter show-hide">
     <div class = "row mb-2">
       <%= form_tag(users_path, method: :get, class: "col-12" ) do %>
         <%= text_field_tag :name, params[:name], placeholder: "Search users by name", class: "col-12 col-md-4 mt-2 mx-0" %>

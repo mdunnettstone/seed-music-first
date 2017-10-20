@@ -1,4 +1,4 @@
-@import "bootstrap";
+
 @import "font-awesome";
 @import url('https://fonts.googleapis.com/css?family=Baloo+Chettan|Lato');
 
@@ -65,6 +65,10 @@ p {
 
 .underline {
   text-decoration: underline;
+}
+
+.hidden {
+  display: none !important;
 }
 
 .booyah-box {
@@ -200,6 +204,7 @@ h1.mega-title {
 
 .pt-10 {
   padding-top: 80px;
+  padding-bottom: 20px;
 }
 
 .my-10 {
