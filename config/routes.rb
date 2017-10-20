@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
     resources :facilities, only: [:new, :create]
     get "/dashboard", :controller => "static_pages", :action => "dashboard"
+    resources :room_comments, only: [:index]
   end
   resources :users
   resources :bookings

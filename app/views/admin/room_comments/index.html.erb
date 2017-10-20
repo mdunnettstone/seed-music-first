@@ -1,0 +1,22 @@
+<h1>These are all the room comments</h1>
+<div class = "container">
+  <div class = "row">
+    <% @rooms.each do |room| %>
+      <div class = "col-12 col-md-6 my-3">
+        <div class = "top-half-booyah-box pl-1">
+          <h5 class = mt-1><%= link_to room.name, room_path(room) %></h5>
+        </div>
+        <div class = "bottom-half-booyah-box pl-1">
+          <% if room.room_comments.present? %>
+            <% room.room_comments.each do |comment| %>
+              <blockquote class = "blockquote"><%= comment.message %></blockquote>
+              <footer class = "blockquote-footer"><%= comment.user.email %>, <%= comment.created_at.strftime("%Y") %></p>
+            <% end %>
+          <% else %>
+            <p>No comments yet. Everyone must be loving it!</p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
