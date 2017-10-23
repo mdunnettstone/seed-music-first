@@ -1,6 +1,9 @@
 <p>Hey There!</p>
 <p>
-    Your Seed Music booking has been <b>confirmed</b>
+  Your Seed Music booking for <b><%= "#{@date}, from #{@start_time} to #{@end_time} in #{@room_name}" %></b> has been confirmed.
+</p>
+<p>
+  You can manage your booking <%= link_to 'here', booking_url(@booking) %>.
 </p>
 
 Enjoy,<br />

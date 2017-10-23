@@ -1,6 +1,8 @@
 Hey there,
 
-Your booking has been confirmed.
+Your Seed Music booking for <%= "#{@date}, from #{@start_time} to #{@end_time} in #{@room_name}" %> has been confirmed.
+
+You can manage your booking here: <%= booking_url(@booking) %>.
 
 Enjoy,
 Seed Music team :)
