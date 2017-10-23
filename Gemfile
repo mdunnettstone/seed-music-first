@@ -75,3 +75,5 @@ gem 'sweet-alert2-rails'
 gem 'font-awesome-rails'
 
 gem 'figaro'
+
+gem 'delayed_job_active_record'

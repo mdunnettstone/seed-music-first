@@ -3,6 +3,7 @@ class Booking < ApplicationRecord
   has_many :users, through: :user_bookings
   belongs_to :room
   after_create :send_booking_created_email
+  before_destroy :send_booking_cancelled_email
   # belongs_to :room, through: :room_timelots
 
   def user_list
@@ -17,5 +18,11 @@ class Booking < ApplicationRecord
     self.users.each do |user|
       BookingMailer.booking_created(self, user).deliver
     end 
+  end
+
+  def send_booking_cancelled_email
+    self.users.each do |user|
+      BookingMailer.booking_cancelled(self, user).deliver
+    end
   end
 end
