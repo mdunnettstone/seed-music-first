@@ -8,7 +8,7 @@ class Admin::RoomsController < ApplicationController
 
   def create
     @room = Room.create(room_params)
-    redirect_to new_admin_room_room_facility(@room)
+    redirect_to new_admin_room_room_facility_path(@room)
   end
 
   def edit

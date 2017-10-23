@@ -80,9 +80,9 @@
           <%= link_to user_path(user) do %>
             <div class = "top-half-booyah-box text-center">
               <% if user.avatar.present? %>
-                <%= image_tag(user.avatar, class: "user-image-circle my-5") %>
+                <%= image_tag(user.avatar, class: "user-image-circle my-3") %>
               <% else %>
-                <%= image_tag('placeholder-user-profile.png', class: "user-image-circle my-5") %>
+                <%= image_tag('placeholder-user-profile.png', class: "user-image-circle my-3") %>
               <% end %>
               <h3 class = "mt-2 mb-4"><%= user.fullname %></h3>
             </div>

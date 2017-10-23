@@ -80,6 +80,9 @@ p {
   display: none !important;
 }
 
+.width100 {
+  width: 100%;
+}
 .booyah-box {
   background: #fff;
   border: 1px solid #ccc;
@@ -87,13 +90,8 @@ p {
   box-sizing: border-box;
 }
 
-.booyah-box-grey {
-  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
-  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
-  box-shadow: 1px 1px 2px 0 #d0d0d0;
-  background: #eceff1;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.box-transparent {
+  background: rgba(255, 255, 255, 0.5);
   box-sizing: border-box;
 }
 
