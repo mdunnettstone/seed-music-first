@@ -77,3 +77,5 @@ gem 'font-awesome-rails'
 gem 'figaro'
 
 gem 'delayed_job_active_record'
+
+gem 'daemons'

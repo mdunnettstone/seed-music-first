@@ -3,6 +3,7 @@ class Booking < ApplicationRecord
   has_many :users, through: :user_bookings
   belongs_to :room
   after_create :send_booking_created_email
+  after_create :send_reminder
   before_destroy :send_booking_cancelled_email
   # belongs_to :room, through: :room_timelots
 
@@ -25,4 +26,17 @@ class Booking < ApplicationRecord
       BookingMailer.booking_cancelled(self, user).deliver
     end
   end
+
+  def send_reminder
+    self.users.each do |user|
+      BookingMailer.booking_reminder(self, user).deliver
+    end
+  end
+
+  def when_to_send_reminder
+    minutes_before_booking = 30.minutes
+    start_time - minutes_before_booking
+  end
+
+  handle_asynchronously :send_reminder, :run_at => Proc.new { |i| i.when_to_run }
 end
