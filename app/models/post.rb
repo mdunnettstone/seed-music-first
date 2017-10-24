@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
+  has_many :post_replies
   validates :category, presence: true
   validates :title, presence: true
   validates :message, length: { minimum: 3 }

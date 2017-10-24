@@ -13,15 +13,61 @@
       </div>
     <% end %>
     <div class = "col-12 col-md-8 offset-md-2">
-      <div class = "col-12 mb-2">
-        <div class = "top-half-booyah-box-secondary px-2 py-2">
-          <h5 class = my-0><%= @post.title %></h5>
-        </div>
-        <div class = "bottom-half-booyah-box px-2">
-          <p><%= @post.message %></p>
-          <small class = "text-muted">Posted by <%= link_to @post.user.fullname, user_path(@post.user) %> on <%= @post.created_at.strftime('%A, %b %d, %Y') %> in <%= @post.humanized_category %></small>
+      <div class = "top-half-booyah-box-secondary col-12">
+        <div class = "row">
+            <div class = "col-4 col-md-2">
+              <% if @post.user.avatar.present? %>
+                <%= image_tag(@post.user.avatar, class: "user-image-circle-small my-1") %>
+              <% else %>
+                <%= image_tag('placeholder-user-profile.png', class: "user-image-circle-small my-1") %>
+              <% end %>
+            </div>
+            <div class = "col-8 col-md-10 mt-auto">
+              <h5><%= @post.title %></h5>
+              <p>by <%= link_to @post.user.fullname, user_path(@post.user) %></p> 
+            </div>
         </div>
       </div>
+      <div class = "bottom-half-booyah-box col-12 background-white">
+        <div class = "text-center pt-3 px-1">
+          <p>"<%= @post.message %>"</p>
+        </div>
+        <hr class = "mt-0 mb-1"/>
+        <h6 class = "underline d-inline">Replies</h6> <span class = "badge badge-info"><%= @post.post_replies.length %></span>
+        <% if @post.post_replies.length > 0 %>
+          <div class = "row">
+            <% @post.post_replies.each do |reply| %>
+              <div class = "col-2 col-md-1 text-right">
+                <% if reply.user.avatar.present? %>
+                  <%= image_tag(reply.user.avatar, class: "user-image-circle-xs my-1") %>
+                <% else %>
+                  <%= image_tag('placeholder-user-profile.png', class: "user-image-circle-xs my-1") %>
+                <% end %>
+              </div>
+              <div class = "col-10 col-md-11">
+                <p class = "my-0"><%= reply.message %></p>
+                <small>- <%= link_to reply.user.fullname, user_path(reply.user) %></small>
+                <hr />
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>No replies yet. Be <strong>the first to respond</strong>, below!</p>
+        <% end %>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<div class = "container mt-4 mb-2">
+  <div class = "row">
+    <div class = "col-12 col-md-8 offset-md-2">
+      <h4>Reply to this post</h4>
+      <%= simple_form_for @post_reply do |f| %>
+        <%= f.input :message %>
+        <%= f.input :post_id, as: :hidden, :input_html => { :value => @post.id } %>
+        <%= f.submit "Reply!", class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 </div>

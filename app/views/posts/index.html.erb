@@ -12,7 +12,7 @@
         <%= submit_tag "Search", class: "btn btn-primary mb-1" %>
       <% end %>
       <% if params[:text].present? || params[:categories].present? %>
-        <%= link_to "Clear", posts_path, class: "btn btn-secondary form-button" %>
+        <%= link_to "Clear", posts_path, class: "btn btn-secondary mb-1" %>
       <% end %>
     </div>
     <div class = "col-12 col-md-8 offset-md-2">
@@ -23,7 +23,14 @@
           </div>
           <div class = "bottom-half-booyah-box px-2">
             <p><%= post.message %></p>
-            <small class = "text-muted">Posted by <%= link_to post.user.fullname, user_path(post.user) %> on <%= post.created_at.strftime('%A, %b %d, %Y') %> in <%= link_to post.humanized_category, posts_path(:categories => post.category) %></small>
+            <small class = "text-muted">Posted by <%= link_to post.user.fullname, user_path(post.user) %> on <%= post.created_at.strftime('%A, %b %d, %Y') %> in <%= link_to post.humanized_category, posts_path(:categories => post.category) %> 
+              <%= link_to post_path(post) do %>
+                <span class = "badge badge-info">
+                  <i class="fa fa-comment-o" aria-hidden="true"></i>
+                  <%= post.post_replies.length %>
+                </span>
+              <% end %>
+            </small>
           </div>
         </div>
       <% end %>

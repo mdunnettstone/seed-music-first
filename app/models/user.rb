@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :user_bookings, dependent: :destroy
   has_many :bookings, through: :user_bookings
   has_many :posts
+  has_many :post_replies
   mount_uploader :avatar, AvatarUploader
 
   accepts_nested_attributes_for :user_instruments

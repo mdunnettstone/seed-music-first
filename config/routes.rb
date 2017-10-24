@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts, except: [:new]
+  resources :post_replies, only: [:create]
   namespace :admin do
     resources :rooms, only: [:new, :create, :edit, :update] do
       resources :room_facilities, only: [:new, :create]

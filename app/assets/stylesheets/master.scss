@@ -402,6 +402,44 @@ label.error {
   box-shadow: 1px 1px 2px 0 #d0d0d0;
 }
 
+.user-image-circle-small {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border-color: grey;
+  border: 2px solid $disabled;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.user-image-circle-small:hover {
+  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  box-shadow: 1px 1px 2px 0 #d0d0d0;
+}
+
+.user-image-circle-xs {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-color: grey;
+  border: 2px solid $disabled;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.user-image-circle-xs:hover {
+  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  box-shadow: 1px 1px 2px 0 #d0d0d0;
+}
+
 .default-hidden {
   display: none;
 }

@@ -1,116 +1,95 @@
 <div class = "container">
   <div class = "row">
-    <div class = "booyah-box col-12 px-0 text-center mb-4">
-      <div class = "top-half-booyah-box col-12 mx-0">
-        <% if @user.avatar.present? %>
-          <%= image_tag(@user.avatar, class: "user-image-circle mt-5 mb-1") %>
-        <% else %>
-          <%= image_tag('placeholder-user-profile.png', class: "user-image-circle mt-5 mb-1") %>
-        <% end %>
-        <h1 class = "mt-2"><%= @user.fullname %></h1>
-        <%= mail_to @user.email do %>
-          <div class = "btn btn-secondary mb-3"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email <%= @user.firstname %></div>
-        <% end %> 
-      </div>
+    <div class = "top-half-booyah-box col-12 mx-0 text-center">
+      <% if @user.avatar.present? %>
+        <%= image_tag(@user.avatar, class: "user-image-circle mt-3 mb-1") %>
+      <% else %>
+        <%= image_tag('placeholder-user-profile.png', class: "user-image-circle mt-3 mb-1") %>
+      <% end %>
+      <h1 class = "mt-2"><%= @user.fullname %></h1>
+      <%= mail_to @user.email do %>
+        <div class = "btn btn-secondary mb-3"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email <%= @user.firstname %></div>
+      <% end %> 
+    </div>
 
-      <!-- Music box -->
-      <div class = "col-12 col-md-6 mb-2">
-        <div class = "col-10 offset-1 my-4 text-left px-0">
-          <div class = "top-half-booyah-box-secondary">
-            <h4 class = "text-center mt-3 ml-0"><%= @user.firstname %>'s Music</h4>
-          </div>
-          <div class = "bottom-half-booyah-box">
-            <% if @user.description.present? %>
-              <div class = "col-12">
-                <h4 class = "ml-0 mb-1">Description:</h4>
-                <div class = "col-11 offset-1 px-0">
-                  <p><%= @user.description %></p>
-                </div>
-              </div> 
-            <% end %>
-            <div class = "col-12 pt-2">
-              <h4 class = "ml-0 mt-0 mb-1">Instruments:</h4>
-              <div class = "col-11 offset-1 px-0">
-                <% @user.unique_instruments.each do |instrument| %>
-                  <span class = "badge badge-default"><%= instrument %></span>
-                <% end %>
-              </div> 
+    <div class = "bottom-half-booyah-box col-12 mx-0">
+      <div class = "row">
+        <div class = "col-12 col-md-6 mb-2">
+          <div class = "col-10 offset-1 my-4 text-left px-0">
+            <div class = "top-half-booyah-box-secondary">
+              <h4 class = "text-center mt-1 ml-0"><%= @user.firstname %>'s Music</h4>
             </div>
-            <div class = "col-12">
-              <h4 class = "ml-0 mb-1">Genres:</h4>
-              <div class = "col-11 offset-1 px-0">
-                <% @user.unique_genres.each do |genre| %>
-                  <span class = "badge badge-default"><%= genre %></span>
-                <% end %>
+            <div class = "bottom-half-booyah-box">
+              <% if @user.description.present? %>
+                <div class = "col-12">
+                  <h4 class = "ml-0 mb-1">Description:</h4>
+                  <div class = "col-11 offset-1 px-0">
+                    <p><%= @user.description %></p>
+                  </div>
+                </div> 
+              <% end %>
+              <div class = "col-12 pt-2">
+                <h4 class = "ml-0 mt-0 mb-1">Instruments:</h4>
+                <div class = "col-11 offset-1 px-0">
+                  <% @user.unique_instruments.each do |instrument| %>
+                    <span class = "badge badge-default"><%= instrument %></span>
+                  <% end %>
+                </div> 
               </div>
-              <br class = "my-1"/>
+              <div class = "col-12">
+                <h4 class = "ml-0 mb-1">Genres:</h4>
+                <div class = "col-11 offset-1 px-0">
+                  <% @user.unique_genres.each do |genre| %>
+                    <span class = "badge badge-default"><%= genre %></span>
+                  <% end %>
+                </div>
+                <br class = "my-1"/>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
       <!-- Activity box -->
-      <div class = "col-12 col-md-6 mb-2">
-        <div class = "col-10 offset-1 booyah-box my-4 text-left px-0">
-          <div class = "top-half-booyah-box-secondary">
-            <h4 class = "text-center mt-3 ml-0"><%= @user.firstname %>'s Activity</h4>
-          </div>
-          <div class = "col-10 offset-1 mt-2">
-            <p class = "green-text"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></i> <strong><%= @user_recent_bookings.length %></strong> bookings in past 6 months</p>
-            <% if @user_recent_bookings.length > 0 %>
-              <p class = "green-text"><i class="fa fa-play" aria-hidden="true"></i> Last booking on <strong><%= @user_recent_bookings.last.start_time.strftime("%A, %e %b %Y") %></strong></p>
-            <% end %>
-            <p class = "green-text"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong><%= @user_future_bookings.length %></strong> upcoming bookings</p>
-            <p><i class="fa fa-history" aria-hidden="true"></i> Member since <%= @user.created_at.strftime("%B %Y") %></p>
+        <div class = "col-12 col-md-6 mb-2">
+          <div class = "col-10 offset-1 booyah-box my-4 text-left px-0">
+            <div class = "top-half-booyah-box-secondary">
+              <h4 class = "text-center mt-1 ml-0"><%= @user.firstname %>'s Activity</h4>
+            </div>
+            <div class = "col-10 offset-1 mt-2">
+              <p class = "green-text"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></i> <strong><%= @user_recent_bookings.length %></strong> bookings in past 6 months</p>
+              <% if @user_recent_bookings.length > 0 %>
+                <p class = "green-text"><i class="fa fa-play" aria-hidden="true"></i> Last booking on <strong><%= @user_recent_bookings.last.start_time.strftime("%A, %e %b %Y") %></strong></p>
+              <% end %>
+              <p class = "green-text"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> <strong><%= @user_future_bookings.length %></strong> upcoming bookings</p>
+              <p><i class="fa fa-history" aria-hidden="true"></i> Member since <%= @user.created_at.strftime("%B %Y") %></p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class = "row">
-    <div class = "col-md-6">
-      <div class = "col-12 booyah-box">
-      <canvas id="myChart" width="50%" height="50%"></canvas>
+      <% if @posts.length > 0 %>
+        <hr />
+        <div class = "col-12">
+          <h3><%= @user.firstname %>'s posts</h3>
+          <% @posts.each do |post| %>
+            <div class = "col-12 mb-2">
+              <div class = "top-half-booyah-box-secondary px-2 py-2">
+                <h5 class = my-0><%= link_to post.title, post_path(post) %></h5>
+              </div>
+              <div class = "bottom-half-booyah-box px-2">
+                <p><%= post.message %></p>
+                <small class = "text-muted">Posted by <%= link_to post.user.fullname, user_path(post.user) %> on <%= post.created_at.strftime('%A, %b %d, %Y') %> in <%= link_to post.humanized_category, posts_path(:categories => post.category) %> 
+                  <%= link_to post_path(post) do %>
+                    <span class = "badge badge-info">
+                      <i class="fa fa-comment-o" aria-hidden="true"></i>
+                      <%= post.post_replies.length %>
+                    </span>
+                  <% end %>
+                </small>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
-
-<script>
-var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-</script>
