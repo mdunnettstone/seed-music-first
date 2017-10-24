@@ -38,5 +38,5 @@ class Booking < ApplicationRecord
     start_time - minutes_before_booking
   end
 
-  handle_asynchronously :send_reminder, :run_at => Proc.new { |i| i.when_to_run }
+  handle_asynchronously :send_reminder, :run_at => Proc.new { |i| i.when_to_send_reminder }
 end
