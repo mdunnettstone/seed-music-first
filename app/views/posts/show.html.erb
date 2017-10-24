@@ -1,0 +1,53 @@
+<div class = "container">
+  <div class = "row">
+    <% if current_user == @post.user %>
+      <div class = "col-12 my-2">
+        <div class = "float-right margin-top-10 col-12 col-lg-3 text-align-right">
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#EditPostModal">
+              <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+            </button>
+            <%= link_to post_path(@post), class: 'btn btn-danger', method: :delete, data: {confirm: 'Are you sure?'} do %>
+              <i class="fa fa-trash" aria-hidden="true"></i> Delete
+            <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class = "col-12 col-md-8 offset-md-2">
+      <div class = "col-12 mb-2">
+        <div class = "top-half-booyah-box-secondary px-2 py-2">
+          <h5 class = my-0><%= @post.title %></h5>
+        </div>
+        <div class = "bottom-half-booyah-box px-2">
+          <p><%= @post.message %></p>
+          <small class = "text-muted">Posted by <%= link_to @post.user.fullname, user_path(@post.user) %> on <%= @post.created_at.strftime('%A, %b %d, %Y') %> in <%= @post.humanized_category %></small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NewPostModal -->
+<div class="modal fade" id="EditPostModal" tabindex="-1" role="dialog" aria-labelledby="EditPostModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="EditPostModal">Edit post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for @post, url: post_path(@post) do |f| %>
+        <div class="modal-body">
+          <%= f.input :category, collection: Post::CATEGORIES %>
+          <%= f.input :title %>
+          <%= f.input :message %>
+          <%= f.input :live %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

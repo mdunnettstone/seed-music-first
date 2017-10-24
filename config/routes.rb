@@ -5,8 +5,9 @@ Rails.application.routes.draw do
 
   resources :rooms, only: [:show, :index] do
     resources :room_comments, only: :create
-
   end
+
+  resources :posts, except: [:new]
   namespace :admin do
     resources :rooms, only: [:new, :create, :edit, :update] do
       resources :room_facilities, only: [:new, :create]

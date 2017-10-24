@@ -105,7 +105,7 @@ p {
   text-decoration: none;
 }
 
-.top-half-booyah-box a, .top-half-booyah-box a:hover {
+.top-half-booyah-box a, .top-half-booyah-box a:hover, .top-half-booyah-box-secondary a, .top-half-booyah-box-secondary a:hover {
   color: white;
 }
 
@@ -127,25 +127,6 @@ p {
   text-decoration: none;
 }
 
-li.sm-bulleted-list {
-  font-size: 130%;
-  font-family: $text-font;
-  list-style: none;
-  color: grey;
-}
-
-li.sm-bulleted-list:before {
-  content: '\2022';
-  display: block;
-  position: relative;
-  max-width: 0;
-  max-height: 0;
-  left: -25px;
-  top: 0;
-  color: rgb(250,188,15);
-  font-size: 20px;
-}
-
 span.numbered {
   background: rgb(250,188,15);
   border-radius: 0.8em;
@@ -160,6 +141,9 @@ span.numbered {
   width: 1.4em; 
 }
 
+h1.inline {
+  display: inline;
+}
 
 .min-height-n {
   min-height: 50px;

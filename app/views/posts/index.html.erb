@@ -1,0 +1,58 @@
+<div class = "container">
+  <div class = "row">
+    <h1 class = "inline col-9 col-md-10 float-left">Seed Music forum</h1>
+    <button type="button" class="btn btn-primary float-right col-3 col-md-2 my-2" data-toggle="modal" data-target="#NewPostModal">
+      <i class="fa fa-plus" aria-hidden="true"></i> New post
+    </button>
+    <div class = "col-12 my-2 text-center">
+      <%= form_tag(posts_path, method: :get, class: "col-12 d-inline" ) do %>
+        <%= text_field_tag :text, params[:message], placeholder: "Search posts by content" %>
+        <p class = "d-inline ml-2">Category:</p>
+          <%= select_tag :categories, options_for_select({:All => nil}.merge(Post::CATEGORIES), :selected => params[:categories]) %>
+        <%= submit_tag "Search", class: "btn btn-primary mb-1" %>
+      <% end %>
+      <% if params[:text].present? || params[:categories].present? %>
+        <%= link_to "Clear", posts_path, class: "btn btn-secondary form-button" %>
+      <% end %>
+    </div>
+    <div class = "col-12 col-md-8 offset-md-2">
+      <% @posts.each do |post| %>
+        <div class = "col-12 mb-2">
+          <div class = "top-half-booyah-box-secondary px-2 py-2">
+            <h5 class = my-0><%= link_to post.title, post_path(post) %></h5>
+          </div>
+          <div class = "bottom-half-booyah-box px-2">
+            <p><%= post.message %></p>
+            <small class = "text-muted">Posted by <%= link_to post.user.fullname, user_path(post.user) %> on <%= post.created_at.strftime('%A, %b %d, %Y') %> in <%= link_to post.humanized_category, posts_path(:categories => post.category) %></small>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- NewPostModal -->
+<div class="modal fade" id="NewPostModal" tabindex="-1" role="dialog" aria-labelledby="NewPostModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="NewPostModal">New post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for @post do |f| %>
+        <div class="modal-body">
+          <%= f.input :category, collection: Post::CATEGORIES %>
+          <%= f.input :title %>
+          <%= f.input :message %>
+          <%= f.input :live, as: :hidden, :input_html => { :value => true } %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
