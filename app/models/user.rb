@@ -15,6 +15,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validate :email_is_whitelisted
+
   def self.search(params)
     search_scope = User.joins(:user_instruments)
 
@@ -57,5 +59,12 @@ class User < ApplicationRecord
 
   def fullname
     "#{self.firstname} #{self.surname}"
+  end
+
+  def email_is_whitelisted
+    domain = email.split("@", 2).last
+    if !WhitelistedEmail.where("email_or_domain = ? OR email_or_domain = ?", domain, email).exists?
+      errors.add(:email, "Your email address has not been approved")
+    end
   end
 end

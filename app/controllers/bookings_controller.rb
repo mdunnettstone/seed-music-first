@@ -25,8 +25,9 @@ class BookingsController < ApplicationController
   end
 
   def create
-    booking = current_user.bookings.create(booking_params)
-    if booking.valid?
+    booking = Booking.new(booking_params)
+    booking.users << current_user
+    if booking.save
       redirect_to booking_path(booking)
     else
       render json: {:errors => booking.errors.full_messages}, :status => :unprocessable_entity

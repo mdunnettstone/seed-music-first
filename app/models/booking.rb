@@ -7,8 +7,8 @@ class Booking < ApplicationRecord
   validates :end_time, presence: true
   validate :end_time_after_start_time
   validate :start_time_in_future
-  # validate :no_longer_than_2_hours_unless_admin
-  # validate :not_already_booked
+  validate :no_longer_than_2_hours_unless_admin
+  validate :not_already_booked
 
 
   after_create :send_booking_created_email
@@ -35,40 +35,48 @@ class Booking < ApplicationRecord
     end
   end
 
-  # def no_longer_than_2_hours_unless_admin
-  #   unless users.first.admin
-  #     if (end_time - start_time) > 2.hour
-  #       errors.add(:end_time, "You may only book for a maximum of 2 hours")
-  #     end
+  def no_longer_than_2_hours_unless_admin
+    if (end_time - start_time) > 2.hour
+      errors.add(:end_time, "You may only book for a maximum of 2 hours") unless users.last.admin
+    end
+  end
+
+  def not_already_booked
+    if overlapping_bookings.exists?
+      errors.add(:room_id, "A booking already exists for this room")  
+    end
+  end
+
+  def overlapping_bookings
+    Booking.where(
+      "room_id = ? AND ((end_time > ? AND end_time <= ?) OR (start_time < ? AND start_time >= ?))", 
+      room_id, start_time, end_time, end_time, start_time
+    )  
+  end
+
+  # # REPLACE WITH SIDEKIQ
+  # def send_booking_created_email
+  #   users.each do |user|
+  #     BookingMailer.booking_created(self, user).deliver
+  #   end 
+  # end
+
+  # def send_booking_cancelled_email
+  #   users.each do |user|
+  #     BookingMailer.booking_cancelled(self, user).deliver
   #   end
   # end
 
-  # def not_already_booked
-
+  # def send_reminder
+  #   users.each do |user|
+  #     BookingMailer.booking_reminder(self, user).deliver
+  #   end
   # end
 
-  def send_booking_created_email
-    self.users.each do |user|
-      BookingMailer.booking_created(self, user).deliver
-    end 
-  end
+  # def when_to_send_reminder
+  #   minutes_before_booking = 30.minutes
+  #   start_time - minutes_before_booking
+  # end
 
-  def send_booking_cancelled_email
-    self.users.each do |user|
-      BookingMailer.booking_cancelled(self, user).deliver
-    end
-  end
-
-  def send_reminder
-    self.users.each do |user|
-      BookingMailer.booking_reminder(self, user).deliver
-    end
-  end
-
-  def when_to_send_reminder
-    minutes_before_booking = 30.minutes
-    start_time - minutes_before_booking
-  end
-
-  handle_asynchronously :send_reminder, :run_at => Proc.new { |i| i.when_to_send_reminder }
+  # handle_asynchronously :send_reminder, :run_at => Proc.new { |i| i.when_to_send_reminder }
 end
