@@ -1,0 +1,12 @@
+<div class = "container">
+  <div class = "row">
+    <div class = "col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 booyah-box py-2">
+      <h3>Give feedback</h3>
+      <%= simple_form_for @feedback do |f| %>
+        <%= f.input :title %>
+        <%= f.input :message %>
+        <%= f.submit "Send feedback!", class: "btn btn-primary col-12" %>
+      <% end %>
+    </div>
+  </div>
+</div>

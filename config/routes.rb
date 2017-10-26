@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :rooms, only: [:show, :index] do
     resources :room_comments, only: :create
   end
-
+  resources :feedbacks, only: [:new, :create]
   resources :posts, except: [:new]
   resources :post_replies, only: [:create]
   namespace :admin do
