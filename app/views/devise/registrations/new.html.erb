@@ -11,7 +11,7 @@
         <%= f.input :email, required: true, hint: "Use your work one" %>
         <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
         <%= f.input :password_confirmation, required: true %>
-        <%= f.input :avatar %>
+        <%= f.input :avatar, :label => "Profile picture: ", class: "btn btn-secondary" %>
       </div>
     </div> <!-- first section -->
 
@@ -25,10 +25,11 @@
             <div class="instrument_field"/>
               <%= instrument.input :instrument_id, collection: Instrument.all, label_method: :name, value_method: :id, include_blank: false %>
               <%= instrument.input :genre_id, collection: Genre.all, label_method: :name, value_method: :id, include_blank: false %>
+              <hr />
             </div>
           <% end %>
         </div>
-        <p><a href="#" class="add_instrument_field">+ add instrument</a></p>
+        <p><a href="#" class="add_instrument_field">+ add another</a></p>
         <%= f.input :description, autofocus: true, hint: "Say a few words about what you like to play and, if you wish to, an indicator of your level" %>
       </div>
 

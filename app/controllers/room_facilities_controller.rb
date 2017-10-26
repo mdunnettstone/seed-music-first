@@ -1,0 +1,3 @@
+class RoomFacilitiesController < ApplicationController
+
+end
