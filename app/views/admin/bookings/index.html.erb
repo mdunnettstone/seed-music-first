@@ -2,7 +2,7 @@
 <%= link_to "< Back to dashboard", admin_dashboard_path, class: "btn btn-secondary ml-2" %>
 <div class = "container">
   <div class = "row">
-    <% if @future_booking.length > 0 %>
+    <% if @future_bookings.length > 0 %>
       <% @future_bookings.each do |booking| %>
         <div class="col-12 col-sm-6 col-md-4">
           <div class="booyah-box">
