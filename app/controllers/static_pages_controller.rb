@@ -4,4 +4,8 @@ class StaticPagesController < ApplicationController
       redirect_to home_path
     end
   end
+
+  def unis
+
+  end
 end

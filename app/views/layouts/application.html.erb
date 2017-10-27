@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SeedMusicFirst</title>
+    <title>Seed Music</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -40,6 +40,10 @@
                     <i class="fa fa-comments" aria-hidden="true"></i> Forum
                   <% end %>
                 </div>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "University Scheme", unis_path, class: "nav-link" %>
               </li>
             <% end %>
           </ul>

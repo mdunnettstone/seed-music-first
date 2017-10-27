@@ -11,6 +11,7 @@
           <div class = "col-8">
             <h3 class = "my-5">And build a musical community around it</h3>
           </div>
+          <%= link_to "Sign-up to view demo software", new_user_registration_path, class: "btn btn-yellow col-8 offset-2" %>
         </div>
       </div>
     </div>
@@ -136,7 +137,7 @@
                 <div class = "col-10 offset-1">
                   <div class = "grey-box mt-3">
                     Connect with '000s of university students through our <strong>university partnership scheme</strong>. Our software serves '000s of students. Let them know about your amazing office.
-                    <div class = "btn btn-primary mt-2">Our University Scheme</div>
+                    <%= link_to 'Our university scheme', unis_path, class: "btn btn-primary my-2" %>
                   </div>
                 </div>
               </div>

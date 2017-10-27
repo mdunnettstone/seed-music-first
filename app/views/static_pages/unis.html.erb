@@ -1,0 +1,73 @@
+<div class = "super-hero">
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-md-6">
+      </div>
+      <div class = "col-12 col-md-6 my-10 py-md-5 text-white frosty">
+        <div class = "col-12 mt-2">
+          <h1>Amazing software for your university's music community</h1>
+        </div>
+        <div class = "col-8">
+          <h3 class = "my-5">For <span class = "badge badge-info">FREE</span>, forever.</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class = "pt-3 px-2 my-3">
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-12">
+        <h1 class = "mega-title"><strong>University Scheme</strong></h1>
+      </div>
+      <div class = "col-12">
+        <div class = "row">
+          <div class = "col-12 booyah-box">
+            <div class = "row">
+              <div class = "col-12 col-md-4 text-center">
+                <h3 class = "my-3"><strong>We're on a mission</strong></h3>
+                <div class = "col-6 offset-3">
+                  <%= image_tag("target.svg") %>
+                </div>
+                <div class = "col-10 offset-1">
+                  <div class = "grey-box mt-3">
+                    <p>Music participation drops during university years and dramatically beyond them. We want to help build communities that people want to stay a part of, at university and beyond.</p>
+                  </div>
+                </div>
+              </div>
+              <div class = "col-12 col-md-4 text-center">
+                <h3 class = "my-3"><strong>We've built some amazing software</strong></h3>
+                <div class = "col-6 offset-3">
+                  <%= image_tag("software.svg") %>
+                </div>
+                <div class = "col-10 offset-1">
+                  <div class = "grey-box mt-3">
+                    <p>We’ve built feature-rich software for booking music rooms, meeting other musicians and forming bands. It’s secure, flexible and designed for universities</p>
+                  </div>
+                </div>
+              </div>
+              <div class = "col-12 col-md-4 text-center">
+                <h3 class = "my-3"><strong>We'd like to offer it to you <span class = "badge badge-info">FREE</span></strong></h3>
+                <div class = "col-6 offset-3">
+                  <%= image_tag("rocket.svg") %>
+                </div>
+                <div class = "col-10 offset-1">
+                  <div class = "grey-box mt-3">
+                    <p>Because universities are so crucial to the mission, we’d like to offer it to you, for free, forever</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-12 text-center my-3">
+                <%= link_to 'Download our brochure', '#', class: "btn btn-primary my-2" %>
+                <%= mail_to "mike@seedmusic.co.uk", "Email us", subject: "Seed Music university scheme", class: "btn btn-pink my-2" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
