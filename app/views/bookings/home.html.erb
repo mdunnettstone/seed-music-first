@@ -74,9 +74,9 @@
       <h2><%= "Other #{@genre.name} musicians" %></h2>
     </div>
   </div>
-  <div class = "container">
-    <div class = "row">
-      <% if @relevant_users.length > 0 %>
+  <% if @relevant_users.length > 0 %>
+    <div class = "container">
+      <div class = "row">
         <% @relevant_users.each do |user| %>
           <div class = "col-sm-6 col-md-4 mb-5">
             <%= link_to user_path(user) do %>
@@ -113,11 +113,7 @@
             </div>
           </div>
         <% end %>
-      <% else %>
-        <div class = "col-12">
-          <p>No other <%= @genre.name %> musicians yet! Tell your friends to sign up at www.seedmusic.co.uk</p>
-        </div>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
