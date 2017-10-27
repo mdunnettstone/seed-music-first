@@ -21,24 +21,26 @@
         <% end %>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-sm-0">
-            <li class="nav-item">
-              <%= link_to rooms_path, class: 'nav-link mx-1' do %>
-                <i class="fa fa-map-marker" aria-hidden="true"></i> Rooms
-              <% end %>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="CommunityDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-users" aria-hidden="true"></i> Community
-              </a>
-              <div class="dropdown-menu" aria-labelledby="CommunityDropdownMenuLink">
-                <%= link_to users_path, class: "dropdown-item" do %>
-                  <i class="fa fa-user-circle" aria-hidden="true"></i> People
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to rooms_path, class: 'nav-link mx-1' do %>
+                  <i class="fa fa-map-marker" aria-hidden="true"></i> Rooms
                 <% end %>
-                <%= link_to posts_path, class: "dropdown-item" do %>
-                  <i class="fa fa-comments" aria-hidden="true"></i> Forum
-                <% end %>
-              </div>
-            </li>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="CommunityDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-users" aria-hidden="true"></i> Community
+                </a>
+                <div class="dropdown-menu" aria-labelledby="CommunityDropdownMenuLink">
+                  <%= link_to users_path, class: "dropdown-item" do %>
+                    <i class="fa fa-user-circle" aria-hidden="true"></i> People
+                  <% end %>
+                  <%= link_to posts_path, class: "dropdown-item" do %>
+                    <i class="fa fa-comments" aria-hidden="true"></i> Forum
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
           </ul>
           <ul class="navbar-nav float-right">
             <% if user_signed_in? %>
