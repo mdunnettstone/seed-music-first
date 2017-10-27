@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #INSTRUMENTS
-%w(harp piano guitar drums violin trumpet kazoo).each do |instrument_name|
+%w(piano guitar drums violin trumpet kazoo harp).each do |instrument_name|
   Instrument.create(name: instrument_name)
 end
 
@@ -49,6 +49,6 @@ whitelisted_email_list = [
 ["hotmail.com"],
 ["mike@seedmusic.co.uk"]]
 
-whitelist_list.each do |email_or_domain|
+whitelisted_email_list.each do |email_or_domain|
   Whitelisted_email.create(email_or_domain: email_or_domain)
 end
