@@ -3,7 +3,8 @@ class BookingsController < ApplicationController
   def home
     @bookings = current_user.bookings.where("(start_time > ?)", Time.now).sort_by{|booking| booking.start_time}
     @prepopulated_search = rounded_datetime(Time.now)
-    @relevant_users = User.search(:genre_id => current_user.user_instruments.sample.genre.id)
+    @genre = current_user.user_instruments.sample.genre
+    @relevant_users = User.search(:genre_id => @genre.id).where.not(id: current_user.id)
   end
 
   def new

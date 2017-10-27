@@ -71,45 +71,51 @@
 <div class = "background-white pt-2">
   <div class = "container my-0">
     <div class = "row my-0">
-      <h2><%= "Other #{current_user.user_instruments.first.genre.name} musicians" %></h2>
+      <h2><%= "Other #{@genre.name} musicians" %></h2>
     </div>
   </div>
   <div class = "container">
     <div class = "row">
-      <% @relevant_users.each do |user| %>
-        <div class = "col-sm-6 col-md-4 mb-5">
-          <%= link_to user_path(user) do %>
-            <div class = "top-half-booyah-box text-center">
-              <% if user.avatar.present? %>
-                <%= image_tag(user.avatar, class: "user-image-circle my-3") %>
-              <% else %>
-                <%= image_tag('placeholder-user-profile.png', class: "user-image-circle my-3") %>
-              <% end %>
-              <h3 class = "mt-2 mb-4"><%= user.fullname %></h3>
-            </div>
-          <% end %>
-          <div class = "bottom-half-booyah-box">
-            <div class = "row">
-              <div class = "col-12">
-                <h4 class = "ml-3 mb-1">Instruments:</h4>
-                <div class = "col-11 offset-1">
-                  <% user.unique_instruments.each do |instrument| %>
-                    <span class = "badge badge-default"><%= instrument %></span>
-                  <% end %>
-                </div>
-              </div>  
-            </div>
-            <div class = "row">
-              <div class = "col-12">
-                <h4 class = "ml-3 mb-1">Genres:</h4>
-                <div class = "col-11 offset-1 mb-2">
-                  <% user.unique_genres.each do |genre| %>
-                    <span class = "badge badge-default"><%= genre %></span>
-                  <% end %>
-                </div>
-              </div>  
+      <% if @relevant_users.length > 0 %>
+        <% @relevant_users.each do |user| %>
+          <div class = "col-sm-6 col-md-4 mb-5">
+            <%= link_to user_path(user) do %>
+              <div class = "top-half-booyah-box text-center">
+                <% if user.avatar.present? %>
+                  <%= image_tag(user.avatar, class: "user-image-circle my-3") %>
+                <% else %>
+                  <%= image_tag('placeholder-user-profile.png', class: "user-image-circle my-3") %>
+                <% end %>
+                <h3 class = "mt-2 mb-4"><%= user.fullname %></h3>
+              </div>
+            <% end %>
+            <div class = "bottom-half-booyah-box">
+              <div class = "row">
+                <div class = "col-12">
+                  <h4 class = "ml-3 mb-1">Instruments:</h4>
+                  <div class = "col-11 offset-1">
+                    <% user.unique_instruments.each do |instrument| %>
+                      <span class = "badge badge-default"><%= instrument %></span>
+                    <% end %>
+                  </div>
+                </div>  
+              </div>
+              <div class = "row">
+                <div class = "col-12">
+                  <h4 class = "ml-3 mb-1">Genres:</h4>
+                  <div class = "col-11 offset-1 mb-2">
+                    <% user.unique_genres.each do |genre| %>
+                      <span class = "badge badge-default"><%= genre %></span>
+                    <% end %>
+                  </div>
+                </div>  
+              </div>
             </div>
           </div>
+        <% end %>
+      <% else %>
+        <div class = "col-10 offset-1">
+          <p>No other <%= @genre %> musicians yet! Tell your friends to sign up at www.seedmusic.co.uk</p>
         </div>
       <% end %>
     </div>
