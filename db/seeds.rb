@@ -45,11 +45,11 @@ end
 
 #WHITELIST
 #email_or_domain
-whitelisted_email_list = [
-["gmail.com"],
-["hotmail.com"],
-["mike@seedmusic.co.uk"]]
+# whitelisted_email_list = [
+# ["gmail.com"],
+# ["hotmail.com"],
+# ["mike@seedmusic.co.uk"]]
 
-whitelisted_email_list.each do |email_or_domain|
-  Whitelisted_email.create(email_or_domain: email_or_domain)
-end
+# whitelisted_email_list.each do |email_or_domain|
+#   Whitelisted_email.create(email_or_domain: email_or_domain)
+# end
