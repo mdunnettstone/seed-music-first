@@ -15,7 +15,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validate :email_is_whitelisted
+  # validate :email_is_whitelisted
 
   def self.search(params)
     search_scope = User.joins(:user_instruments)
