@@ -69,10 +69,6 @@ gem 'bootstrap-multiselect_rails', '~> 0.9.4'
 
 gem 'carrierwave', '~> 1.0'
 
-gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
-
-gem 'sweet-alert2-rails'
-
 gem 'font-awesome-rails'
 
 gem 'figaro'
@@ -80,3 +76,7 @@ gem 'figaro'
 gem 'delayed_job_active_record'
 
 gem 'daemons'
+
+gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'
+
+gem 'sweet-alert2-rails'
