@@ -12,7 +12,7 @@ class Booking < ApplicationRecord
 
 
   after_create :send_booking_created_email
-  after_create :send_reminder
+  # after_create :send_reminder
   before_destroy :send_booking_cancelled_email
 
   def user_list
@@ -55,17 +55,17 @@ class Booking < ApplicationRecord
   end
 
   # # REPLACE WITH SIDEKIQ
-  # def send_booking_created_email
-  #   users.each do |user|
-  #     BookingMailer.booking_created(self, user).deliver
-  #   end 
-  # end
+  def send_booking_created_email
+    users.each do |user|
+      BookingMailer.booking_created(self, user).deliver
+    end 
+  end
 
-  # def send_booking_cancelled_email
-  #   users.each do |user|
-  #     BookingMailer.booking_cancelled(self, user).deliver
-  #   end
-  # end
+  def send_booking_cancelled_email
+    users.each do |user|
+      BookingMailer.booking_cancelled(self, user).deliver
+    end
+  end
 
   # def send_reminder
   #   users.each do |user|
