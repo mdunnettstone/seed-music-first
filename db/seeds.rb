@@ -41,3 +41,14 @@ room_list = [
 room_list.each do |name, address, capacity, facility_ids|
   Room.create(name: name, address: address, capacity: capacity, facility_ids: facility_ids)
 end
+
+#WHITELIST
+#email_or_domain
+whitelist_list = [
+["gmail.com"],
+["hotmail.com"],
+["mike@seedmusic.co.uk"]]
+
+whitelist_list.each do |email_or_domain|
+  Whitelist.create(email_or_domain: email_or_domain)
+end
