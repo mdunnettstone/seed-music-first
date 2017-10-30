@@ -30,13 +30,13 @@
         <div class = "booyah-box py-2">
           <% @rooms.each do |room| %>
           <div class = "row">
+            <h4 class = "ml-4 no-link" data-toggle="tooltip" data-html="true" title=<%= "Capacity:&nbsp#{room.capacity}" %>><%= link_to room.name, room_path(room), target: :_black %></h4>
             <div class = "col-12">
               <div class = "mb-3">
-                <h4 class = "ml-4"><%= room.name %></h4>
                 <ul class = "slot-list" id = "slot-list">
                   <% @timeslots.each do |timeslot| %>
                     <% if @bookings.any? {|booking| (booking.start_time..booking.end_time).cover?(timeslot + 1.second) && booking.room_id == room.id}%>
-                      <li class = "timeslot my-2 disabled col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= timeslot.strftime("%H:%M") %></li>
+                      <li class = "timeslot my-2 disabled col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>" data-toggle="tooltip" data-html="true" title="Already booked"><%= timeslot.strftime("%H:%M") %></li>
                     <% else %>
                       <li class = "timeslot my-2 selectable-timeslot col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-roomid = "<%= room.id %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= timeslot.strftime("%H:%M") %></li>
                     <% end %>
@@ -52,6 +52,12 @@
         </div>
       </div>
       <div class = "second-section users">
+        <div class="alert alert-warning alert-dismissible fade show mt-1 sticky-top" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Play with others!</strong> Click on users below to share a booking.
+        </div>
         <h3 class = "d-inline">Users</h3>
         <a class = "toggle-user-form btn btn-secondary mb-3 ml-3"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
         <div class = "row">
@@ -66,12 +72,6 @@
         </div>
         <div class = "row">
           <div class = "col-12">
-            <div class="alert alert-warning alert-dismissible fade show mt-1" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <strong>Play with others!</strong> Click on users below to share a booking.
-            </div>
           </div>
         </div>
           <div class = "row hidden">
@@ -95,7 +95,7 @@
           <i class="fa fa-calendar" aria-hidden="true"></i> Date: <b><span class = "bookingdate">Please select</span></b>
         </div>
         <div class = "col-12 col-md-6 mt-1 mt-md-3">
-          <i class="fa fa-clock-o" aria-hidden="true"></i> Time: <b><span class = "bookingtime">Please select</span></b>
+          <i class="fa fa-clock-o" aria-hidden="true"></i> Time: <b><span class = "bookingtime text-pink">Please select</span></b>
         </div>
         <div class = "col-12 col-md-6 mt-1 mt-md-3">
           <i class="fa fa-users" aria-hidden="true"></i> Users: <b><span class = "bookingusers">Just you</span></b>

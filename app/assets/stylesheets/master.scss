@@ -76,6 +76,10 @@ p {
   text-decoration: underline;
 }
 
+.no-link a, no-link a:hover{
+  color: $charcoal;
+}
+
 .hidden {
   display: none !important;
 }
