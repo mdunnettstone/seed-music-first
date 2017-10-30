@@ -233,6 +233,10 @@ input[type=text] {
   box-sizing: border-box;
 }
 
+select {
+  opacity: 1;
+}
+
 select.form-control.select.optional {
   height: 40px;
   border: 1px solid #ccc;
