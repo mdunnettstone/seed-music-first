@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class = "row first-section">
+  <div class = "row first-section sticky-top">
     <div class = "col-12 col-md-8 offset-md-2">
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -36,9 +36,9 @@
                 <ul class = "slot-list" id = "slot-list">
                   <% @timeslots.each do |timeslot| %>
                     <% if @bookings.any? {|booking| (booking.start_time..booking.end_time).cover?(timeslot + 1.second) && booking.room_id == room.id}%>
-                      <li class = "timeslot my-2 disabled col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
+                      <li class = "timeslot my-2 disabled col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= timeslot.strftime("%H:%M") %></li>
                     <% else %>
-                      <li class = "timeslot my-2 selectable-timeslot col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-roomid = "<%= room.id %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= "#{timeslot.strftime("%H:%M")} - #{(timeslot + 15.minute).strftime("%H:%M")}" %></li>
+                      <li class = "timeslot my-2 selectable-timeslot col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-roomid = "<%= room.id %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= timeslot.strftime("%H:%M") %></li>
                     <% end %>
                   <% end %>
                 </ul>
@@ -85,7 +85,7 @@
       </div>
     </div>
   </div>
-  <div class = "row sticky background-grey my-2">
+  <div class = "row sticky-bottom background-grey my-2">
     <div class = "col-10 offset-1 col-md-6 offset-md-3">
       <div class = "row booyah-box py-1">
         <div class = "col-12 col-md-6 mt-1 mt-md-1">
@@ -148,6 +148,13 @@ $(function () {
         item.toggleClass('active end');
       }
 
+      //Find all those that are selected and take the data to put in stuff
+      var selected = slots.find(".active");
+      var selectedTimeStart = ($(selected[0]).data("timestart"));
+      var selectedTimeEnd = ($(selected[selected.length-1]).data("timeend"));
+      var selectedRoom = ($(selected[0]).data("room"));
+      var selectedDate = ($(selected[0]).data("date"))
+
       //if the start is after the end, use prevUntil(), filling them all with active middle
       //otherwise use nextUntil()
 
@@ -157,26 +164,26 @@ $(function () {
         item.nextUntil(".disabled").addClass("immune");
         item.prevUntil(".disabled").addClass("immune");
         selectable.not(".immune").addClass("disabled-temp").removeClass("selectable-timeslot");
-        $(".guidance-text").html("<strong>" + "Great job!" + "</strong>" +  " Now choose an end time")
+        $(".guidance-text").html("<strong>" + "Great job!" + "</strong>" +  " Now choose an end time");
+        $('.timeslot').each(function(){
+            $(this).text($(this).data('timeend'));
+        });
       } else {
+        $('.timeslot').each(function(){
+            $(this).text($(this).data('timestart'));
+        });
         slots.find(".immune").removeClass("immune");
         slots.find(".disabled-temp").removeClass("disabled-temp").addClass("selectable-timeslot");
       }
 
       if (slots.find(".active").length > 1) {
-        $(".guidance-text").html("Nice, now click " + "<strong>" + "continue" + "</strong>")
+        $(".guidance-text").html("Nice, now click " + "<strong>" + "continue" + "</strong>");
         if (slots.find(".start").prevAll(".end").length > 0) {
           $(".start").prevUntil(".end").addClass("active middle");
         } else {
           $(".start").nextUntil(".end").addClass("active middle");
         }
       }
-      //Find all those that are selected and take the data to put in stuff
-      var selected = slots.find(".active");
-      var selectedTimeStart = ($(selected[0]).data("timestart"));
-      var selectedTimeEnd = ($(selected[selected.length-1]).data("timeend"));
-      var selectedRoom = ($(selected[0]).data("room"));
-      var selectedDate = ($(selected[0]).data("date"))
 
       if (selected.length === 0) {
         $( ".bookingroom" ).text("Please select");

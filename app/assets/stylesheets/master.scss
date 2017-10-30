@@ -275,9 +275,15 @@ label.error {
   color: #FF9494;
 }
 
-.sticky {
+.sticky-bottom {
   position: sticky;
   bottom: 10px;
+  z-index: 3;
+}
+
+.sticky-top {
+  position: sticky;
+  top: 10px;
   z-index: 3;
 }
 
