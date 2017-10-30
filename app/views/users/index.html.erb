@@ -14,9 +14,11 @@
         <div class = "row mb-2">
           <%= form_tag(users_path, method: :get, class: "col-12" ) do %>
             <%= text_field_tag :name, params[:name], placeholder: "Search users by name", class: "col-12 col-md-4 mt-2 mx-0" %>
+            <p class = "mb-0 mt-2">Instrument: </p>
             <div class = "col-6 col-md-3 my-2 mx-0">
               <%= select_tag :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name, params[:instrument_id]), multiple: true, class: "multiselect" %>
             </div>
+            <p class = "mb-0 mt-2">Genre: </p>
             <div class = "col-6 col-md-3 my-2 mx-0">
             <%= select_tag :genre_id, options_from_collection_for_select(Genre.all, :id, :name, params[:genre_id]), multiple: true, :class => "multiselect" %>
             </div>

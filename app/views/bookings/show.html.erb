@@ -1,5 +1,5 @@
 <div class = "container">
-  <h1 class = "col-12 text-center my-5">You're going to play some music!</h1>
+  <h1 class = "col-12 text-center mt-5 text-mint">Your booking</h1>
   <div class = "row justify-content-center">
     <div class="col-10 col-md-6">
       <div class = "booyah-box px-3">
@@ -29,12 +29,14 @@
             <hr />
           </div>
         </div>
-        <div class = "row mx-3">
-          <div class = "col-12 mb-2 btn btn-primary"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>&nbsp Add to calendar</div>
-          <%= link_to booking_path(@booking), class: "col-12 mb-2 btn btn-danger", method: :delete, data: {confirm: 'Are you sure? This will delete the booking for everyone!'} do %>
-            <i class="fa fa-trash" aria-hidden="true"></i>&nbsp Delete
-          <% end %>
-        </div>
+        <% if @booking.users.any? {|user| user == current_user} %>
+          <div class = "row mx-3">
+            <div class = "col-12 mb-2 btn btn-primary"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>&nbsp Add to calendar</div>
+            <%= link_to booking_path(@booking), class: "col-12 mb-2 btn btn-danger", method: :delete, data: {confirm: 'Are you sure? This will delete the booking for everyone!'} do %>
+              <i class="fa fa-trash" aria-hidden="true"></i>&nbsp Delete
+            <% end %>
+          </div>
+        <% end %>
       </div>
       <br />
     </div>

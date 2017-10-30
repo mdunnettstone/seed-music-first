@@ -7,7 +7,11 @@
         <%= image_tag('placeholder-user-profile.png', class: "user-image-circle mt-3 mb-1") %>
       <% end %>
       <h1 class = "mt-2"><%= @user.fullname %></h1>
-      <% if current_user != @user %>
+      <% if current_user == @user %>
+        <%= link_to edit_user_registration_path do %>
+          <div class = "btn btn-secondary mb-3"><i class = "fa fa-pencil" aria-hidden="true"></i> Edit profile</div>
+        <% end %>
+      <% else %>
         <%= mail_to @user.email do %>
           <div class = "btn btn-secondary mb-3"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email <%= @user.firstname %></div>
         <% end %>

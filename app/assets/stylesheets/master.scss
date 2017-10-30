@@ -254,14 +254,6 @@ button.multiselect {
   text-align: center;
 }
 
-button.multiselect::after{
-  display: none;
-}
-
-ul.multiselect-container {
-  margin-top: 40px;
-}
-
 select {
   height: 40px;
   border: 1px solid #ccc;
