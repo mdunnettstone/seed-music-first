@@ -8,7 +8,7 @@
         <div class = "row">
           <%= form_tag(new_booking_path, method: :get, class: "col-12 col-md-6 frosty pb-2") do %>
             <h3 class = "mb-1 mt-0"><span class = "badge">Date</span></h3>
-            <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"),  class: "date col-12 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today, "data-date-min-date" => Date.today %>
+            <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"),  class: "date col-12 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today, "data-date-min-date" => Date.today, "data-disable-touch-keyboard" => true %>
             <h3 class = "mb-1 mt-2"><span class = "badge">Time</span></h3>
             <%= select_time @prepopulated_search, {:time_separator => ":", :minute_step => 15}, class: "time col-3 pr-0 pl-0 mx-0 d-inline" %>
             <%= submit_tag "Search", class: "btn btn-primary col form-button d-inline my-1" %>
@@ -74,9 +74,9 @@
       <h2><%= "Other #{@genre.name} musicians" %></h2>
     </div>
   </div>
-  <% if @relevant_users.length > 0 %>
-    <div class = "container">
-      <div class = "row">
+  <div class = "container">
+    <div class = "row">
+      <% if @relevant_users.length > 0 %>
         <% @relevant_users.each do |user| %>
           <div class = "col-sm-6 col-md-4 mb-5">
             <%= link_to user_path(user) do %>
@@ -113,7 +113,9 @@
             </div>
           </div>
         <% end %>
-      </div>
+      <% else %>
+        <p>No other <%= @genre.name %> musicians yet! Encourage people to sign up!</p>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
