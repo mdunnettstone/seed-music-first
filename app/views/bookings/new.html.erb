@@ -184,6 +184,9 @@ $(function () {
 
       if (selected.length > 1) {
         $(".guidance-text").html("Nice, now click " + "<strong>" + "continue" + "</strong>");
+        selectable.each(function(){
+          $(this).html('- ' + $(this).data('timeend'));
+        })
         //if end is before start
         if (slots.find(".start").prevAll(".end").length > 0) {
           //These do the highlighting
@@ -201,6 +204,7 @@ $(function () {
           $(".start").nextUntil(".end").addClass("active middle");
           $(".start").nextUntil(".end").html("-");
           //These change the text
+
           $(".start").each(function(){
             $(this).html($(this).data('timestart') + ' - ')
           });
