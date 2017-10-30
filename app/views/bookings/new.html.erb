@@ -158,16 +158,13 @@ $(function () {
       //if the start is after the end, use prevUntil(), filling them all with active middle
       //otherwise use nextUntil()
 
-      if (slots.find(".active").length > 0) {
+      if (selected.length > 0) {
         selectable.removeClass("immune");
         item.addClass("immune");
         item.nextUntil(".disabled").addClass("immune");
         item.prevUntil(".disabled").addClass("immune");
         selectable.not(".immune").addClass("disabled-temp").removeClass("selectable-timeslot");
         $(".guidance-text").html("<strong>" + "Great job!" + "</strong>" +  " Now choose an end time");
-        $('.timeslot').each(function(){
-            $(this).text($(this).data('timeend'));
-        });
       } else {
         $('.timeslot').each(function(){
             $(this).text($(this).data('timestart'));
@@ -176,12 +173,40 @@ $(function () {
         slots.find(".disabled-temp").removeClass("disabled-temp").addClass("selectable-timeslot");
       }
 
-      if (slots.find(".active").length > 1) {
+      if (selected.length === 1) {
+        selectable.each(function(){
+          $(this).html('- ' + $(this).data('timeend'));
+        })
+        selected.each(function(){
+          $(this).html($(this).data('timestart') + ' - ' + $(this).data('timeend'));
+        })
+      }
+
+      if (selected.length > 1) {
         $(".guidance-text").html("Nice, now click " + "<strong>" + "continue" + "</strong>");
+        //if end is before start
         if (slots.find(".start").prevAll(".end").length > 0) {
+          //These do the highlighting
           $(".start").prevUntil(".end").addClass("active middle");
+          $(".start").prevUntil(".end").html("-");
+          //These change the text
+          $(".end").each(function(){
+            $(this).html($(this).data('timestart') + ' - ')
+          });
+          $(".start").each(function(){
+            $(this).html('- ' + $(this).data('timeend'))
+          });
         } else {
+          //These do the highlighting
           $(".start").nextUntil(".end").addClass("active middle");
+          $(".start").nextUntil(".end").html("-");
+          //These change the text
+          $(".start").each(function(){
+            $(this).html($(this).data('timestart') + ' - ')
+          });
+          $(".end").each(function(){
+            $(this).html('- ' + $(this).data('timeend'))
+          });
         }
       }
 
