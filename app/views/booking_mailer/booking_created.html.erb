@@ -5,6 +5,9 @@
 <p>
   You can manage your booking <%= link_to 'here', booking_url(@booking) %>.
 </p>
+<p>
+  This booking was created by <%= link_to @creator_name, user_url(@creator) %>.
+</p>
 
 Enjoy,<br />
 Seed Music

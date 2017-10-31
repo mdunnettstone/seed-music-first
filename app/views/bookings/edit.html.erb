@@ -1,0 +1,28 @@
+<div class = "container">
+  <div class = "row">
+    <div class = "col-12 col-sm-6">
+      <h5>Add users to your booking</h5>
+      <%= form_tag(add_user_booking_path, method: :patch, class: "col-12" ) do %>
+        <%= select_tag :user_id, options_from_collection_for_select(@new_users, :id, :fullname), multiple: true, class: "multiselect" %>
+        <%= submit_tag "Add users", class: "btn btn-primary" %>
+      <% end %>
+    </div>  
+    <div class = "col-12 col-sm-6">
+      <h5>Remove yourself from this booking</h5>
+      <% if current_user != @booking.creator %>
+        <%= form_tag(remove_user_booking_path, method: :patch, data: {confirm: 'Are you sure? This will delete the booking for everyone!'}, class: "col-12" ) do %>
+          <%= hidden_field_tag(:user_id, current_user.id) %>
+          <%= submit_tag "Remove yourself", class: "btn btn-danger" %>
+        <% end %>
+      <% else %>
+        <p>As creator of the booking, you may not remove yourself.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    $('.multiselect').multiselect();
+  });
+</script>

@@ -23,6 +23,10 @@ class Booking < ApplicationRecord
   usernames.join(", ")
   end
 
+  def creator
+    User.find(creator_user_id)
+  end
+
   def end_time_after_start_time
     if end_time <= start_time
       errors.add(:end_time, "must be after start time")

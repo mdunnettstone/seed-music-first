@@ -24,6 +24,9 @@
           </div>
           <div class = "col-10">
             <h5><%= @booking.user_list %></h5>
+            <% if @booking.users.any? {|user| user == current_user} %>
+              <%= link_to "Edit users", edit_booking_path(@booking), class: "btn btn-secondary" %>
+            <% end %>
           </div>
           <div class = "col-12">
             <hr />

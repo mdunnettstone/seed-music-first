@@ -28,6 +28,7 @@ class BookingsController < ApplicationController
   def create
     booking = Booking.new(booking_params)
     booking.users << current_user
+    booking.assign_attributes(creator_user_id: current_user.id)
     if booking.save
       redirect_to booking_path(booking)
     else
@@ -47,6 +48,41 @@ class BookingsController < ApplicationController
     else
       return render text: 'Not Allowed', status: :forbidden
     end
+  end
+
+  def edit
+    @booking = Booking.find_by_id(params[:id])
+    unless @booking.users.any? {|user| user == current_user}
+      return render text: 'Not Allowed', status: :forbidden
+    end
+    @current_users = []
+    @booking.users.each {|user| @current_users << user.id}
+    @new_users = User.where.not(id: @current_users)
+  end
+
+  def add_user
+    @booking = Booking.find_by_id(params[:id])
+    unless @booking.users.any? {|user| user == current_user}
+      return render text: 'Not Allowed', status: :forbidden
+    end
+    (params[:user_id]).each do |user_id|
+      @booking.users << User.find(user_id)
+    end
+    redirect_to booking_path(@booking)
+  end
+
+  def remove_user
+    @booking = Booking.find_by_id(params[:id])
+    if current_user != @booking.creator
+      if current_user.id == (params[:user_id]).to_i
+        @booking.users.delete(User.find((params[:user_id]).to_i))
+      else
+        return render text: 'You may only remove yourself from the booking', status: :forbidden  
+      end
+    else
+      return render text: 'As the creator of the booking, you may not remove yourself from the booking. Please cancel the booking and proceed from there', status: :forbidden
+    end
+    redirect_to home_path
   end
 
   private

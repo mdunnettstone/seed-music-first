@@ -3,6 +3,12 @@ class BookingMailer < ApplicationMailer
 
   def booking_created(booking, user)
     @booking    = booking
+    @creator = booking.creator
+    if @creator == user
+      @creator_name = "you"
+    else
+      @creator_name = booking.creator.fullname
+    end
     @recipient  = user.email
     @date       = booking.start_time.strftime("%a, %e %b %Y")
     @start_time = booking.start_time.strftime("%H:%M")

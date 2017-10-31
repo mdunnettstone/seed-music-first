@@ -19,7 +19,14 @@ Rails.application.routes.draw do
     resources :room_comments, only: [:index]
   end
   resources :users
-  resources :bookings, except: [:index]
+  resources :bookings, except: [:index] do
+    member do
+      patch :add_user
+      put :add_user
+      patch :remove_user
+      put :remove_user
+    end
+  end
   get "/home", :controller => "bookings", :action => "home"
   get "users/validation/check_email", :controller => "users", :action => "check_email"
   
