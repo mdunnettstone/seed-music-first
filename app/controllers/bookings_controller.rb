@@ -66,7 +66,9 @@ class BookingsController < ApplicationController
       return render text: 'Not Allowed', status: :forbidden
     end
     (params[:user_id]).each do |user_id|
-      @booking.users << User.find(user_id)
+      added_user = User.find(user_id)
+      @booking.users << added_user
+      BookingMailer.booking_user_added(@booking, added_user, current_user).deliver
     end
     redirect_to booking_path(@booking)
   end

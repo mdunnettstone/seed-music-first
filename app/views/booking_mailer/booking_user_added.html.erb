@@ -1,0 +1,13 @@
+<p>Hi there,</p>
+<p>
+  You have been added to a Seed Music booking on <b><%= "#{@date}, from #{@start_time} to #{@end_time} in #{@room_name}" %></b>.
+</p>
+<p>
+  You can manage your booking <%= link_to 'here', booking_url(@booking) %>.
+</p>
+<p>
+  This booking was created by <%= link_to @booking.creator.fullname, user_url(@booking.creator) %>, and you were added by <%= link_to @adder.fullname, user_url(@adder) %>.
+</p>
+
+Enjoy,<br />
+Seed Music

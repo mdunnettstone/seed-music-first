@@ -39,4 +39,16 @@ class BookingMailer < ApplicationMailer
     mail(to: @recipient,
       subject: "Music room booking in 30 minutes")
   end
+
+  def booking_user_added(booking, user, adder)
+    @adder      = adder
+    @booking    = booking
+    @recipient  = user.email
+    @date       = booking.start_time.strftime("%a, %e %b %Y")
+    @start_time = booking.start_time.strftime("%H:%M")
+    @end_time   = booking.end_time.strftime("%H:%M")
+    @room_name  = booking.room.name
+    mail(to: @recipient,
+      subject: "You have been added to a booking on #{@date}")
+  end
 end
