@@ -11,8 +11,8 @@ class Booking < ApplicationRecord
   validate :not_already_booked
 
 
-  after_create :send_booking_created_email
-  # after_create :send_reminder
+  after_create :queue_booking_created_email
+  after_create :queue_booking_reminder_email
   before_destroy :send_booking_cancelled_email
 
   def user_list
@@ -58,7 +58,10 @@ class Booking < ApplicationRecord
     )  
   end
 
-  # # REPLACE WITH SIDEKIQ
+  def queue_booking_created_email
+    BookingCreatedEmailWorker.perform_async(id)
+  end
+
   def send_booking_created_email
     users.each do |user|
       BookingMailer.booking_created(self, user).deliver
@@ -71,16 +74,13 @@ class Booking < ApplicationRecord
     end
   end
 
-  # def send_reminder
-  #   users.each do |user|
-  #     BookingMailer.booking_reminder(self, user).deliver
-  #   end
-  # end
+  def queue_booking_reminder_email
+    BookingReminderEmailWorker.perform_at(start_time - 30.minute, id)
+  end
 
-  # def when_to_send_reminder
-  #   minutes_before_booking = 30.minutes
-  #   start_time - minutes_before_booking
-  # end
-
-  # handle_asynchronously :send_reminder, :run_at => Proc.new { |i| i.when_to_send_reminder }
+  def send_booking_reminder_email
+    users.each do |user|
+      BookingMailer.booking_reminder(self, user).deliver
+    end
+  end
 end

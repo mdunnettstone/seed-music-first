@@ -29,5 +29,6 @@ Rails.application.routes.draw do
   end
   get "/home", :controller => "bookings", :action => "home"
   get "users/validation/check_email", :controller => "users", :action => "check_email"
-  
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end
