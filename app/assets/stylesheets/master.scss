@@ -92,6 +92,14 @@ p {
   width: 100%;
 }
 
+.secondary-nav-btn {
+  border-radius: 0px !important;
+  height: 60px;
+  padding-top: 15px !important;
+  font-size: 20px !important; 
+  line-height: 60px;
+}
+
 .booyah-box {
   background: #fff;
   border: 1px solid #ccc;
@@ -297,7 +305,8 @@ label.error {
 .btn-primary,
 .btn-primary:active,
 .btn-primary:visited,
-.btn-primary:focus {
+.btn-primary:focus
+.btn-primary.active {
     background-color: $mint-dark !important;
     border: 2px solid $mint-dark !important;
 }

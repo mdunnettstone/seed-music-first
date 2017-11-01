@@ -6,156 +6,219 @@
         </div>
         <div class = "col-12 col-md-6 my-10 py-md-5 text-white frosty">
           <div class = "col-12 mt-2">
-            <h1>Build a music room in your office</h1>
+            <h1>Building musical communities in <strong>universities</strong> and <strong>workplaces</strong></h1>
           </div>
-          <div class = "col-8">
-            <h3 class = "my-5">And build a musical community around it</h3>
-          </div>
-          <%= link_to "View demo software", new_user_registration_path, class: "btn btn-yellow col-8 offset-2" %>
+        </div>
+        <%= link_to "Trial our software", new_user_registration_path, class: "btn btn-pink col-8 offset-2 my-3" %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class = "row">
+  <div class = "col-6 mx-0 text-center secondary-nav-btn btn btn-primary business-section-select "><span class = "content-align-middle">I am from a business</span></div>
+  <div class = "col-6 mx-0 text-center secondary-nav-btn btn btn-yellow university-section-select">I am from a university</div>
+</div>
+  <!-- The mission -->
+<div class = "business-section">
+  <div class = "background-white">
+    <div class = "container">
+      <div class = "row text-center">
+        <div class = "col-12 col-md-8 offset-md-2 py-3">
+          <h1 class = "mega-title">A music practice room in your office</h1>
+          <h1 class = "text-mint">A <strong>community</strong> built around it</h1>
         </div>
       </div>
     </div>
   </div>
 
-    <!-- The mission -->
-  <div class = "pt-3 px-2 my-3" id = "mission-section">
-    <div class = "container">
+  <div class = "clear"></div>
+  <div class = "px-2">
+    <div class = "container mt-3" id = "proposition-section">
+      <!-- Our proposition -->
       <div class = "row">
-        <div class = "col-md-6 my-2">
-          <h1 class = "text-mint"><strong>The Mission</strong></h1>
+        <div class = "col-12">
+          <h1 class = "mega-title"><strong>Our Proposition</strong></h1>
+        </div>
+        <div class = "col-12">
+          <div class = "row">
+            <div class = "col-12 booyah-box">
+              <h2 class = "mt-2"><span class = "numbered">1</span><strong> Easy set-up</strong></h2>
+              <div class = "row">
+                <div class = "col-12 col-md-4 text-center">
+                  <h3><strong>Kit-out</strong></h3>
+                  <div class = "col-6 offset-3">
+                    <%= image_tag("kit-out.svg") %>
+                  </div>
+                  <div class = "col-10 offset-1">
+                    <div class = "grey-box mt-3">
+                      We set-up an <strong>amazing music space</strong> in your office building, providing everything from piano and drums to soundproofing and stands.
+                    </div>
+                  </div>
+                </div>
+                <div class = "col-12 col-md-4 text-center">
+                  <h3><strong>Software</strong></h3>
+                  <div class = "col-6 offset-3">
+                    <%= image_tag("software.svg") %>
+                  </div>
+                  <div class = "col-10 offset-1">
+                    <div class = "grey-box mt-3">
+                      Our bespoke software makes it easy to <strong>find fellow musicians</strong> in the company and to <strong>book the room</strong> for a practice session with them.
+                    </div>
+                  </div>
+                </div>
+                <div class = "col-12 col-md-4 text-center">
+                  <h3><strong>Service</strong></h3>
+                  <div class = "col-6 offset-3">
+                    <%= image_tag("settings.svg") %>
+                  </div>
+                  <div class = "col-10 offset-1">
+                    <div class = "grey-box mt-3">
+                      We run <strong>social events</strong> to keep the community running, and provide <strong>technical assistance</strong> to keep the room running.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class = "row">
+                <div class = "col-12 text-center my-3">
+                  <div class = "btn btn-secondary col-6 toggle-what">See more</div>
+                </div>
+              </div>
+              <div class = "row ">
+                <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center show-hide what-further-information">
+                  <p>A beautifully formatted paragraph of extended text explaining content</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class = "row booyah-box pt-4">
-        <div class = "col-md-6 px-5">
-          <h2 class = "my-3">When people start work, they stop music</h2>
-          <h3>We want to <strong><em class = "underline text-pink">fix this</em></strong></h3>
-        </div>
-        <div class = "col-md-6 text-center mb-5">
-          <canvas id="musicParticipationChart" width="90%" height="50%"></canvas>
+
+      <!-- Why bother -->
+      <div class = "row mt-5">
+        <div class = "col-12">
+          <div class = "row">
+            <div class = "col-12 booyah-box">
+              <h2 class = "mt-2"><span class = "numbered">2</span><strong> Great for business</strong></h2>
+              <div class = "row">
+                <div class = "col-12 col-md-4 text-center">
+                  <h3><strong>Productivity</strong></h3>
+                  <div class = "col-6 offset-3">
+                    <%= image_tag("productivity.svg") %>
+                  </div>
+                  <div class = "col-10 offset-1">
+                    <div class = "grey-box mt-3">
+                      Playing music does <strong>amazing things for the brain</strong>. It's the brain's equivalent of a full-body workout. Playing regularly makes employees <strong>more creative</strong> and more adept at <strong>problem solving</strong>.
+                    </div>
+                  </div>
+                </div>
+                <div class = "col-12 col-md-4 text-center">
+                  <h3><strong>Retention</strong></h3>
+                  <div class = "col-6 offset-3">
+                    <%= image_tag("retention.svg") %>
+                  </div>
+                  <div class = "col-10 offset-1">
+                    <div class = "grey-box mt-3">
+                      Give your employees something amazing. Something they value and that creates a <strong>bond with both the workplace and their fellow employees</strong>. Also something <strong>your competitors don't have</strong>.
+                    </div>
+                  </div>
+                </div>
+                <div class = "col-12 col-md-4 text-center">
+                  <h3><strong>Recruitment</strong></h3>
+                  <div class = "col-6 offset-3">
+                    <%= image_tag("recruitment.svg") %>
+                  </div>
+                  <div class = "col-10 offset-1">
+                    <div class = "grey-box mt-3">
+                      Connect with '000s of university students through our <strong>university partnership scheme</strong>. Our software serves '000s of students. Let them know about your amazing office.
+                      <%= link_to 'Our university scheme', unis_path, class: "btn btn-primary my-2" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class = "row">
+                <div class = "col-12 text-center my-3">
+                  <div class = "btn btn-secondary col-6 toggle-why">See more</div>
+                </div>
+              </div>
+              <div class = "row mb-3">
+                <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center why-further-information show-hide">
+                  <h3>1) Watch this video</h3>
+                  <iframe width="100%" height= "315" src="https://www.youtube.com/embed/R0JKCYZ8hng" frameborder="0" allowfullscreen></iframe>
+                  <h3>2) Think about what the drivers of retention are</h3>
+                  <p>Day-to-day employee happiness?<br />Having a bond with your colleagues?<br />Feeling that your company cares about you?<br />Working at a company that provides something you really value?</p>
+                  <h3>3) Attract amazing graduates</h3>
+                  <p>Our software is <strong>in universities</strong>. It serves '000s of creative, ambitious students each month. We tell them which companies offer music practice rooms, and link to those graduate schemes.</p>
+                  <div class = "btn btn-primary">See a screenshot of what they see</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class = "clear"></div>
-<div class = "px-2">
-  <div class = "container mt-3" id = "proposition-section">
-    <!-- Our proposition -->
-    <div class = "row">
-      <div class = "col-12">
-        <h1 class = "mega-title"><strong>Our Proposition</strong></h1>
-      </div>
-      <div class = "col-12">
-        <div class = "row">
-          <div class = "col-12 booyah-box">
-            <h2 class = "mt-2"><span class = "numbered">1</span><strong> Easy set-up</strong></h2>
-            <div class = "row">
-              <div class = "col-12 col-md-4 text-center">
-                <h3><strong>Kit-out</strong></h3>
-                <div class = "col-6 offset-3">
-                  <%= image_tag("kit-out.svg") %>
-                </div>
-                <div class = "col-10 offset-1">
-                  <div class = "grey-box mt-3">
-                    We set-up an <strong>amazing music space</strong> in your office building, providing everything from piano and drums to soundproofing and stands.
-                  </div>
-                </div>
-              </div>
-              <div class = "col-12 col-md-4 text-center">
-                <h3><strong>Software</strong></h3>
-                <div class = "col-6 offset-3">
-                  <%= image_tag("software.svg") %>
-                </div>
-                <div class = "col-10 offset-1">
-                  <div class = "grey-box mt-3">
-                    Our bespoke software makes it easy to <strong>find fellow musicians</strong> in the company and to <strong>book the room</strong> for a practice session with them.
-                  </div>
-                </div>
-              </div>
-              <div class = "col-12 col-md-4 text-center">
-                <h3><strong>Service</strong></h3>
-                <div class = "col-6 offset-3">
-                  <%= image_tag("settings.svg") %>
-                </div>
-                <div class = "col-10 offset-1">
-                  <div class = "grey-box mt-3">
-                    We run <strong>social events</strong> to keep the community running, and provide <strong>technical assistance</strong> to keep the room running.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class = "row">
-              <div class = "col-12 text-center my-3">
-                <div class = "btn btn-secondary col-6 toggle-what">See more</div>
-              </div>
-            </div>
-            <div class = "row ">
-              <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center show-hide what-further-information">
-                <p>A beautifully formatted paragraph of extended text explaining content</p>
-              </div>
-            </div>
-          </div>
+<div class = "university-section show-hide">
+  <div class = "background-white">
+    <div class = "container">
+      <div class = "row text-center">
+        <div class = "col-12 col-md-8 offset-md-2 py-3">
+          <h1 class = "mega-title">Amazing software for your music community</h1>
         </div>
       </div>
     </div>
-
-    <!-- Why bother -->
-    <div class = "row mt-5">
-      <div class = "col-12">
-        <div class = "row">
-          <div class = "col-12 booyah-box">
-            <h2 class = "mt-2"><span class = "numbered">2</span><strong> Great for business</strong></h2>
-            <div class = "row">
-              <div class = "col-12 col-md-4 text-center">
-                <h3><strong>Productivity</strong></h3>
-                <div class = "col-6 offset-3">
-                  <%= image_tag("productivity.svg") %>
+  </div>
+  <div class = "pt-3 px-2 my-3">
+    <div class = "container">
+      <div class = "row">
+        <div class = "col-12">
+          <h1 class = "mega-title"><strong>University Scheme</strong></h1>
+        </div>
+        <div class = "col-12">
+          <div class = "row">
+            <div class = "col-12 booyah-box">
+              <div class = "row">
+                <div class = "col-12 col-md-4 text-center">
+                  <h3 class = "my-3"><strong>We're on a mission</strong></h3>
+                  <div class = "col-6 offset-3">
+                    <%= image_tag("target.svg") %>
+                  </div>
+                  <div class = "col-10 offset-1">
+                    <div class = "grey-box mt-3">
+                      <p>Music participation drops during university years and dramatically beyond them. We want to help build communities that people want to stay a part of, at university and beyond.</p>
+                    </div>
+                  </div>
                 </div>
-                <div class = "col-10 offset-1">
-                  <div class = "grey-box mt-3">
-                    Playing music does <strong>amazing things for the brain</strong>. It's the brain's equivalent of a full-body workout. Playing regularly makes employees <strong>more creative</strong> and more adept at <strong>problem solving</strong>.
+                <div class = "col-12 col-md-4 text-center">
+                  <h3 class = "my-3"><strong>We've built some amazing software</strong></h3>
+                  <div class = "col-6 offset-3">
+                    <%= image_tag("software.svg") %>
+                  </div>
+                  <div class = "col-10 offset-1">
+                    <div class = "grey-box mt-3">
+                      <p>We’ve built feature-rich software for booking music rooms, meeting other musicians and forming bands. It’s secure, flexible and designed for universities</p>
+                      <%= link_to "View demo software", new_user_registration_path, class: "btn btn-yellow" %>
+                    </div>
+                  </div>
+                </div>
+                <div class = "col-12 col-md-4 text-center">
+                  <h3 class = "my-3"><strong>We'd like to offer it to you <span class = "badge badge-info">FREE</span></strong></h3>
+                  <div class = "col-6 offset-3">
+                    <%= image_tag("rocket.svg") %>
+                  </div>
+                  <div class = "col-10 offset-1">
+                    <div class = "grey-box mt-3">
+                      <p>Because universities are so crucial to the mission, we’d like to offer it to you, for free, forever</p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class = "col-12 col-md-4 text-center">
-                <h3><strong>Retention</strong></h3>
-                <div class = "col-6 offset-3">
-                  <%= image_tag("retention.svg") %>
+              <div class = "row">
+                <div class = "col-12 text-center my-3">
+                  <%= link_to 'Download our brochure', '#', class: "btn btn-primary my-2" %>
+                  <%= mail_to "mike@seedmusic.co.uk", "Email us", subject: "Seed Music university scheme", class: "btn btn-pink my-2" %>
                 </div>
-                <div class = "col-10 offset-1">
-                  <div class = "grey-box mt-3">
-                    Give your employees something amazing. Something they value and that creates a <strong>bond with both the workplace and their fellow employees</strong>. Also something <strong>your competitors don't have</strong>.
-                  </div>
-                </div>
-              </div>
-              <div class = "col-12 col-md-4 text-center">
-                <h3><strong>Recruitment</strong></h3>
-                <div class = "col-6 offset-3">
-                  <%= image_tag("recruitment.svg") %>
-                </div>
-                <div class = "col-10 offset-1">
-                  <div class = "grey-box mt-3">
-                    Connect with '000s of university students through our <strong>university partnership scheme</strong>. Our software serves '000s of students. Let them know about your amazing office.
-                    <%= link_to 'Our university scheme', unis_path, class: "btn btn-primary my-2" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class = "row">
-              <div class = "col-12 text-center my-3">
-                <div class = "btn btn-secondary col-6 toggle-why">See more</div>
-              </div>
-            </div>
-            <div class = "row mb-3">
-              <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center why-further-information show-hide">
-                <h3>1) Watch this video</h3>
-                <iframe width="100%" height= "315" src="https://www.youtube.com/embed/R0JKCYZ8hng" frameborder="0" allowfullscreen></iframe>
-                <h3>2) Think about what the drivers of retention are</h3>
-                <p>Day-to-day employee happiness?<br />Having a bond with your colleagues?<br />Feeling that your company cares about you?<br />Working at a company that provides something you really value?</p>
-                <h3>3) Attract amazing graduates</h3>
-                <p>Our software is <strong>in universities</strong>. It serves '000s of creative, ambitious students each month. We tell them which companies offer music practice rooms, and link to those graduate schemes.</p>
-                <div class = "btn btn-primary">See a screenshot of what they see</div>
               </div>
             </div>
           </div>
@@ -166,54 +229,54 @@
 </div>
 
 <script>
-var ctx = document.getElementById('musicParticipationChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
+// var ctx = document.getElementById('musicParticipationChart').getContext('2d');
+// var chart = new Chart(ctx, {
+//     // The type of chart we want to create
+//     type: 'line',
 
-    // The data for our dataset
-    data: {
-        labels: ["16-19", "20-24", "25-29", "30-44", "45-59", "60-69", "70 & over"],
-        datasets: [{
-            label: "Actual (ONS)",
-            backgroundColor: 'rgba(75,194,162, 0.4)',
-            borderColor: 'rgb(75,194,162)',
-            data: [21, 15, 12, 12, 10, 7, 7],
-        },
-        {
-            label: "Seed Music aim",
-            backgroundColor: 'rgba(237,21,102,0.1)',
-            borderColor: 'rgb(237,21,102)',
-            data: [21, 21, 21, 21, 21, 21, 21],  
-            }]
-    },
+//     // The data for our dataset
+//     data: {
+//         labels: ["16-19", "20-24", "25-29", "30-44", "45-59", "60-69", "70 & over"],
+//         datasets: [{
+//             label: "Actual (ONS)",
+//             backgroundColor: 'rgba(75,194,162, 0.4)',
+//             borderColor: 'rgb(75,194,162)',
+//             data: [21, 15, 12, 12, 10, 7, 7],
+//         },
+//         {
+//             label: "Seed Music aim",
+//             backgroundColor: 'rgba(237,21,102,0.1)',
+//             borderColor: 'rgb(237,21,102)',
+//             data: [21, 21, 21, 21, 21, 21, 21],  
+//             }]
+//     },
 
-    // Configuration options go here
-    options: {
-      legend: {
-        display: true
-      },
-      scales: {
-        yAxes: [{
-            gridLines: {
-              display: false
-            },
-            ticks: {
-                beginAtZero: true,
-                display: true
-            }
-        }],
-        xAxes: [{
-          gridLines: {
-              display: false
-            },
-          ticks: {
-            display: true
-          }
-        }],
-      }
-    }
-});
+//     // Configuration options go here
+//     options: {
+//       legend: {
+//         display: true
+//       },
+//       scales: {
+//         yAxes: [{
+//             gridLines: {
+//               display: false
+//             },
+//             ticks: {
+//                 beginAtZero: true,
+//                 display: true
+//             }
+//         }],
+//         xAxes: [{
+//           gridLines: {
+//               display: false
+//             },
+//           ticks: {
+//             display: true
+//           }
+//         }],
+//       }
+//     }
+// });
 
 $(function() {
   $(".toggle-what").click(function(){
@@ -222,6 +285,18 @@ $(function() {
 
   $(".toggle-why").click(function(){
     $(".why-further-information").slideToggle();
+  });
+
+  $(".business-section-select").click(function () {
+
+      $(".business-section").show();
+      $(".university-section").hide();
+  });
+  $(".university-section-select").click(function () {
+
+      $(".university-section").show();
+      $(".business-section").hide();
+
   });
 
 });
