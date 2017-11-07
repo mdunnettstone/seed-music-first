@@ -34,7 +34,9 @@
         </div>
         <% if @booking.users.any? {|user| user == current_user} %>
           <div class = "row mx-3">
-            <div class = "col-12 mb-2 btn btn-primary"><i class="fa fa-calendar-plus-o" aria-hidden="true"></i>&nbsp Add to calendar</div>
+            <%= link_to booking_path({:format => :ics }.merge(params)), :class => "btn btn-primary col-12 mb-2" do %>
+              <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>&nbsp Add to calendar
+            <% end %>
             <%= link_to booking_path(@booking), class: "col-12 mb-2 btn btn-danger", method: :delete, data: {confirm: 'Are you sure? This will delete the booking for everyone!'} do %>
               <i class="fa fa-trash" aria-hidden="true"></i>&nbsp Delete
             <% end %>

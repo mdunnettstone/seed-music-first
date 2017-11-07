@@ -86,6 +86,7 @@ GEM
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     i18n (0.8.6)
+    icalendar (2.4.1)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -219,6 +220,7 @@ DEPENDENCIES
   devise
   figaro
   font-awesome-rails
+  icalendar
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

@@ -39,8 +39,18 @@ class BookingsController < ApplicationController
   def show
     @booking = Booking.find_by_id(params[:id])
     respond_to do |format|
-      format.html {}
-
+      format.html
+      format.ics do 
+        cal = Icalendar::Calendar.new           
+        booking = Icalendar::Event.new
+        booking.dtstart = @booking.start_time
+        booking.dtend = @booking.end_time
+        booking.summary = "Booking in #{@booking.room.name}"
+        booking.uid = booking.url = booking_url(@booking)
+        cal.add_event(booking)
+        cal.publish
+        render :text =>  cal.to_ical
+      end
     end
   end
 

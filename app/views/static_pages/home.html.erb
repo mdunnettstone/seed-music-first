@@ -16,7 +16,7 @@
 </div>
 <div class = "row">
   <div class = "col-6 mx-0 text-center secondary-nav-btn btn btn-primary business-section-select "><span class = "content-align-middle">I am from a business</span></div>
-  <div class = "col-6 mx-0 text-center secondary-nav-btn btn btn-yellow university-section-select">I am from a university</div>
+  <div class = "col-6 mx-0 text-center secondary-nav-btn btn btn-secondary university-section-select">I am from a university</div>
 </div>
   <!-- The mission -->
 <div class = "business-section">
@@ -288,15 +288,21 @@ $(function() {
   });
 
   $(".business-section-select").click(function () {
-
-      $(".business-section").show();
-      $(".university-section").hide();
+    if($(this).hasClass("btn-secondary")){
+      $(".btn-primary").removeClass("btn-primary").addClass("btn-secondary");
+      $(this).removeClass("btn-secondary").addClass("btn-primary");
+    }
+    $(".business-section").show();
+    $(".university-section").hide();
   });
+
   $(".university-section-select").click(function () {
-
-      $(".university-section").show();
-      $(".business-section").hide();
-
+    if($(this).hasClass("btn-secondary")){
+      $(".btn-primary").removeClass("btn-primary").addClass("btn-secondary");
+      $(this).removeClass("btn-secondary").addClass("btn-primary");
+    }
+    $(".university-section").show();
+    $(".business-section").hide();
   });
 
 });
