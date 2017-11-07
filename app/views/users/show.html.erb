@@ -35,21 +35,14 @@
                 </div> 
               <% end %>
               <div class = "col-12 pt-2">
-                <h4 class = "ml-0 mt-0 mb-1">Instruments:</h4>
+                <h4 class = "ml-0 mb-1">Instruments and genres</h4>
                 <div class = "col-11 offset-1 px-0">
-                  <% @user.unique_instruments.each do |instrument| %>
-                    <span class = "badge badge-default"><%= instrument %></span>
-                  <% end %>
-                </div> 
-              </div>
-              <div class = "col-12">
-                <h4 class = "ml-0 mb-1">Genres:</h4>
-                <div class = "col-11 offset-1 px-0">
-                  <% @user.unique_genres.each do |genre| %>
-                    <span class = "badge badge-default"><%= genre %></span>
+                  <% @user.instrument_bracket_genres.each do |grouped_user_instrument| %>
+                    <strong><%= grouped_user_instrument[0] %></strong>:
+                    <%= grouped_user_instrument[1].to_sentence %>
+                    <br />               
                   <% end %>
                 </div>
-                <br class = "my-1"/>
               </div>
             </div>
           </div>

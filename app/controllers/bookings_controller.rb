@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
     @timeslots           = build_room_times(search_start, search_end)
     @bookings            = Booking.where("(end_time > ? AND end_time <= ?) OR (start_time < ? AND start_time >= ?)", search_start, search_end, search_end, search_start)
     @rooms               = Room.order(:id)
-    @users               = User.all
+    @users               = User.where.not(id: current_user.id)
   end
 
   def create
@@ -40,7 +40,7 @@ class BookingsController < ApplicationController
     @booking = Booking.find_by_id(params[:id])
     respond_to do |format|
       format.html {}
-      
+
     end
   end
 

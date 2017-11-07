@@ -56,6 +56,21 @@ class User < ApplicationRecord
     end
     genres.uniq
   end
+
+  def instrument_bracket_genres
+    grouped_array = []
+    user_instruments.all.group_by(&:instrument_id).each do |instrument_id, user_instruments|
+      individual_array = []
+      individual_array << Instrument.find(instrument_id).name
+      genre_array = []
+      user_instruments.each do |user_instrument|
+        genre_array << Genre.find(user_instrument.genre_id).name
+      end
+      individual_array << genre_array
+      grouped_array << individual_array
+    end
+    grouped_array
+  end
   
   def fullname
     "#{self.firstname} #{self.surname}"
