@@ -38,6 +38,10 @@ class BookingsController < ApplicationController
 
   def show
     @booking = Booking.find_by_id(params[:id])
+    respond_to do |format|
+      format.html {}
+      
+    end
   end
 
   def destroy
