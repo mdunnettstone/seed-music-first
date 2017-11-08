@@ -1,5 +1,5 @@
 class BookingMailer < ApplicationMailer
-  default from: 'mdunnettstone@gmail.com'
+  default from: 'bookings@seedmusic.co.uk'
 
   def booking_created(booking, user)
     @booking    = booking

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @users = User.search(search_params)
+    @users = User.where.not(id: current_user.id).search(search_params)
     @recent_bookings = Booking.where("(start_time > ?)", Time.now - 6.month).order(:start_time)
 
 

@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'mdunnettstone@gmail.com'
+  default from: 'bookings@seedmusic.co.uk'
   layout 'mailer'
 end
