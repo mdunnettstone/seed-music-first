@@ -1,6 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.default_url_options = { :host => 'seedmusic.co.uk.herokudns.com' }
+  config.action_mailer.default_url_options = { :host => 'www.seedmusic.co.uk' }
 
   ActionMailer::Base.smtp_settings = {
     address: 'smtp.sendgrid.net',
