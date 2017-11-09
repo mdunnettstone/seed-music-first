@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
   before_action :authenticate_user!
   def home
     @bookings = current_user.bookings.where("(start_time > ?)", Time.now).sort_by{|booking| booking.start_time}
-    @prepopulated_search = rounded_datetime(Time.now)
+    @prepopulated_search = rounded_datetime(Time.now + 1.hour)
     @genre = current_user.user_instruments.sample.genre
     @relevant_users = User.search(:genre_id => @genre.id).where.not(id: current_user.id)
   end

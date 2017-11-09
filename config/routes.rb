@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :bookings, only: [:index]
     get "/dashboard", :controller => "static_pages", :action => "dashboard"
     resources :room_comments, only: [:index]
+    resources :whitelisted_emails, only: [:index, :create]
   end
   resources :users
   resources :bookings, except: [:index] do

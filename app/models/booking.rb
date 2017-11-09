@@ -20,7 +20,7 @@ class Booking < ApplicationRecord
     self.users.each do |user|
       usernames << "#{user.firstname} #{user.surname}"
     end
-  usernames.join(", ")
+  usernames.to_sentence
   end
 
   def creator

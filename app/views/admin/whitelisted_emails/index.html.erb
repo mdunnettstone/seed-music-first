@@ -1,0 +1,28 @@
+<div class = "container">
+  <div class = "row">
+    <div class = "col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 booyah-box py-2">
+      <h3>All whitelisted emails</h3>
+      <h6>All domains</h6>
+      <ul>
+      <% @all_domains.each do |email| %>
+        <li><%= email.email_or_domain %></li>
+      <% end %>
+      </ul>
+
+      <h6>All individual emails</h6>
+      <ul>
+      <% @all_emails.each do |email| %>
+        <li><%= email.email_or_domain %></li>
+      <% end %>
+      </ul>
+      <hr />
+
+      <h5>Add a new domain or email</h5>
+      <%= simple_form_for @whitelisted_email, url: admin_whitelisted_emails_path do |f| %>
+        <%= f.input :email_or_domain %>
+        <p class = "text-muted">To add a batch, please email in Excel or CSV format to mike@seedmusic.co.uk</p>
+        <%= f.submit "Add", class: "btn btn-primary col-12" %>
+      <% end %>
+    </div>
+  </div>
+</div>

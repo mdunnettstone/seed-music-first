@@ -35,8 +35,8 @@
               <div class = "mb-3">
                 <ul class = "slot-list" id = "slot-list">
                   <% @timeslots.each do |timeslot| %>
-                    <% if @bookings.any? {|booking| (booking.start_time..booking.end_time).cover?(timeslot + 1.second) && booking.room_id == room.id}%>
-                      <li class = "timeslot my-2 disabled col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>" data-toggle="tooltip" data-html="true" title="Already booked"><%= timeslot.strftime("%H:%M") %></li>
+                    <% if booking = @bookings.where("room_id = ? AND (end_time > ? AND start_time < ?)", room.id, timeslot + 1.second, timeslot + 1.second).first %>
+                      <li class = "timeslot my-2 disabled col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>" data-toggle="tooltip" data-html="true" title="Booked by <%= booking.user_list %>"><%= timeslot.strftime("%H:%M") %></li>
                     <% else %>
                       <li class = "timeslot my-2 selectable-timeslot col-5 col-md-3 col-lg-2 mx-1 mx-md-2" data-room = "<%= room.name %>" data-roomid = "<%= room.id %>" data-date = "<%= timeslot.strftime("%A, %d %b %Y") %>" data-timestart = "<%= timeslot.strftime("%H:%M") %>" data-timeend = "<%= (timeslot + 15.minute).strftime("%H:%M") %>"><%= timeslot.strftime("%H:%M") %></li>
                     <% end %>
