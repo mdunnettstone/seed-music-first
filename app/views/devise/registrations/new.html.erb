@@ -54,7 +54,10 @@
   });
 
   $(function() {
-    $('.multiselect').multiselect();
+    $('.multiselect').multiselect({
+      enableFiltering: true,
+      enableCaseInsensitiveFiltering: true
+    });
     // initial starting index depends on number of fields on the page
     var instrumentIndex = $('.instrument_field').length - 1;
 

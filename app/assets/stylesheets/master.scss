@@ -1,6 +1,6 @@
 
 @import "font-awesome";
-@import url('https://fonts.googleapis.com/css?family=Baloo+Chettan|Lato');
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 $disabled:#C0C0C0;
 $background:#f6f7fa;
@@ -13,12 +13,7 @@ $blue: #2989ce;
 $charcoal:#263030;
 $light-grey:#e3e3e3;
 $white:#ffffff;
-$header-font:'Baloo Chettan', cursive;
 $text-font: 'Lato', sans-serif;
-
-h1 {
-  font-family: $header-font;
-}
 
 p {
   font-family: $text-font;
@@ -197,7 +192,6 @@ h1.inline {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  font-family: $header-font;
 }
 
 .super-hero h1 {
