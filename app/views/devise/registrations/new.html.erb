@@ -23,8 +23,10 @@
         <div class="all_instrument_fields">
           <%= f.simple_fields_for :user_instruments do |instrument| %>
             <div class="instrument_field"/>
-              <%= instrument.input :instrument_id, collection: Instrument.order(:name), label_method: :name, value_method: :id, include_blank: false %>
-              <%= instrument.input :genre_id, collection: Genre.order(:name), label_method: :name, value_method: :id, include_blank: false %>
+            <p class = "mb-0 mt-2">Instrument: </p>
+              <%= instrument.input :instrument_id, collection: Instrument.order(:name), label: false, value_method: :id, include_blank: false, input_html: { :class => 'multiselect' } %>
+            <p class = "mb-0 mt-2">Genre: </p>
+              <%= instrument.input :genre_id, collection: Genre.order(:name), label: false, value_method: :id, include_blank: false, :input_html => { :class => 'multiselect' } %>
               <hr />
             </div>
           <% end %>
@@ -44,6 +46,7 @@
 </div>
 
 <script>
+
   $.fn.extend({
     toggleText: function(a, b){
         return this.text(this.text() == b ? a : b);
@@ -51,6 +54,7 @@
   });
 
   $(function() {
+    $('.multiselect').multiselect();
     // initial starting index depends on number of fields on the page
     var instrumentIndex = $('.instrument_field').length - 1;
 
