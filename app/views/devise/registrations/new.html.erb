@@ -23,8 +23,8 @@
         <div class="all_instrument_fields">
           <%= f.simple_fields_for :user_instruments do |instrument| %>
             <div class="instrument_field"/>
-              <%= instrument.input :instrument_id, collection: Instrument.all, label_method: :name, value_method: :id, include_blank: false %>
-              <%= instrument.input :genre_id, collection: Genre.all, label_method: :name, value_method: :id, include_blank: false %>
+              <%= instrument.input :instrument_id, collection: Instrument.order(:name), label_method: :name, value_method: :id, include_blank: false %>
+              <%= instrument.input :genre_id, collection: Genre.order(:name), label_method: :name, value_method: :id, include_blank: false %>
               <hr />
             </div>
           <% end %>
