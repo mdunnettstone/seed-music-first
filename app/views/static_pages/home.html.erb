@@ -26,24 +26,24 @@
         <div class="carousel-inner" role="listbox">
           <div class="carousel-item active">
             <div class = "col-12 background-yellow">
-              <div class = "row">
-                <div class = "col-md-6 py-3 px-3">
-                  <%= image_tag("music-room-demo.jpg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %> 
-                </div>
-                <div class = "col-md-6 text-center py-3 px-3">
-                    <h1 class = "pt-3 pt-md-5">A music practice room in your office</h1>
+              <div class = "container">
+                <div class = "row">
+                  <div class = "col-md-6 offset-md-3 py-3 px-3 text-center text-white">
+                    <h1>A <span class = "underline-pink">music practice room</span> in your office</h1>
+                    <%= image_tag("music-room-demo.jpg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="carousel-item">
             <div class = "col-12 background-pink">
-              <div class = "row">
-                <div class = "col-md-6 text-center py-3 px-3 text-white">
-                    <h1 class = "pt-3 pt-md-5">A community built around it</h1>
-                </div>
-                <div class = "col-md-6 py-3 px-3">
-                  <%= image_tag("musician.jpg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %> 
+              <div class = "container">
+                <div class = "row">
+                  <div class = "col-md-6 offset-md-3 text-center py-3 px-3 text-center text-white">
+                    <h1>A <span class = "underline-mint">musical community</span> built around it</h1>
+                    <%= image_tag("musician.jpg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %> 
+                  </div>
                 </div>
               </div>
             </div>
@@ -220,7 +220,7 @@
                   <div class = "col-10 offset-1">
                     <div class = "grey-box mt-3">
                       <p>We’ve built feature-rich software for booking music rooms, meeting other musicians and forming bands. It’s secure, flexible and designed for universities</p>
-                      <%= link_to "View demo software", new_user_registration_path, class: "btn btn-yellow" %>
+                      <%= link_to "View demo software", new_user_registration_path, class: "btn btn-yellow mb-3" %>
                     </div>
                   </div>
                 </div>
@@ -237,10 +237,9 @@
                 </div>
               </div>
               <div class = "row">
-                <div class = "col-12 text-center my-3">
-                  <%= link_to 'Download our brochure', '#', class: "btn btn-primary my-2" %>
-                  <%= mail_to "hello@seedmusic.co.uk", "Email us", subject: "Seed Music university scheme", class: "btn btn-pink my-2" %>
-                </div>
+                <!-- <div class = "col-12 text-center my-3"> -->
+                  <!-- <%= link_to 'Download our brochure', '#', class: "btn btn-primary my-2" %> -->
+                <!-- </div> -->
               </div>
             </div>
           </div>
@@ -249,7 +248,11 @@
     </div>
   </div>
 </div>
-
+<div class = "container">
+  <div class = "row">
+    <%= mail_to "hello@seedmusic.co.uk", "Get in touch", class: "btn btn-pink text-center col-md-6 offset-md-3 my-2" %>
+  </div>
+</div>
 <script>
 // var ctx = document.getElementById('musicParticipationChart').getContext('2d');
 // var chart = new Chart(ctx, {
