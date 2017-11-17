@@ -11,6 +11,11 @@
             <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"), class: "date col-12 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => "0d", "data-disable-touch-keyboard" => true, readonly: true %>
             <h3 class = "mb-1 mt-2"><span class = "badge">Time</span></h3>
             <%= select_time @prepopulated_search, {:time_separator => ":", :minute_step => 15}, class: "time col-3 pr-0 pl-0 mx-0 d-inline" %>
+            <div class = "my-1"><a class = "room-search-toggle text-white" href = "#">+ Search by room</a></div>
+            <span class = "room-search show-hide">
+            <h3 class = "my-0"><span class = "badge">Rooms</span></h3>
+              <%= select_tag "room_ids", options_from_collection_for_select(@rooms, :id, :name), multiple: true, :class => "multiselect" %>
+            </span>
             <%= submit_tag "Search", class: "btn btn-primary col form-button d-inline my-1" %>
           <% end %>
         </div>
@@ -119,3 +124,17 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(function() {
+    $('.multiselect').multiselect({
+      enableFiltering: true,
+      enableCaseInsensitiveFiltering: true
+    });
+
+    $(".room-search-toggle").click(function(evt){
+      evt.preventDefault();
+      $(".room-search").slideToggle();
+    });
+  });
+</script>

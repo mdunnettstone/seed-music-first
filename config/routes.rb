@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'static_pages#home'
   get "/unis", :controller => "static_pages", :action => "unis"
+  get "/download_uni_doc", :controller => "static_pages", :action => "download_uni_doc"
   resources :rooms, only: [:show, :index] do
     resources :room_comments, only: :create
   end

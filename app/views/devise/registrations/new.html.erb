@@ -18,23 +18,7 @@
     <div class = "btn btn-primary continue">Continue</div>
 
     <div class = "second-section">
-      <div class="form-inputs">
-        <h2>Your music</h2>
-        <div class="all_instrument_fields">
-          <%= f.simple_fields_for :user_instruments do |instrument| %>
-            <div class="instrument_field"/>
-            <p class = "mb-0 mt-2">Instrument: </p>
-              <%= instrument.input :instrument_id, collection: Instrument.order(:name), label: false, value_method: :id, include_blank: false, input_html: { :class => 'multiselect' } %>
-            <p class = "mb-0 mt-2">Genre: </p>
-              <%= instrument.input :genre_id, collection: Genre.order(:name), label: false, value_method: :id, include_blank: false, :input_html => { :class => 'multiselect' } %>
-              <hr />
-            </div>
-          <% end %>
-        </div>
-        <p><a href="#" class="add_instrument_field">+ add another</a></p>
-        <%= f.input :description, autofocus: true, hint: "Say a few words about what you like to play and, if you wish to, an indicator of your level" %>
-      </div>
-
+      <%= render "user_instrument_form_fields", form: f, include_remove: false %>
       <div class = "clear"></div>
       <div class="form-actions">
         <%= f.submit "Sign up", class: "btn btn-primary col-12" %>

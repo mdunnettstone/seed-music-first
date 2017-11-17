@@ -21,12 +21,42 @@
   <!-- The mission -->
 <div class = "business-section">
   <div class = "background-white">
-    <div class = "container">
-      <div class = "row text-center">
-        <div class = "col-12 col-md-8 offset-md-2 py-3">
-          <h1 class = "mega-title">A music practice room in your office</h1>
-          <h1 class = "text-mint">A <strong>community</strong> built around it</h1>
+    <div class = "row">
+      <div id="carouselExampleIndicators" class="carousel slide col-12" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item active">
+            <div class = "col-12 background-yellow">
+              <div class = "row">
+                <div class = "col-md-6 py-3 px-3">
+                  <%= image_tag("music-room-demo.jpg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %> 
+                </div>
+                <div class = "col-md-6 text-center py-3 px-3">
+                    <h1>A music practice room in your office</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class = "col-12 background-pink">
+              <div class = "row">
+                <div class = "col-md-6 text-center py-3 px-3 text-white">
+                    <h1>A community built around it</h1>
+                </div>
+                <div class = "col-md-6 py-3 px-3">
+                  <%= image_tag("musician.jpg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %> 
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
     </div>
   </div>
@@ -36,120 +66,112 @@
     <div class = "container mt-3" id = "proposition-section">
       <!-- Our proposition -->
       <div class = "row">
-        <div class = "col-12">
-          <h1 class = "mega-title"><strong>Our Proposition</strong></h1>
+        <div class = "col-12 text-center">
+          <h1 class = "mega-title my-3 underline-mint"><strong>Our Proposition</strong></h1>
         </div>
-        <div class = "col-12">
-          <div class = "row">
-            <div class = "col-12 booyah-box">
-              <h2 class = "mt-2"><span class = "numbered">1</span><strong> Easy set-up</strong></h2>
-              <div class = "row">
-                <div class = "col-12 col-md-4 text-center">
-                  <h3><strong>Kit-out</strong></h3>
-                  <div class = "col-6 offset-3">
-                    <%= image_tag("kit-out.svg") %>
+
+        <div class = "row">
+          <div class = "col-12">
+            <div class = "row">
+              <div class = "col-12 booyah-box">
+                <h2 class = "mt-2"><span class = "numbered">1</span><strong> Great for business</strong></h2>
+                <div class = "row">
+                  <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
+                    <h3><strong>Productivity</strong></h3>
+                    <div class = "col-6 offset-3">
+                      <%= image_tag("productivity.svg") %>
+                    </div>
+                    <div class = "col-10 offset-1">
+                      <div class = "grey-box mt-3">
+                        Playing music does <strong>amazing things for the brain</strong>. It's the brain's equivalent of a full-body workout. Playing regularly makes employees <strong>more creative</strong> and more adept at <strong>problem solving</strong>.
+                      </div>
+                      <%= link_to 'Watch a 4-minute video', 'https://www.youtube.com/watch?v=R0JKCYZ8hng&feature=youtu.be', class: "btn btn-secondary col-12 mt-3", target: :_blank %> 
+                    </div>
                   </div>
-                  <div class = "col-10 offset-1">
-                    <div class = "grey-box mt-3">
-                      We set-up an <strong>amazing music space</strong> in your office building, providing everything from piano and drums to soundproofing and stands.
+                  <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
+                    <h3><strong>Retention</strong></h3>
+                    <div class = "col-6 offset-3">
+                      <%= image_tag("retention.svg") %>
+                    </div>
+                    <div class = "col-10 offset-1">
+                      <div class = "grey-box mt-3">
+                        Give your employees something amazing. Something they value and that creates a <strong>bond with both the workplace and their fellow employees</strong>. Also something <strong>your competitors don't have</strong>.
+                      </div>
+                    </div>
+                  </div>
+                  <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
+                    <h3><strong>Recruitment</strong></h3>
+                    <div class = "col-6 offset-3">
+                      <%= image_tag("recruitment.svg") %>
+                    </div>
+                    <div class = "col-10 offset-1">
+                      <div class = "grey-box mt-3">
+                        Connect with '000s of university students through our <strong>university partnership scheme</strong>. Our software serves '000s of students. Let them know about your amazing office.
+                        <%= link_to 'Our university scheme', unis_path, class: "btn btn-primary my-2" %>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class = "col-12 col-md-4 text-center">
-                  <h3><strong>Software</strong></h3>
-                  <div class = "col-6 offset-3">
-                    <%= image_tag("software.svg") %>
-                  </div>
-                  <div class = "col-10 offset-1">
-                    <div class = "grey-box mt-3">
-                      Our bespoke software makes it easy to <strong>find fellow musicians</strong> in the company and to <strong>book the room</strong> for a practice session with them.
-                    </div>
+                <div class = "row">
+                  <div class = "col-12 text-center my-3">
+                    <div class = "btn btn-secondary col-6 toggle-why">See more</div>
                   </div>
                 </div>
-                <div class = "col-12 col-md-4 text-center">
-                  <h3><strong>Service</strong></h3>
-                  <div class = "col-6 offset-3">
-                    <%= image_tag("settings.svg") %>
+                <div class = "why-further-information show-hide">
+                  <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center">
+                    <p>To learn more, please arrange a 15 minute meeting at your convenience by contacting <%= mail_to "hello@seedmusic.co.uk" %></p>
                   </div>
-                  <div class = "col-10 offset-1">
-                    <div class = "grey-box mt-3">
-                      We run <strong>social events</strong> to keep the community running, and provide <strong>technical assistance</strong> to keep the room running.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class = "row">
-                <div class = "col-12 text-center my-3">
-                  <div class = "btn btn-secondary col-6 toggle-what">See more</div>
-                </div>
-              </div>
-              <div class = "row ">
-                <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center show-hide what-further-information">
-                  <p>To learn more, please arrange a 15 minute meeting at your convenience by contacting <%= mail_to "mike@seedmusic.co.uk" %></p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Why bother -->
-      <div class = "row mt-5">
-        <div class = "col-12">
-          <div class = "row">
-            <div class = "col-12 booyah-box">
-              <h2 class = "mt-2"><span class = "numbered">2</span><strong> Great for business</strong></h2>
-              <div class = "row">
-                <div class = "col-12 col-md-4 text-center">
-                  <h3><strong>Productivity</strong></h3>
-                  <div class = "col-6 offset-3">
-                    <%= image_tag("productivity.svg") %>
-                  </div>
-                  <div class = "col-10 offset-1">
-                    <div class = "grey-box mt-3">
-                      Playing music does <strong>amazing things for the brain</strong>. It's the brain's equivalent of a full-body workout. Playing regularly makes employees <strong>more creative</strong> and more adept at <strong>problem solving</strong>.
-                    </div>
-                  </div>
+        <div class = "row my-3">
+          <div class = "col-12 booyah-box">
+            <h2 class = "mt-2"><span class = "numbered">2</span><strong> Easy set-up</strong></h2>
+            <div class = "row">
+              <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
+                <h3><strong>Kit-out</strong></h3>
+                <div class = "col-6 offset-3">
+                  <%= image_tag("kit-out.svg") %>
                 </div>
-                <div class = "col-12 col-md-4 text-center">
-                  <h3><strong>Retention</strong></h3>
-                  <div class = "col-6 offset-3">
-                    <%= image_tag("retention.svg") %>
-                  </div>
-                  <div class = "col-10 offset-1">
-                    <div class = "grey-box mt-3">
-                      Give your employees something amazing. Something they value and that creates a <strong>bond with both the workplace and their fellow employees</strong>. Also something <strong>your competitors don't have</strong>.
-                    </div>
-                  </div>
-                </div>
-                <div class = "col-12 col-md-4 text-center">
-                  <h3><strong>Recruitment</strong></h3>
-                  <div class = "col-6 offset-3">
-                    <%= image_tag("recruitment.svg") %>
-                  </div>
-                  <div class = "col-10 offset-1">
-                    <div class = "grey-box mt-3">
-                      Connect with '000s of university students through our <strong>university partnership scheme</strong>. Our software serves '000s of students. Let them know about your amazing office.
-                      <%= link_to 'Our university scheme', unis_path, class: "btn btn-primary my-2" %>
-                    </div>
+                <div class = "col-10 offset-1">
+                  <div class = "grey-box mt-3">
+                    We set-up an <strong>amazing music space</strong> in your office building, providing everything from piano and drums to soundproofing and stands.
                   </div>
                 </div>
               </div>
-              <div class = "row">
-                <div class = "col-12 text-center my-3">
-                  <div class = "btn btn-secondary col-6 toggle-why">See more</div>
+              <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
+                <h3><strong>Software</strong></h3>
+                <div class = "col-6 offset-3">
+                  <%= image_tag("software.svg") %>
+                </div>
+                <div class = "col-10 offset-1">
+                  <div class = "grey-box mt-3">
+                    Our bespoke software makes it easy to <strong>find fellow musicians</strong> in the company and to <strong>book the room</strong> for a practice session with them.
+                  </div>
                 </div>
               </div>
-              <div class = "row mb-3">
-                <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center why-further-information show-hide">
-                  <h3>1) Watch this video</h3>
-                  <iframe width="100%" height= "315" src="https://www.youtube.com/embed/R0JKCYZ8hng" frameborder="0" allowfullscreen></iframe>
-                  <h3>2) Think about what the drivers of retention are</h3>
-                  <p>Day-to-day employee happiness?<br />Having a bond with your colleagues?<br />Feeling that your company cares about you?<br />Working at a company that provides something you really value?</p>
-                  <h3>3) Attract amazing graduates</h3>
-                  <p>Our software is <strong>in universities</strong>. It serves '000s of creative, ambitious students each month. We tell them which companies offer music practice rooms, and link to those graduate schemes.</p>
-                  <div class = "btn btn-primary">See a screenshot of what they see</div>
+              <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
+                <h3><strong>Service</strong></h3>
+                <div class = "col-6 offset-3">
+                  <%= image_tag("settings.svg") %>
                 </div>
+                <div class = "col-10 offset-1">
+                  <div class = "grey-box mt-3">
+                    We run <strong>social events</strong> to keep the community running, and provide <strong>technical assistance</strong> to keep the room running.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-12 text-center my-3">
+                <div class = "btn btn-secondary col-6 toggle-what">See more</div>
+              </div>
+            </div>
+            <div class = "row ">
+              <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center show-hide what-further-information">
+                <p>To learn more, please arrange a 15 minute meeting at your convenience by contacting <%= mail_to "hello@seedmusic.co.uk" %></p>
               </div>
             </div>
           </div>
@@ -217,7 +239,7 @@
               <div class = "row">
                 <div class = "col-12 text-center my-3">
                   <%= link_to 'Download our brochure', '#', class: "btn btn-primary my-2" %>
-                  <%= mail_to "mike@seedmusic.co.uk", "Email us", subject: "Seed Music university scheme", class: "btn btn-pink my-2" %>
+                  <%= mail_to "hello@seedmusic.co.uk", "Email us", subject: "Seed Music university scheme", class: "btn btn-pink my-2" %>
                 </div>
               </div>
             </div>

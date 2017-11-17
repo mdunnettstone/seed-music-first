@@ -9,15 +9,17 @@
 
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
     <meta name="viewport" content="initial-scale=1">
+    <%= favicon_link_tag %>
   </head>
 
   <body id = "background-grey">
     <div id="flex-content-container">
-      <nav class="navbar navbar-toggleable-sm navbar-light bg-faded mb-0">
+      <nav class="navbar navbar-toggleable-sm navbar-inverse background-purple mb-0">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon mt-0"></span>
         </button>
         <%= link_to root_path, class: 'navbar-brand' do %>
+          <%= image_tag "SM_Logo", height: '30', class: "d-inline-block align-top", alt: "Seed Music logo" %>
           Seed Music
         <% end %>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -68,6 +70,11 @@
               </li>
               <li class="nav-item">
                 <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+              </li>
+              <li class = "nav-item">
+                <%= mail_to "hello@seedmusic.co.uk" do %>
+                  <div class = "btn btn-pink">Contact us</div>
+                <% end %>
               </li>
             <% end %>
           </ul>

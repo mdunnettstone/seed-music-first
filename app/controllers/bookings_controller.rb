@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
   def home
+    @rooms = Room.all
     @bookings = current_user.bookings.where("(start_time > ?)", Time.now).sort_by{|booking| booking.start_time}
     @prepopulated_search = rounded_datetime(Time.now + 1.hour)
     @genre = current_user.user_instruments.sample.genre
@@ -13,15 +14,20 @@ class BookingsController < ApplicationController
     else
       parsed_datetime = rounded_datetime(DateTime.now) + 1.hour
     end
+
     @searched_start_time = rounded_datetime(parsed_datetime)
 
-    
+
+    @rooms = Room.order(:id)
+    if params[:room_ids].present?
+      @rooms = @rooms.where(id: params[:room_ids])
+    end
+
     search_start         = @searched_start_time - 30.minute
     search_end           = @searched_start_time + 90.minute
     
     @timeslots           = build_room_times(search_start, search_end)
-    @bookings            = Booking.where("(end_time > ? AND end_time <= ?) OR (start_time < ? AND start_time >= ?)", search_start, search_end, search_end, search_start)
-    @rooms               = Room.order(:id)
+    @bookings            = Booking.within(search_start, search_end)
     @users               = User.where.not(id: current_user.id)
   end
 

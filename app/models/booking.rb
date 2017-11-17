@@ -10,6 +10,9 @@ class Booking < ApplicationRecord
   validate :no_longer_than_2_hours_unless_admin
   validate :not_already_booked
 
+  scope :within, ->(start_time, end_time) {
+    where("(end_time > ? AND end_time <= ?) OR (start_time < ? AND start_time >= ?)", start_time, end_time, end_time, start_time)
+  }
 
   after_create :queue_booking_created_email
   after_create :queue_booking_reminder_email
@@ -52,10 +55,7 @@ class Booking < ApplicationRecord
   end
 
   def overlapping_bookings
-    Booking.where(
-      "room_id = ? AND ((end_time > ? AND end_time <= ?) OR (start_time < ? AND start_time >= ?))", 
-      room_id, start_time, end_time, end_time, start_time
-    )  
+    Booking.within(start_time, end_time).where(room: room)
   end
 
   def queue_booking_created_email

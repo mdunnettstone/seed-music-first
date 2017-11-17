@@ -71,6 +71,11 @@ p {
   text-decoration: underline;
 }
 
+.underline-mint {
+  text-decoration: underline;
+  text-decoration-color: $mint-dark;
+}
+
 .no-link a, no-link a:hover{
   color: $charcoal;
 }

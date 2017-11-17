@@ -9,7 +9,8 @@ class Post < ApplicationRecord
     'Bands --> Musicians': 'Bandseek',
     'Musicians --> Bands': 'Musicianseek',
     'Events': 'Event',
-    'Music recommendations': 'Music'
+    'Music recommendations': 'Music',
+    'Other': 'Other'
   }
 
   def humanized_category
