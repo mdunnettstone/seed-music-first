@@ -1,258 +1,277 @@
-<div class = "super-hero">
-  <div class = "mt-0">
-    <div class = "container">
-      <div class = "row">
-        <div class = "col-md-6">
-        </div>
-        <div class = "col-12 col-md-6 my-10 py-md-5 text-white frosty">
-          <div class = "col-12 mt-2">
-            <h1>Building musical communities in <strong>universities</strong> and <strong>workplaces</strong></h1>
-          </div>
-        </div>
-        <%= link_to "Trial our software", new_user_registration_path, class: "btn btn-pink col-8 offset-2 my-3" %>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Business / Uni Selector -->
 <div class = "row">
   <div class = "col-6 mx-0 text-center secondary-nav-btn btn btn-primary business-section-select "><span class = "content-align-middle">For businesses</span></div>
   <div class = "col-6 mx-0 text-center secondary-nav-btn btn btn-secondary university-section-select">For universities</div>
 </div>
-  <!-- The mission -->
+
 <div class = "business-section">
-  <div class = "background-white">
-    <div class = "row">
-      <div id="carouselExampleIndicators" class="carousel slide col-12" data-ride="carousel">
-        <div class="carousel-inner" role="listbox">
-          <div class="carousel-item active">
-            <div class = "col-12 background-yellow">
-              <div class = "container">
-                <div class = "row">
-                  <div class = "col-md-6 offset-md-3 py-3 px-3 text-center text-white">
-                    <h1>A <span class = "underline-pink">music practice room</span> in your office</h1>
-                    <%= image_tag("music-room-demo.jpg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class = "col-12 background-pink">
-              <div class = "container">
-                <div class = "row">
-                  <div class = "col-md-6 offset-md-3 text-center py-3 px-3 text-center text-white">
-                    <h1>A <span class = "underline-mint">musical community</span> built around it</h1>
-                    <%= image_tag("musician.jpg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %> 
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <!-- For businesses -->
+  <!-- Fixed header -->
+  <div class = "music-background">
+    <div class = "container py-5">
+      <div class = "row my-5">
+        <div class = "col-md-8 col-lg-6 background-pink py-4 mx-3">
+          <h1 class = "text-white">A <span class = "underline-mint">music practice room</span> in your office</h1>
+          <h4 class = "text-white">A <span class = "underline-mint">community</span> built around it</h4>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
       </div>
     </div>
   </div>
 
-  <div class = "clear"></div>
-  <div class = "px-2">
-    <div class = "container mt-3" id = "proposition-section">
-      <!-- Our proposition -->
-      <div class = "row">
-        <div class = "col-12 text-center">
-          <h1 class = "mega-title my-3 underline-mint"><strong>Our Proposition</strong></h1>
-        </div>
-
-        <div class = "row">
+  <!-- Good for business carousel -->
+  <div class = "">
+    <h1 class = "underline-mint mt-3 ml-2">Good for business</h1>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="carousel-item py-3 py-md-5 active background-mint">
           <div class = "col-12">
-            <div class = "row">
-              <div class = "col-12 booyah-box">
-                <h2 class = "mt-2"><span class = "numbered">1</span><strong> Great for business</strong></h2>
-                <div class = "row">
-                  <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
-                    <h3><strong>Productivity</strong></h3>
-                    <div class = "col-6 offset-3">
-                      <%= image_tag("productivity.svg") %>
-                    </div>
-                    <div class = "col-10 offset-1">
-                      <div class = "grey-box mt-3">
-                        Playing music does <strong>amazing things for the brain</strong>. It's the brain's equivalent of a full-body workout. Playing regularly makes employees <strong>more creative</strong> and more adept at <strong>problem solving</strong>.
-                      </div>
-                      <%= link_to 'Watch a 4-minute video', 'https://www.youtube.com/watch?v=R0JKCYZ8hng&feature=youtu.be', class: "btn btn-secondary col-12 mt-3", target: :_blank %> 
-                    </div>
-                  </div>
-                  <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
-                    <h3><strong>Retention</strong></h3>
-                    <div class = "col-6 offset-3">
-                      <%= image_tag("retention.svg") %>
-                    </div>
-                    <div class = "col-10 offset-1">
-                      <div class = "grey-box mt-3">
-                        Give your employees something amazing. Something they value and that creates a <strong>bond with both the workplace and their fellow employees</strong>. Also something <strong>your competitors don't have</strong>.
-                      </div>
-                    </div>
-                  </div>
-                  <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
-                    <h3><strong>Recruitment</strong></h3>
-                    <div class = "col-6 offset-3">
-                      <%= image_tag("recruitment.svg") %>
-                    </div>
-                    <div class = "col-10 offset-1">
-                      <div class = "grey-box mt-3">
-                        Connect with '000s of university students through our <strong>university partnership scheme</strong>. Our software serves '000s of students. Let them know about your amazing office.
-                        <%= link_to 'Our university scheme', unis_path, class: "btn btn-primary my-2" %>
-                      </div>
-                    </div>
-                  </div>
+            <div class = "container">
+              <div class = "row">
+                <div class = "col-md-4 offset-md-1">
+                  <%= image_tag("retention.svg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
                 </div>
-                <div class = "row">
-                  <div class = "col-12 text-center my-3">
-                    <div class = "btn btn-secondary col-6 toggle-why">See more</div>
-                  </div>
-                </div>
-                <div class = "why-further-information show-hide">
-                  <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center">
-                    <p>To learn more, please arrange a 15 minute meeting at your convenience by contacting <%= mail_to "hello@seedmusic.co.uk" %></p>
-                  </div>
+                <div class = "col-md-4 offset-md-1 background-pink mt-2 mt-md-0 text-center description-text">
+                  <h1 class = "text-white underline-yellow">Retention</h1>
+                  <p class = "text-white description-text">Places to play music are <strong>scarce</strong> in cities. Provide one for your employees and build a community around it which <strong class = "underline-mint">no-one wants to leave</strong>.</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class = "row my-3">
-          <div class = "col-12 booyah-box">
-            <h2 class = "mt-2"><span class = "numbered">2</span><strong> Easy set-up</strong></h2>
-            <div class = "row">
-              <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
-                <h3><strong>Kit-out</strong></h3>
-                <div class = "col-6 offset-3">
-                  <%= image_tag("kit-out.svg") %>
+        <div class="carousel-item py-3 py-md-5 background-yellow">
+          <div class = "col-12">
+            <div class = "container">
+              <div class = "row">
+                <div class = "col-md-4 offset-md-1">
+                  <%= image_tag("recruitment.svg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
                 </div>
-                <div class = "col-10 offset-1">
-                  <div class = "grey-box mt-3">
-                    We set-up an <strong>amazing music space</strong> in your office building, providing everything from piano and drums to soundproofing and stands.
-                  </div>
-                </div>
-              </div>
-              <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
-                <h3><strong>Software</strong></h3>
-                <div class = "col-6 offset-3">
-                  <%= image_tag("software.svg") %>
-                </div>
-                <div class = "col-10 offset-1">
-                  <div class = "grey-box mt-3">
-                    Our bespoke software makes it easy to <strong>find fellow musicians</strong> in the company and to <strong>book the room</strong> for a practice session with them.
-                  </div>
-                </div>
-              </div>
-              <div class = "col-12 col-md-4 text-center mt-4 mt-md-0">
-                <h3><strong>Service</strong></h3>
-                <div class = "col-6 offset-3">
-                  <%= image_tag("settings.svg") %>
-                </div>
-                <div class = "col-10 offset-1">
-                  <div class = "grey-box mt-3">
-                    We run <strong>social events</strong> to keep the community running, and provide <strong>technical assistance</strong> to keep the room running.
-                  </div>
+                <div class = "col-md-4 offset-md-1 background-purple mt-2 mt-md-0 text-center description-text">
+                  <h1 class = "text-white underline-mint">Recruitment</h1>
+                  <p class = "text-white">Be a creative office, attract creative talent. Plus, with our university scheme, you can tell the 000's of students who use our software about your amzing community.</p>
+                  <%= link_to unis_path do %>
+                    <div class = "btn btn-primary my-2">Our university scheme</div>
+                  <% end %>
                 </div>
               </div>
             </div>
-            <div class = "row">
-              <div class = "col-12 text-center my-3">
-                <div class = "btn btn-secondary col-6 toggle-what">See more</div>
-              </div>
-            </div>
-            <div class = "row ">
-              <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center show-hide what-further-information">
-                <p>To learn more, please arrange a 15 minute meeting at your convenience by contacting <%= mail_to "hello@seedmusic.co.uk" %></p>
+          </div>
+        </div>
+        <div class="carousel-item py-3 py-md-5 background-pink">
+          <div class = "col-12">
+            <div class = "container">
+              <div class = "row">
+                <div class = "col-md-4 offset-md-1">
+                  <%= image_tag("productivity.svg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
+                </div>
+                <div class = "col-md-4 offset-md-1 background-mint mt-2 mt-md-0 text-center description-text">
+                  <h1 class = "text-white underline-yellow">Productivity</h1>
+                  <p class = "text-white">Playing music does amazing things for the brain. It's the mental equivalent of a full-body workout. Playing regularly makes employees more creative and more adept at problem-solving.</p>
+                  <%= link_to 'https://www.youtube.com/watch?v=R0JKCYZ8hng&feature=youtu.be' do %>
+                    <div class = "btn btn-yellow my-2">Watch a 4-minute TED talk</div>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Easy set up carousel -->
+  <div class = "">
+    <h1 class = "underline-mint mt-3 ml-2">Easy to get started</h1>
+    <div id="SecondCarouselIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#SecondCarouselIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#SecondCarouselIndicators" data-slide-to="1"></li>
+        <li data-target="#SecondCarouselIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="carousel-item py-3 py-md-5 active background-yellow">
+          <div class = "col-12">
+            <div class = "container">
+              <div class = "row">
+                <div class = "col-md-4 offset-md-1">
+                  <%= image_tag("kit-out.svg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
+                </div>
+                <div class = "col-md-4 offset-md-1 background-purple mt-2 mt-md-0 text-center description-text">
+                  <h1 class = "text-white underline-pink">Kit-out</h1>
+                  <p class = "text-white">We set-up an <strong>amazing music space</strong> in your office building, providing everything from piano and drums to soundproofing and stands.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item py-3 py-md-5 background-mint">
+          <div class = "col-12">
+            <div class = "container">
+              <div class = "row">
+                <div class = "col-md-4 offset-md-1">
+                  <%= image_tag("software.svg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
+                </div>
+                <div class = "col-md-4 offset-md-1 background-pink mt-2 mt-md-0 text-center description-text">
+                  <h1 class = "text-white underline-yellow">Software</h1>
+                  <p class = "text-white">Our bespoke software makes it easy to <strong>find fellow musicians</strong> in the company and to <strong>book the room</strong> for a practice session with them.</p>
+                  <%= link_to new_user_registration_path do %>
+                    <div class = "btn btn-yellow my-2">Trial our software</div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item py-3 py-md-5 background-purple">
+          <div class = "col-12">
+            <div class = "container">
+              <div class = "row">
+                <div class = "col-md-4 offset-md-1">
+                  <%= image_tag("service.svg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
+                </div>
+                <div class = "col-md-4 offset-md-1 background-yellow mt-2 mt-md-0 text-center description-text">
+                  <h1 class = "text-white underline-pink">Service</h1>
+                  <p class = "text-white">We run <strong>social events</strong> to keep the community running, and provide <strong>technical assistance</strong> to keep the room running.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#SecondCarouselIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#SecondCarouselIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div> <!-- End of business section -->
+
+<!-- University section -->
+<div class = "university-section show-hide">
+  <div class = "uni-background">
+    <div class = "container py-5">
+      <div class = "row my-5">
+        <div class = "col-md-8 col-lg-6 background-pink py-4 mx-3">
+          <h1 class = "text-white">Fantastic music room booking software</h1>
+          <h4 class = "text-white">For <span class = "badge badge-info">FREE</span>, for ever</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class = "">
+    <h1 class = "underline-mint mt-3 ml-2">Our software</h1>
+    <div id="UniCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#UniCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#UniCarousel" data-slide-to="1"></li>
+        <li data-target="#UniCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="carousel-item py-3 py-md-5 active background-yellow">
+          <div class = "col-12">
+            <div class = "container">
+              <div class = "row">
+                <div class = "col-md-4 offset-md-1">
+                  <%= image_tag("target.svg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
+                </div>
+                <div class = "col-md-4 offset-md-1 background-purple mt-2 mt-md-0 text-center description-text">
+                  <h1 class = "text-white underline-pink">Beautiful room booking</h1>
+                  <p class = "text-white">Our software makes room booking sleek and simple. Book by yourself or as a group. Includes useful features like email reminders and 'add to calender'</p>
+                  <%= link_to new_user_registration_path do %>
+                    <div class = "btn btn-primary my-2">Trial our software</div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item py-3 py-md-5 background-mint">
+          <div class = "col-12">
+            <div class = "container">
+              <div class = "row">
+                <div class = "col-md-4 offset-md-1">
+                  <%= image_tag("software.svg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
+                </div>
+                <div class = "col-md-4 offset-md-1 background-pink mt-2 mt-md-0 text-center description-text">
+                  <h1 class = "text-white underline-yellow">Community focused</h1>
+                  <p class = "text-white">Create a brief musical profile on sign up. Discover other musicians at your university. Form more bands. Build a better community.</p>
+                  <%= link_to new_user_registration_path do %>
+                    <div class = "btn btn-yellow my-2">Trial our software</div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item py-3 py-md-5 background-purple">
+          <div class = "col-12">
+            <div class = "container">
+              <div class = "row">
+                <div class = "col-md-4 offset-md-1">
+                  <%= image_tag("rocket.svg", class: "img-fluid rounded", height: 'auto', max_width: '100%') %>
+                </div>
+                <div class = "col-md-4 offset-md-1 background-yellow mt-2 mt-md-0 text-center description-text">
+                  <h1 class = "text-white underline-pink">Always improving</h1>
+                  <p class = "text-white">We want to be a brilliant musical hub, which forms the heart of your university community. We committed to continual improvement, with your input.</p>
+                  <%= link_to new_user_registration_path do %>
+                    <div class = "btn btn-pink my-2">Trial our software</div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#UniCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#UniCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div> <!-- End of uni section -->
+
+<!-- Generic section -->
+<div class = "">
+  <div class = "container mb-3">
+    <div class = "row">
+      <div class = "col-10 offset-1 col-md-6 offset-md-3 text-center">
+        <h1 class = "underline-mint mt-3 ml-2">The mission</h1>
+        <h3 class = ""><span class = "text-mint">The problem:</span> People stop playing music when they leave education and start working</h3>
+        <h3 class = ""><span class = "text-pink">The solution:</span> Build more and stronger musical communities in universities and the workplace</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class = "background-charcoal pt-3 text-center">
+    <div class = "container">
+      <h1 class = "text-white underline-yellow">Get in touch</h1>
+      <h6 class = "text-white">Drop us an email to arrange a 15 minute discussion</p>
+      <p class = "text-muted">We've even pre-drafted one for you</p>
+      <%= mail_to "hello@seedmusic.co.uk", "Get in touch", subject: "Seed Music - introductory discussion", class: "btn btn-pink my-2" %>
     </div>
   </div>
 </div>
 
-<div class = "university-section show-hide">
-  <div class = "background-white">
-    <div class = "container">
-      <div class = "row text-center">
-        <div class = "col-12 col-md-8 offset-md-2 py-3">
-          <h1 class = "mega-title">Amazing software for your music community</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class = "pt-3 px-2 my-3">
-    <div class = "container">
-      <div class = "row">
-        <div class = "col-12">
-          <h1 class = "mega-title"><strong>University Scheme</strong></h1>
-        </div>
-        <div class = "col-12">
-          <div class = "row">
-            <div class = "col-12 booyah-box">
-              <div class = "row">
-                <div class = "col-12 col-md-4 text-center">
-                  <h3 class = "my-3"><strong>We're on a mission</strong></h3>
-                  <div class = "col-6 offset-3">
-                    <%= image_tag("target.svg") %>
-                  </div>
-                  <div class = "col-10 offset-1">
-                    <div class = "grey-box mt-3">
-                      <p>Music participation drops during university years and dramatically beyond them. We want to help build communities that people want to stay a part of, at university and beyond.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class = "col-12 col-md-4 text-center">
-                  <h3 class = "my-3"><strong>We've built some amazing software</strong></h3>
-                  <div class = "col-6 offset-3">
-                    <%= image_tag("software.svg") %>
-                  </div>
-                  <div class = "col-10 offset-1">
-                    <div class = "grey-box mt-3">
-                      <p>We’ve built feature-rich software for booking music rooms, meeting other musicians and forming bands. It’s secure, flexible and designed for universities</p>
-                      <%= link_to "View demo software", new_user_registration_path, class: "btn btn-yellow mb-3" %>
-                    </div>
-                  </div>
-                </div>
-                <div class = "col-12 col-md-4 text-center">
-                  <h3 class = "my-3"><strong>We'd like to offer it to you <span class = "badge badge-info">FREE</span></strong></h3>
-                  <div class = "col-6 offset-3">
-                    <%= image_tag("rocket.svg") %>
-                  </div>
-                  <div class = "col-10 offset-1">
-                    <div class = "grey-box mt-3">
-                      <p>Because universities are so crucial to the mission, we’d like to offer it to you, for free, forever</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class = "row">
-                <!-- <div class = "col-12 text-center my-3"> -->
-                  <!-- <%= link_to 'Download our brochure', '#', class: "btn btn-primary my-2" %> -->
-                <!-- </div> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class = "container">
-  <div class = "row">
-    <%= mail_to "hello@seedmusic.co.uk", "Get in touch", class: "btn btn-pink text-center col-md-6 offset-md-3 my-2" %>
-  </div>
-</div>
 <script>
 // var ctx = document.getElementById('musicParticipationChart').getContext('2d');
 // var chart = new Chart(ctx, {
