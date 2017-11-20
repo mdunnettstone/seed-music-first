@@ -14,7 +14,7 @@
             <div class = "my-1"><a class = "room-search-toggle text-white" href = "#">+ Search by room</a></div>
             <span class = "room-search show-hide">
             <h3 class = "my-0"><span class = "badge">Rooms</span></h3>
-              <%= select_tag "room_ids", options_from_collection_for_select(@rooms, :id, :name), multiple: true, :class => "multiselect" %>
+              <%= select_tag "room_ids", options_from_collection_for_select(@rooms, :id, :name), multiple: true, class: "multiselect col-12" %>
             </span>
             <%= submit_tag "Search", class: "btn btn-primary col form-button d-inline my-1" %>
           <% end %>

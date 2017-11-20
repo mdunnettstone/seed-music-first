@@ -323,12 +323,8 @@
 // });
 
 $(function() {
-  $(".toggle-what").click(function(){
-    $(".what-further-information").slideToggle();
-  });
-
-  $(".toggle-why").click(function(){
-    $(".why-further-information").slideToggle();
+  $('.carousel').carousel({
+    interval: 15000
   });
 
   $(".business-section-select").click(function () {
