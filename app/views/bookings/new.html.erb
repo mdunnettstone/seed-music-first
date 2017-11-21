@@ -30,7 +30,7 @@
         <div class = "booyah-box py-2">
           <% @rooms.each do |room| %>
           <div class = "row">
-            <h4 class = "ml-4 no-link" data-toggle="tooltip" data-html="true" title=<%= "Capacity:&nbsp#{room.capacity}" %>><%= link_to room.name, room_path(room), target: :_black %></h4>
+            <h4 class = "ml-4 no-link" data-toggle="tooltip" data-html="true" title=<%= "Capacity:&nbsp#{room.capacity}" %>><%= link_to room.name, room_path(room), target: :_blank %></h4>
             <div class = "col-12">
               <div class = "mb-3">
                 <ul class = "slot-list" id = "slot-list">
