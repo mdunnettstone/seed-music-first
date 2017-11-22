@@ -38,10 +38,10 @@
   });
 
   $(function() {
-    $('.multiselect').multiselect({
-      enableFiltering: true,
-      enableCaseInsensitiveFiltering: true
-    });
+    // $('.multiselect').multiselect({
+    //   enableFiltering: true,
+    //   enableCaseInsensitiveFiltering: true
+    // });
     // initial starting index depends on number of fields on the page
     var instrumentIndex = $('.instrument_field').length - 1;
 
@@ -68,6 +68,12 @@
         newFor = $(this).attr("for").replace(/0/g, instrumentIndex);
         $(this).attr("for", newFor);
       });
+
+      //Enable multiselect on new fields
+      // $('.multiselect').multiselect({
+      //   enableFiltering: true,
+      //   enableCaseInsensitiveFiltering: true
+      // });
 
       return false;
     });
