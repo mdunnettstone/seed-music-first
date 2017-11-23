@@ -80,3 +80,5 @@ gem 'sweet-alert2-rails'
 gem 'sidekiq'
 
 gem 'icalendar'
+
+gem 'fog-aws'
