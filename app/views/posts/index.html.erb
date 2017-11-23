@@ -1,12 +1,10 @@
-<div class = "room-user-hero">
+<div class = "hero">
   <div class = "container">
-    <div class = "row py-3 box-transparent">
-      <div class = "col-12">
-        <div  class = "col-9 col-md-10 float-left">
-          <h1 class = "text-mint">The forum</h1>
-          <h3>Post to find bandmates, events or amazing music of any genre!</h3>
-        </div>
-        <button type="button" class="btn btn-primary float-right my-2" data-toggle="modal" data-target="#NewPostModal">
+    <div class = "row">
+      <div class = "col-12 my-2 background-pink">
+        <h1 class = "text-yellow">The forum</h1>
+        <h3 class = "text-white">Post to find bandmates, events or amazing music of any genre!</h3>
+        <button type="button" class="btn btn-primary col-12 mb-2" data-toggle="modal" data-target="#NewPostModal">
           <i class="fa fa-plus" aria-hidden="true"></i> New post
         </button>
       </div>
@@ -16,7 +14,7 @@
       <div class = "col-12 my-2 text-center">
         <%= form_tag(posts_path, method: :get, class: "col-12 d-inline" ) do %>
           <%= text_field_tag :text, params[:message], placeholder: "Search posts by content" %>
-          <p class = "d-inline ml-2">Category:</p>
+          <p class = "d-inline ml-2 text-white">Category:</p>
             <%= select_tag :categories, options_for_select({:All => nil}.merge(Post::CATEGORIES), :selected => params[:categories]) %>
           <%= submit_tag "Search", class: "btn btn-primary mb-1" %>
         <% end %>

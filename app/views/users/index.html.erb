@@ -1,41 +1,35 @@
-<div class = "room-user-hero">
-  <div class = box-transparent>
-    <div class = "container">
-      <div class = "row">
-        <div class = "col-12 col-md-6">
-          <h1 class = "text-mint">Find other musicians!</h1>
-          <h5 class = "text-purple"><strong>Search or filter</strong> by instrument and genre</h5>
-        </div>
-      </div>
-    </div>
-    <div class = "container">
-      <div class="btn btn-secondary col-10 offset-1 toggle-search mt-2"><i class="fa fa-filter" aria-hidden="true"></i> Filter</div>
-      <div class = "search-and-filter show-hide">
-        <div class = "row mb-2">
-          <%= form_tag(users_path, method: :get, class: "col-12" ) do %>
-            <%= text_field_tag :name, params[:name], placeholder: "Search users by name", class: "col-12 col-md-4 mt-2 mx-0" %>
-            <p class = "mb-0 mt-2">Instrument: </p>
-            <div class = "col-6 col-md-3 my-2 mx-0">
-              <%= select_tag :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name, params[:instrument_id]), multiple: true, class: "multiselect" %>
-            </div>
-            <p class = "mb-0 mt-2">Genre: </p>
-            <div class = "col-6 col-md-3 my-2 mx-0">
-            <%= select_tag :genre_id, options_from_collection_for_select(Genre.all, :id, :name, params[:genre_id]), multiple: true, :class => "multiselect" %>
-            </div>
-            <%= submit_tag "Search", class: "btn btn-primary col-12 col-md-2 mt-2" %>
-          <% end %>
-        </div>
-      </div>
-      <div class = "col-12">
-        <hr class = "mt-2 mb-4">
-      </div>
-    </div>
-  </div>
+<div class = "hero">
   <div class = "container">
     <div class = "row">
+      <div class = "col-12 my-2 background-pink">
+        <h1 class = "text-yellow">Find other musicians!</h1>
+        <h5 class = "text-white"><strong>Search or filter</strong> by instrument and genre</h5>
+        <div class="btn btn-secondary col-10 offset-1 toggle-search mt-2"><i class="fa fa-filter" aria-hidden="true"></i> Filter</div>
+        <div class = "search-and-filter show-hide">
+          <div class = "row mb-2">
+            <%= form_tag(users_path, method: :get, class: "col-12" ) do %>
+              <%= text_field_tag :name, params[:name], placeholder: "Search users by name", class: "col-12 col-md-4 mt-2 mx-0" %>
+              <p class = "mb-0 mt-2 text-white">Instrument: </p>
+              <div class = "col-6 col-md-3 my-2 mx-0">
+                <%= select_tag :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name, params[:instrument_id]), multiple: true, class: "multiselect" %>
+              </div>
+              <p class = "mb-0 mt-2 text-white">Genre: </p>
+              <div class = "col-6 col-md-3 my-2 mx-0">
+              <%= select_tag :genre_id, options_from_collection_for_select(Genre.all, :id, :name, params[:genre_id]), multiple: true, :class => "multiselect" %>
+              </div>
+              <%= submit_tag "Search", class: "btn btn-primary col-12 col-md-2 mt-2" %>
+            <% end %>
+          </div>
+        </div>
+        <div class = "col-12">
+          <hr class = "mt-2 mb-4">
+        </div>
+      </div>
+    </div>
+    <div class = "row">
       <% @users.each do |user| %>
-        <div class = "col-md-6 mb-5">
-          <div class = "booyah-box col-10 offset-1 px-0">
+        <div class = "col-md-4 mb-5">
+          <div class = "booyah-box col-12 px-0">
             <%= link_to user_path(user) do %>
               <div class = "top-half-booyah-box mx-0 text-center">
                 <% if user.avatar.present? %>
