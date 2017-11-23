@@ -66,6 +66,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       :firstname,
       :surname,
       :description,
+      :avatar,
       :user_instruments_attributes => [:instrument_id, :genre_id]
     ])
   end
@@ -76,6 +77,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       :firstname,
       :surname,
       :description,
+      :avatar,
       :user_instruments_attributes => [:instrument_id, :genre_id]
     ])
   end
