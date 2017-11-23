@@ -46,11 +46,11 @@
                 <a class="nav-link dropdown-toggle" href="#" role="button" id="CommunityDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-users" aria-hidden="true"></i> Community
                 </a>
-                <div class="dropdown-menu" aria-labelledby="CommunityDropdownMenuLink">
-                  <%= link_to users_path, class: "dropdown-item" do %>
+                <div class="dropdown-menu background-pink" aria-labelledby="CommunityDropdownMenuLink">
+                  <%= link_to users_path, class: "dropdown-item text-white" do %>
                     <i class="fa fa-user-circle" aria-hidden="true"></i> People
                   <% end %>
-                  <%= link_to posts_path, class: "dropdown-item" do %>
+                  <%= link_to posts_path, class: "dropdown-item text-white" do %>
                     <i class="fa fa-comments" aria-hidden="true"></i> Forum
                   <% end %>
                 </div>
@@ -67,21 +67,21 @@
                 <a class="nav-link dropdown-toggle" href="#" role="button" id="ProfileDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-smile-o" aria-hidden="true"></i> &nbsp<%= current_user.firstname %>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="ProfileDropdownMenuLink">
-                  <%= link_to user_path(current_user), class: "dropdown-item" do %>
+                <div class="dropdown-menu background-mint" aria-labelledby="ProfileDropdownMenuLink">
+                  <%= link_to user_path(current_user), class: "dropdown-item text-white" do %>
                     <i class="fa fa-user" aria-hidden="true"></i> Profile
                   <% end %>
-                  <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+                  <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item text-white" do %>
                     <i class="fa fa-sign-out" aria-hidden="true"></i> Sign out
                   <% end %>
                 </div>
               </li>
             <% else %>
               <li class="nav-item">
-                <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
+                <%= link_to 'Sign in', new_user_session_path, class: 'nav-link text-white' %>
               </li>
               <li class="nav-item">
-                <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+                <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link text-white' %>
               </li>
               <li class = "nav-item">
                 <%= mail_to "hello@seedmusic.co.uk" do %>

@@ -25,7 +25,7 @@
   </div>
 
   <div class = "row">
-    <div class = "col-12 col-md-8 offset-md-2">
+    <div class = "col-12">
       <div class = "first-section">
         <div class = "booyah-box py-2">
           <% @rooms.each do |room| %>
@@ -344,7 +344,7 @@ $(function () {
         swal("Booking confirmed!", "We'll show you your booking details now", "success")
       },
       error: function(data) {
-        swal("Bad request!", data.errors, "warning")
+        swal("Bad request!", "This is an invalid booking", "warning")
       }
     });
   });
