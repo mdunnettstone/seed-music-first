@@ -1,30 +1,28 @@
-<h1 class = "ml-3">Edit your profile</h1>
+<div class = "col-10 offset-1 col-md-6 col-lg-4 offset-md-3 offset-lg-4 pt-3 mb-5">
+  <h1 class = "text-mint">Edit your profile</h1>
+  <div class = "booyah-box px-1 py-1">
+    <%= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+      <div class = "first-section">
+        <div class="form-inputs">
+          <h2>Your details</h2>
+          <%= f.error_notification %>
+            <%= f.input :firstname, required: true, autofocus: true %>
+            <%= f.input :surname, required: true, autofocus: true %>
+            <%= f.input :email, required: true, autofocus: true, hint: "Use your work one" %>
+            <%= f.input :avatar %>
+        </div>
+      </div> <!-- first section -->
+      <div class = "btn btn-primary continue my-2">Continue</div>
 
-<div class = "booyah-box col-10 offset-1 col-md-6 col-lg-4 offset-md-3 offset-lg-4 pt-3 mb-5">
-  <%= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
-    <div class = "first-section">
-      <div class="form-inputs">
-        <h2>Your details</h2>
-        <%= f.error_notification %>
-          <%= f.input :firstname, required: true, autofocus: true %>
-          <%= f.input :surname, required: true, autofocus: true %>
-          <%= f.input :email, required: true, autofocus: true, hint: "Use your work one" %>
-          <%= f.input :avatar %>
-      </div>
-    </div> <!-- first section -->
-    <div class = "btn btn-primary continue my-2">Continue</div>
-
-    <div class = "second-section">
-       
-      <%= render "user_instrument_form_fields", form: f, include_remove: true %>
-        
-
-      <div class = "clear"></div>
-      <div class="form-actions">
-        <%= f.submit "Update my profile", class: "btn btn-primary col-12" %>
-      </div>
-    </div> <!-- second section -->
-  <% end %>
+      <div class = "second-section">
+        <%= render "user_instrument_form_fields", form: f, include_remove: true %>
+        <div class = "clear"></div>
+        <div class="form-actions">
+          <%= f.submit "Update my profile", class: "btn btn-primary col-12" %>
+        </div>
+      </div> <!-- second section -->
+    <% end %>
+  </div>
 </div>
 <br />
 <br />

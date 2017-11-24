@@ -1,7 +1,11 @@
-<div class = "container">
+<div class = "container my-3">
   <div class = "row">
-    <h2 class = "col-12">Admin dashboard</h2>
-    <h4 class = "col-12">Admin privileges</h5>
+    <div class = "col-12 my-2 background-pink">
+      <h1 class = "text-yellow">Admin dashboard</h1>
+      <h5 class = "text-white">Manage rooms, bookings and user access</h5>
+    </div>
+  </div>
+  <div class = "row">
     <div class = "col-12 col-sm-6 col-md-4">
       <h6>Rooms</h6>
       <%= link_to new_admin_room_path, class: "btn btn-primary mb-2 col-12" do %>
@@ -28,7 +32,7 @@
 
 <hr />
 
-<div class = "container">
+<div class = "container my-3">
   <div class = "row">
     <h4 class = "col-12">Usage statistics</h4>
     <div class = "col-6 col-md-4">
