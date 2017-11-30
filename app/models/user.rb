@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  belongs_to :account
   has_many :user_instruments, inverse_of: :user, dependent: :destroy
   has_many :user_comments
   has_many :user_bookings, dependent: :destroy

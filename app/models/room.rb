@@ -1,4 +1,5 @@
 class Room < ApplicationRecord
+  belongs_to :account
   has_many :bookings
   has_many :room_comments
   has_many :room_facilities
