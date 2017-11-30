@@ -98,6 +98,10 @@
           <%= link_to 'Book!', '#', class: "btn btn-pink update-test col-12 mt-0", id: current_user.id %>
         </span>
         <div class = "col-12">
+          <ul id = "errors">
+          </ul>
+        </div>
+        <div class = "col-12">
           <hr class = "mt-1 mb-0"/>
         </div>
         <div class = "col-12 col-md-6 mt-1 mt-md-1">
@@ -298,7 +302,8 @@ $(function () {
   }
 
   //Creates new booking and updates booking id of all selected roomTimeslots
-  $('.update-test').click(function() {
+  $('.update-test').click(function(evt) {
+    evt.preventDefault();
     //find all selected users
     var selectedUsers = $("div.second-section").find(".active-user");
     var selectedUserIdsDOM = selectedUsers.map(function(){
@@ -325,11 +330,12 @@ $(function () {
     var selectedDateStart = selectedDates[0];
     var selectedDateEnd = selectedDates[selectedDates.length -1];
     var selectedRoom = ($(slots[0]).data("roomid"));
-
+     
     $.ajax({
       type: "POST",
       beforeSend: function(xhr) {
-        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        $('#errors').html('');
       },
       url: "/bookings",
       data: {
@@ -344,7 +350,10 @@ $(function () {
         swal("Booking confirmed!", "We'll show you your booking details now", "success")
       },
       error: function(data) {
-        swal("Bad request!", "This is an invalid booking", "warning")
+        $.each(data.responseJSON.errors, function(index, error){
+          $('#errors').append("<li>" + error + "</li>")
+        });
+        $('#errors').toggle("highlight");
       }
     });
   });

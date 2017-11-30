@@ -36,6 +36,7 @@ class BookingsController < ApplicationController
     booking.users << current_user
     booking.assign_attributes(creator_user_id: current_user.id)
     if booking.save
+      flash[:notice] = "Booking created successfully"
       redirect_to booking_path(booking)
     else
       render json: {:errors => booking.errors.full_messages}, :status => :unprocessable_entity
