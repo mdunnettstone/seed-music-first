@@ -1,13 +1,68 @@
-<div class = "container">
-  <div class = "row">
-    <div class = "col-12">
-      <h1>Would you like a music practice room in your office?</h1>
-      <p>A load of text about why you really should</p>
+<!-- First section -->
+<div class = "background-pink">
+  <div class = "container pt-3 pt-md-5">
+    <div class = "row py-2 py-md-3">
+      <div class = "col-12 col-md-8">
+        <h1 class = "text-white display-4">Would you like a <strong class = "underline-yellow" data-toggle="tooltip" data-placement="bottom" title="Soundproofed, of course, and kitted out with everything you need">music practice room</strong> in your office? <span class = "badge badge-info">FREE</span></h1>
+      </div>
+      <div class = "col-12 col-md-4 text-center">
+        <h1 class = "text-mint"><%= image_tag("cityscape.svg", class: "py-3 my-3 pr-2", height: '100') %> + <%= image_tag("SM_Logo.svg", class: "py-3 my-3", height: '100') %></h1>
+      </div>
+      <div class = "col-10 offset-1 col-md-6 offset-md-3">
+        <div class = "col-12">
+          <div class = "btn btn-primary col-12 mt-3 mt-md-5" data-toggle="modal" data-target="#interestedUserModal">Yes please!</div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class = "row">
-    <div class = "col-12">
-      <div class = "btn btn-pink float-bottom-right" data-toggle="modal" data-target="#interestedUserModal">Yes please!</div>
+</div>
+
+<!-- Second section -->
+<div class = "">
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-12 col-md-6">
+        <%= image_tag("music-room-demo.jpg", class: "py-3 img img-fluid") %>
+      </div>
+      <div class = "col-md-6 my-3 background-purple text-center">
+        <h1 class = "text-white my-4">Seed Music is here to help.</h1>
+        <h4 class = "text-yellow my-4">This is what we do</h4>
+        <div class = "col-10 offset-1 col-md-6 offset-md-3">
+          <div class = "col-12">
+            <div class = "btn btn-pink col-12 mt-3 mt-md-5 mb-2" data-toggle="modal" data-target="#interestedUserModal">Wonderful!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Third section -->
+<div class = "background-mint">
+  <div class = "container">
+    <div class = "row">
+      <h1 class = "text-center text-white display-4 mt-3 mb-4">We want to find the most musical offices</h1>
+      <div class = "col-md-6">
+        <h6 class = "text-white underline-yellow"># Registered musicians, by company</h6>
+        <%= bar_chart [["???", 222], ["??", 104], ["?", 99]], colors: ["rgba(250, 188, 15, 1)"], library: {legend: {position: "left"}} %>
+        <div class = "col-12">
+          <div class = "btn btn-pink col-12 my-2" data-toggle="modal" data-target="#interestedUserModal">Where does your company rank?</div>
+        </div>
+      </div>
+      <div class = "col-md-6">
+        <div class = "row">
+          <div class = "col-10 offset-1 background-pink my-2">
+            <h3 class = "text-center text-white mt-2">Register your interest</h3>
+            <p class = "text-white">Our rooms make the biggest difference in offices where there are the most musicians or aspiring musicians.</p>
+            <p class = "text-white">Let us know you're interested with just your work email, and share with your colleagues. We'll try our hardest to make it happen at the companies topping the leaderboard.</p>
+            <div class = "col-10 offset-1 col-md-6 offset-md-3">
+              <div class = "col-12">
+                <div class = "btn btn-yellow col-12 mb-2" data-toggle="modal" data-target="#interestedUserModal">Sign me up!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -25,15 +80,27 @@
       </div>
       <%= simple_form_for @interested_user do |f| %>
         <div class="modal-body">
-          <%= f.input :email %>
-          <%= f.input :postcode %>
-
+          <%= f.input :email, hint: "Use your work one so we know which company you're from (we never share data)" %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <%= f.submit "Count me in!", class: "btn btn-primary" %>
+          <%= f.submit "Count me in & view leaderboard", class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  $(function() {
+    $('.carousel').carousel({
+      interval: 15000
+    });
+    function testScroll(ev){
+      if (window.pageYOffset>400) {
+        $(".change-button").addClass("btn-yellow");
+      };
+    }
+    window.onscroll=testScroll
+  });
+</script>

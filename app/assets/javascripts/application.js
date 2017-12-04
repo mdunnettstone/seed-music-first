@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require sweetalert2
 //= require sweet-alert2-rails
+//= require Chart.bundle
+//= require chartkick
+//= require social-share-button
 //= require turbolinks
 //= require tether
 //= require bootstrap-sprockets
