@@ -6,4 +6,11 @@ class ApplicationController < ActionController::Base
       render plain: 'Unauthorized', status: :unauthorized
     end
   end
+
+  helper_method :current_account
+  def current_account
+    return unless request.subdomain(1).present?
+    return if request.subdomain(1) == "www"
+    @current_account ||= Account.find_by(subdomain: request.subdomain(1))
+  end
 end

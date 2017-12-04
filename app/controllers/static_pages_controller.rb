@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
-    if current_user.present?
-      redirect_to home_path
+    if current_user.present?  
+      redirect_to home_url(subdomain: current_user.account.subdomain)
     end
   end
 

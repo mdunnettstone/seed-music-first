@@ -2,6 +2,7 @@ class Booking < ApplicationRecord
   has_many :user_bookings, dependent: :destroy
   has_many :users, through: :user_bookings
   belongs_to :room
+  belongs_to :account
 
   validates :start_time, presence: true
   validates :end_time, presence: true

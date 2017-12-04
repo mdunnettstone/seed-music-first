@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
+  belongs_to :account
   has_many :post_replies
   validates :category, presence: true
   validates :title, presence: true

@@ -7,16 +7,16 @@ class Admin::RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.create(room_params)
+    @room = current_account.rooms.create(room_params)
     redirect_to new_admin_room_room_facility_path(@room)
   end
 
   def edit
-    @room = Room.find_by_id(params[:id])
+    @room = current_account.rooms.find_by_id(params[:id])
   end
 
   def update
-    @room = Room.find_by_id(params[:id])
+    @room = current_account.rooms.find_by_id(params[:id])
     @room.update_attributes(room_params)
     redirect_to room_path(@room)
   end
