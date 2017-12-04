@@ -1,16 +1,20 @@
-# As per https://github.com/ryanb/railscasts-episodes/issues/12
-require 'no_subdomain'
-require 'has_subdomain'
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   constraints(NoSubdomain) do
     root 'static_pages#home'
     get "/unis", :controller => "static_pages", :action => "unis"
     get "/download_uni_doc", :controller => "static_pages", :action => "download_uni_doc"
+
+    # Interested Users
+    get "/yes", :controller => "interested_users", :action => "new"
+    resources :interested_users, only: [:create]
+    get "/leaderboard", :controller => "interested_users", :action => "index"
   end
 
   constraints(HasSubdomain) do
+    root 'bookings#home'
     devise_for :users, :controllers => { registrations: 'users/registrations' }
+    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
     resources :rooms, only: [:show, :index] do
       resources :room_comments, only: :create
     end
@@ -39,6 +43,7 @@ Rails.application.routes.draw do
     get "/home", :controller => "bookings", :action => "home"
     get "users/validation/check_email", :controller => "users", :action => "check_email"
   end
+  
   require 'sidekiq/web'
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'

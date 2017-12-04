@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_account
   def current_account
-    @current_account ||= Account.find_by(subdomain: request.subdomain)
+    return unless request.subdomain(1).present?
+    return if request.subdomain(1) == "www"
+    @current_account ||= Account.find_by(subdomain: request.subdomain(1))
   end
 end

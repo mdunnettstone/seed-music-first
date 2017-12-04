@@ -3,7 +3,7 @@ class Admin::RoomFacilitiesController < ApplicationController
   before_action :authenticate_is_admin
 
   def new
-    @room = Room.find_by_id(params[:room_id])
+    @room = current_account.rooms.find_by_id(params[:room_id])
     @current_facilities = @room.facilities.all
     @room_facility = RoomFacility.new
   end

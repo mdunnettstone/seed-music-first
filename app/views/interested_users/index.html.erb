@@ -1,0 +1,19 @@
+<div class = "background-pink">
+  <div class = "container py-3 py-md-5">
+    <div class = "row py-2 py-md-3">
+      <div class = "col">
+        <h1 class = "text-white display-3">Current leaderboard</h1>
+        <h3 class = "text-white">Share with colleagues to move your company up!</h3>
+        <%= social_share_button_tag("Let's get a music room in our office!", :allow_sites => %w(email linkedin twitter), :url => "http://www.seedmusic.co.uk/yes", :image => "http://seedmusic.co.uk/images/music-room-demo.jpg", desc: "Seed Music are searching for the most musical offices in the UK. They want to provide music practice rooms where the demand is greatest. Let's get our company up the rankings!") %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class = "container">
+  <div class = "row mt-3">
+    <div class = "col-12">
+      <h1>The most musical companies, so far</h1>
+      <%= bar_chart @interested_users.group(:company).count.sort, colors: ["#4bc2a2"] %>
+    </div>
+  </div>
+</div>

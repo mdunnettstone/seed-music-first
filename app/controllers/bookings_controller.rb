@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
     @bookings = current_user.bookings.where("(start_time > ?)", Time.now).sort_by{|booking| booking.start_time}
     @prepopulated_search = rounded_datetime(Time.now + 1.hour)
     @genre = current_user.user_instruments.sample.genre
-    @relevant_users = User.search(:genre_id => @genre.id).where.not(id: current_user.id)
+    @relevant_users = current_account.users.search(:genre_id => @genre.id).where.not(id: current_user.id)
   end
 
   def new
@@ -18,7 +18,7 @@ class BookingsController < ApplicationController
     @searched_start_time = rounded_datetime(parsed_datetime)
 
 
-    @rooms = Room.order(:id)
+    @rooms = current_account.rooms.order(:id)
     if params[:room_ids].present?
       @rooms = @rooms.where(id: params[:room_ids])
     end
@@ -27,14 +27,14 @@ class BookingsController < ApplicationController
     search_end           = @searched_start_time + 90.minute
     
     @timeslots           = build_room_times(search_start, search_end)
-    @bookings            = Booking.within(search_start, search_end)
-    @users               = User.where.not(id: current_user.id)
+    @bookings            = current_account.bookings.within(search_start, search_end)
+    @users               = current_account.users.where.not(id: current_user.id)
   end
 
   def create
     booking = Booking.new(booking_params)
     booking.users << current_user
-    booking.assign_attributes(creator_user_id: current_user.id)
+    booking.assign_attributes(creator_user_id: current_user.id, account: current_account)
     if booking.save
       flash[:notice] = "Booking created successfully"
       redirect_to booking_path(booking)
@@ -44,7 +44,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = Booking.find_by_id(params[:id])
+    @booking = current_account.bookings.find_by_id(params[:id])
     respond_to do |format|
       format.html
       format.ics do 

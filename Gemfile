@@ -82,3 +82,7 @@ gem 'sidekiq'
 gem 'icalendar'
 
 gem 'fog-aws'
+
+gem 'chartkick'
+
+gem 'social-share-button'

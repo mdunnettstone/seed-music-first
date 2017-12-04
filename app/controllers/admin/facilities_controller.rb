@@ -7,7 +7,7 @@ class Admin::FacilitiesController < ApplicationController
   end
 
   def create
-    @facility = Facility.create(facility_params)
+    @facility = current_account.facilities.create(facility_params)
     redirect_to root_path
   end
 
