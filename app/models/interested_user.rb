@@ -7,13 +7,11 @@ class InterestedUser < ApplicationRecord
   after_create :queue_thanks_email
 
   def queue_thanks_email
-    BookingCreatedEmailWorker.perform_async(id)
+    InterestedUserWorker.perform_async(id)
   end
 
-  def send_booking_created_email
-    users.each do |user|
-      BookingMailer.booking_created(self, user).deliver
-    end 
+  def send_registered_interest_email
+    InterestedUserMailer.user_registered(self).deliver
   end
 
   def figure_out_company
