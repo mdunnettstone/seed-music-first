@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   get "/unis", :controller => "static_pages", :action => "unis"
   get "/download_uni_doc", :controller => "static_pages", :action => "download_uni_doc"
+
+  # Interested Users
+  get "/yes", :controller => "interested_users", :action => "new"
+  resources :interested_users, only: [:create]
+  get "/leaderboard", :controller => "interested_users", :action => "index"
+
   resources :rooms, only: [:show, :index] do
     resources :room_comments, only: :create
   end

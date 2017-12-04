@@ -1,6 +1,6 @@
-
 @import "font-awesome";
 @import url('https://fonts.googleapis.com/css?family=Lato');
+@import "social-share-button";
 
 $disabled:#C0C0C0;
 $background:#f6f7fa;
@@ -101,10 +101,6 @@ p {
 
 .hidden {
   display: none !important;
-}
-
-.fade {
-  opacity: 0.9 !important;
 }
 
 .width100 {
@@ -238,6 +234,16 @@ h1.inline {
 
 .clear {
   clear: both;
+}
+
+$size: 100px;
+
+.social-share-button {
+  .ssb-icon {
+    background-size: $size $size;
+    height: $size;
+    width: $size;
+  }
 }
 
 .hero {
@@ -477,6 +483,13 @@ label.error {
   color: grey;
 }
 
+.hr-mint {
+  background-color: $mint-dark !important;
+  color: $mint-dark !important;
+  border: solid 2px $mint-dark !important;
+  height: 5px !important;
+}
+
 .user-image-circle {
   display: inline-block;
   width: 150px;
@@ -544,4 +557,14 @@ span.help-block {
   border-radius: 3px;
   padding: 2px 8px 2px 8px;
   margin: 10px;
+}
+
+.float-bottom-right {
+  position: fixed; 
+  top: 20px; 
+  right: 20px;
+}
+
+.min-height-n {
+  min-height: 220px;
 }
