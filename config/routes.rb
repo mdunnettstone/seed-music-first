@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   end
 
   constraints(HasSubdomain) do
-    root 'bookings#home'
     devise_for :users, :controllers => { registrations: 'users/registrations' }
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
