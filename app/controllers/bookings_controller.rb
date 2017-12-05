@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_account_matches_user
   def home
     @rooms = current_account.rooms.all
     @bookings = current_user.bookings.where("(start_time > ?)", Time.now).sort_by{|booking| booking.start_time}

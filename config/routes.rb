@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   constraints(NoSubdomain) do
     root 'static_pages#home'
+    get "/select_account", :controller => "static_pages", :action => "select_account"
     get "/unis", :controller => "static_pages", :action => "unis"
     get "/download_uni_doc", :controller => "static_pages", :action => "download_uni_doc"
 

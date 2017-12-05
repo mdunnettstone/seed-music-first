@@ -1,0 +1,33 @@
+<div class = "container">
+  <div class = "row">
+    <div class = "col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+      <div class = "booyah-box my-3 px-1 pb-2">
+        <h1>Pick your account</h1>
+        <p>Please select your account and then whether you wish to <strong>sign in or sign up</strong></p>
+        <p>Account: </p><%= select_tag 'subdomain', options_from_collection_for_select(@accounts, "subdomain", "subdomain"), :include_blank => true %>
+        <div class = "clear"></div>
+        <% @accounts.each do |account| %>
+          <div class = "show-hide accounts" id = <%= account.subdomain %>>
+            <%= link_to "Sign up", new_user_registration_url(subdomain: account.subdomain), class: "btn btn-secondary" %>
+            <%= link_to "Sign in", new_user_session_url(subdomain: account.subdomain), class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function() {
+
+  $("#subdomain").bind("change", function() {
+    var subdomain = $("#subdomain").val();
+    if (subdomain.length > 0) {
+      $(".accounts").hide();
+      $("#" + subdomain).slideToggle();
+    } else {
+      $(".accounts").hide();
+    }
+  });
+});
+</script>

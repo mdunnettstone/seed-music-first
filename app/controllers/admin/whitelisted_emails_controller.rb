@@ -1,4 +1,6 @@
 class Admin::WhitelistedEmailsController < ApplicationController
+  before_action :authenticate_user!, :authenticate_is_admin, :check_account_matches_user
+  
   def create
     current_account.whitelisted_emails.create(whitelisted_email_params)
     redirect_to admin_whitelisted_emails_path

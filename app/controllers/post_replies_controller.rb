@@ -1,4 +1,5 @@
 class PostRepliesController < ApplicationController
+  before_action :authenticate_user!, :check_account_matches_user
   def create
     @post_reply = current_user.post_replies.create(post_reply_params)
     redirect_to post_path(@post_reply.post)

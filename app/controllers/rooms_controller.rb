@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_account_matches_user
 
   def index
     @rooms = current_account.rooms.order(:id)
@@ -8,7 +8,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = current_account.rooms.find_by_id(params[:id])
-    @room_comment = current_account.room_comments.new
+    @room_comment = @room.room_comments.new
     @bookings = current_user.bookings.where("(room_id = ? AND start_time > ?)", @room.id, Time.now).sort_by{|booking| booking.start_time}
   end
 

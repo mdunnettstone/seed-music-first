@@ -1,5 +1,4 @@
 class RoomComment < ApplicationRecord
-  belongs_to :account
   belongs_to :room
   belongs_to :user
 

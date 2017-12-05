@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show]
+  before_action :check_account_matches_user, only: [:index, :show]
 
   def index
     @users = current_account.users.where.not(id: current_user.id).search(search_params)

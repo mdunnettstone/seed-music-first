@@ -13,7 +13,7 @@
   <div class = "row mt-3">
     <div class = "col-12">
       <h1>The most musical companies, so far</h1>
-      <%= bar_chart @interested_users.group(:company).count.sort, colors: ["#4bc2a2"] %>
+      <%= bar_chart @interested_users.group(:company).count.sort_by { |company, count| count }.reverse!, colors: ["#4bc2a2"] %>
     </div>
   </div>
 </div>

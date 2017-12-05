@@ -1,5 +1,5 @@
 class RoomCommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_account_matches_user
 
   def create
     @room = current_account.rooms.find(params[:room_id])

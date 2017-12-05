@@ -1,12 +1,18 @@
 class StaticPagesController < ApplicationController
   def home
-    if current_user.present?  
-      redirect_to home_url(subdomain: current_user.account.subdomain)
-    end
+
   end
 
   def unis
 
+  end
+
+  def select_account
+    if current_user.present?
+      redirect_to home_url(subdomain: current_user.account.subdomain)
+    else
+      @accounts = Account.all
+    end
   end
 
   def download_uni_doc

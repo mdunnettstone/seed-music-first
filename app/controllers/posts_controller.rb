@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_account_matches_user
 
   def index
     @posts = current_account.posts.search(search_params)

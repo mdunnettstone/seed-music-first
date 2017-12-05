@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
     return if request.subdomain(1) == "www"
     @current_account ||= Account.find_by(subdomain: request.subdomain(1))
   end
+
+  def check_account_matches_user
+    unless current_user.account == current_account
+      flash[:notice] = "This is the incorrect subdomain for your account, please select from below"
+      redirect_to select_account_url(subdomain: nil)
+    end
+  end
 end

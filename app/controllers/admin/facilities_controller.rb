@@ -1,13 +1,12 @@
 class Admin::FacilitiesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :authenticate_is_admin
+  before_action :authenticate_user!, :authenticate_is_admin, :check_account_matches_user
 
   def new
     @facility = Facility.new
   end
 
   def create
-    @facility = current_account.facilities.create(facility_params)
+    @facility = Facility.create(facility_params)
     redirect_to root_path
   end
 
