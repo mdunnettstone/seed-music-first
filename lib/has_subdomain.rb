@@ -1,5 +1,6 @@
 class HasSubdomain
   def self.matches?(request)
-    request.subdomain(1).present? && request.subdomain(1) != 'www'
+    tld_length = Rails.env.production? ? 2 : 1
+    request.subdomain(tld_length).present? && request.subdomain(tld_length) != 'www'
   end
 end
