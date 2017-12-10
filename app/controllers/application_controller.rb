@@ -9,9 +9,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_account
   def current_account
-    return unless request.subdomain(1).present?
-    return if request.subdomain(1) == "www"
-    @current_account ||= Account.find_by(subdomain: request.subdomain(1))
+    tld_length = Rails.env.production? ? 2 : 1
+    return unless request.subdomain(tld_length).present?
+    return if request.subdomain(tld_length) == "www"
+    @current_account ||= Account.find_by(subdomain: request.subdomain(tld_length))
   end
 
   def check_account_matches_user
