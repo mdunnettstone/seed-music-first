@@ -16,8 +16,8 @@ class ApplicationController < ActionController::Base
   end
 
   def check_account_matches_user
-    unless current_user.account == current_account
-      redirect_to select_account_url(subdomain: nil)
-    end
+    # unless current_user.account == current_account
+    #   redirect_to select_account_url(subdomain: nil)
+    # end
   end
 end
