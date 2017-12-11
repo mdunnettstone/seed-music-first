@@ -94,8 +94,10 @@
   </div>
 </div>
 
+<script>$('h1').addClass('fade-out');</script>
 <script>
   $(function() {
+    $('h1').removeClass('fade-out');
     $('.carousel').carousel({
       interval: 15000
     });

@@ -15,6 +15,16 @@ $light-grey:#e3e3e3;
 $white:#ffffff;
 $text-font: 'Lato', sans-serif;
 
+h1 {
+    opacity: 1;
+    transition: 1s opacity;
+}
+
+h1.fade-out {
+    opacity: 0;
+    transition: none;
+}
+
 p {
   font-family: $text-font;
 }
