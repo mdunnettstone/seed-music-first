@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
     #   redirect_to select_account_url(subdomain: nil)
     # end
   end
+
+  def full_domain(subdomain)
+    
+  end
 end
