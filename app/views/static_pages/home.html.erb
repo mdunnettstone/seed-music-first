@@ -21,8 +21,19 @@
     <div class = "container py-5">
       <div class = "row my-5">
         <div class = "col-md-8 col-lg-6 background-pink py-4 mx-3">
-          <h1 class = "text-white">A <span class = "underline-mint">music practice room</span> in your office</h1>
-          <h4 class = "text-white">A <span class = "underline-mint">community</span> built around it</h4>
+          <h1 class = "text-white display-4">A <span class = "underline-mint">music practice room</span> in your office</h1>
+          <h4 class = "text-white mt-4">A <span class = "underline-mint">community</span> built around it</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class = "background-pink">
+    <div class = "container">
+      <div class = "row py-5">
+        <div class = "col-10 offset-1 col-md-6 offset-md-3 background-yellow text-center">
+          <h1 class = "display-4 my-2">We want to find the offices with the best potential for a musical community.</h1>
+          <%= link_to "Is your office one of them?", yes_path, class: "btn btn-primary my-3" %>
         </div>
       </div>
     </div>
@@ -331,7 +342,8 @@
 //       }
 //     }
 // });
-
+</script>
+<script>
 $(function() {
   $('.carousel').carousel({
     interval: 15000
