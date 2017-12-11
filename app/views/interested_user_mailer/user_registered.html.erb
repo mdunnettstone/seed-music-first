@@ -1,10 +1,14 @@
-<p>Hi there,<br /><br />
+<p>Thanks for registering your interest in a Seed Music practice room at <%= @company.humanize %>. <strong>A music room in your office is one step closer</strong><br /><br />
 
-Thanks for registering your interest in a Seed Music practice room at <%= @company.humanize %>.<br /><br />
+<strong>The next and final step is to share.</strong><br /><br />
 
-We need your help to find the most musical offices, where Seed Music's facilities will have the biggest impact. If you think <%= @company %> should be one of them, please do share <strong>www.seedmusic.co.uk/yes</strong> with your colleagues. Signing up is a good start, but the biggest effect comes from sharing.<br /><br />
+We want our practice rooms to have the biggest possible impact, which means installing them in offices where there are the most musicians (aspiring, former or current). <br /><br />
 
-Below is a suggested email to send round to your colleagues. Please do write a personal one if you have time!<br /><br />
+Please spread the word amongst your colleagues, friends and fellow musicians! The link is <%= link_to "here", yes_url %>, and there's a suggested email to send round, below.<br /><br />
+
+We're excited to see the other musicians that you know.<br /><br />
+
+Be sure to check back to <%= link_to "see how your company is doing", leaderboard_url %>.
 
 Very best wishes,<br />
 Seed Music
@@ -14,10 +18,12 @@ Seed Music
 
 Hi all,<br /><br />
 
-Wouldn't it be great if people at <%= @company %> could play music?<br /><br />
+Seed Music is converting under-utilised office space into fantastic music practice rooms.<br /><br />
 
-Seed Music are trying to find the most musical offices, where their soundproofed, fully-equipped music practice rooms would have the biggest impact. I think <%= @company %> should be up there!<br /><br />
+Wouldn't it be great if <%= @company %> got involved and became more musical?<br /><br />
 
-The more people that vote for our office, the more likely we are to get one. You can register your interest with just your work email, <%= link_to "here", yes_url %>.<br /><br />
+To make sure the rooms have the biggest impact, Seed Music are creating a ranking the most musical offices. Those at the top of the leaderboard have the highest chance of getting. I think <%= @company %> should be up there.<br /><br />
+
+So please vote for <%= @company %>, <%= link_to "here", yes_url %>. All it takes is your work email.<br /><br />
 
 Best wishes,<br /></p>
