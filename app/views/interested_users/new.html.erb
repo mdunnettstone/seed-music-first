@@ -94,6 +94,10 @@
   </div>
 </div>
 
+<% if @interested_user.errors.any? %>
+   <script> $('#interestedUserModal').modal('show');</script>
+<% end %>
+
 <script>$('h1').addClass('fade-out');</script>
 <script>
   $(function() {
