@@ -1,5 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.hostname = "seedmusic.co.uk"
   config.action_mailer.default_url_options = { :host => 'www.seedmusic.co.uk' }
 
   ActionMailer::Base.smtp_settings = {

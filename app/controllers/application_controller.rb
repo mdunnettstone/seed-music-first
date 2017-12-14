@@ -21,7 +21,8 @@ class ApplicationController < ActionController::Base
     # end
   end
 
-  def full_domain(subdomain)
-    
+  helper_method :current_host
+  def current_host
+    Rails.application.config.hostname    
   end
 end

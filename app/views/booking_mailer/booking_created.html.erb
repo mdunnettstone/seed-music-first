@@ -3,7 +3,7 @@
   Your Seed Music booking for <b><%= "#{@date}, from #{@start_time} to #{@end_time} in #{@room_name}" %></b> has been confirmed.
 </p>
 <p>
-  You can manage your booking and add it to your calendar, <%= link_to 'here', booking_url(@booking) %>.
+  You can manage your booking and add it to your calendar, <%= link_to 'here', booking_url(@booking, subdomain: @creator.account.subdomain, host: current_host) %>.
 </p>
 <p>
   This booking was created by <%= link_to @creator_name, user_url(@creator) %>.

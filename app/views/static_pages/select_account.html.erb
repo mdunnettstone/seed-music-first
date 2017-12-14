@@ -8,8 +8,8 @@
         <div class = "clear"></div>
         <% @accounts.each do |account| %>
           <div class = "show-hide accounts" id = <%= account.subdomain %>>
-            <%= link_to "Sign up", new_user_registration_url(subdomain: account.subdomain), class: "btn btn-secondary" %>
-            <%= link_to "Sign in", new_user_session_url(subdomain: account.subdomain), class: "btn btn-primary" %>
+            <%= link_to "Sign up", new_user_registration_url(subdomain: account.subdomain, host: current_host), class: "btn btn-secondary" %>
+            <%= link_to "Sign in", new_user_session_url(subdomain: account.subdomain, host: current_host), class: "btn btn-primary" %>
           </div>
         <% end %>
       </div>

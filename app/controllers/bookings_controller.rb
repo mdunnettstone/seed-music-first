@@ -53,7 +53,7 @@ class BookingsController < ApplicationController
         booking.dtstart = @booking.start_time
         booking.dtend = @booking.end_time
         booking.summary = "Booking in #{@booking.room.name}"
-        booking.uid = booking.url = booking_url(@booking)
+        booking.uid = booking.url = booking_url(@booking, subdomain: current_account.subdomain, host: current_host)
         cal.add_event(booking)
         cal.publish
         render :text =>  cal.to_ical

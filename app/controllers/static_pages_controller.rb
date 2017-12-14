@@ -9,7 +9,7 @@ class StaticPagesController < ApplicationController
 
   def select_account
     if current_user.present?
-      redirect_to home_url(subdomain: current_user.account.subdomain)
+      redirect_to home_url(subdomain: current_user.account.subdomain, host: current_host)
     else
       @accounts = Account.all
     end
