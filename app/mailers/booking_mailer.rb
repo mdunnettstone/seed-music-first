@@ -3,7 +3,6 @@ class BookingMailer < ApplicationMailer
 
   def booking_created(booking, user)
     @booking    = booking
-    @host       = current_host
     @creator    = booking.creator
     if @creator == user
       @creator_name = "you"
