@@ -4,7 +4,7 @@ You have been added to a Seed Music booking on <%= "#{@date}, from #{@start_time
 
 You can manage your booking here: <%= booking_url(@booking) %>.
 
-This booking was created by <%= @booking.creator.fullname %>: <%= user_url(@booking.creator) %>, and you were added by @adder.fullname, <%= user_url(@adder) %>.
+This booking was created by <%= @booking.creator.fullname %>: <%= user_url(@booking.creator, host: "#{@booking.account.subdomain}.#{current_host}") %>, and you were added by @adder.fullname, <%= user_url(@adder, host: "#{@booking.account.subdomain}.#{current_host}") %>.
 
 Enjoy,
 Seed Music

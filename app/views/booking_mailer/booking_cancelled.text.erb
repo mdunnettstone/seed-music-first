@@ -3,7 +3,7 @@ Hi there,
   Your Seed Music booking for <%= "#{@date}, from #{@start_time} to #{@end_time} in #{@room_name}" %> has been cancelled.
 
 
-  If you still still wish to play some music, please make another booking: <%= root_url %>.
+  If you still still wish to play some music, please make another booking: <%= root_url(host: "#{@booking.account.subdomain}.#{current_host}") %>.
 
 Best wishes,
 Seed Music
