@@ -2,9 +2,9 @@ Hi there,
 
 Your Seed Music booking for <%= "#{@date}, from #{@start_time} to #{@end_time} in #{@room_name}" %> has been confirmed.
 
-You can manage your booking and add it to you calender, here: <%= booking_url(@booking, host: "#{@booking.account.subdomain}.#{current_host}") %>.
+You can manage your booking and add it to you calender, here: <%= booking_url(@booking, host: "#{@booking.account.subdomain}.#{@host}") %>.
 
-This booking was created by <%= @creator_name %>: <%= user_url(@creator, host: "#{@booking.account.subdomain}.#{current_host}") %>.
+This booking was created by <%= @creator_name %>: <%= user_url(@creator, host: "#{@booking.account.subdomain}.#{@host}") %>.
 
 Enjoy,
 Seed Music team :)
