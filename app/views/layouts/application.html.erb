@@ -30,15 +30,22 @@
           <span> </span>
           <span> </span>  
         </button>
-        <%= link_to root_path, class: 'navbar-brand' do %>
-          <%= image_tag "SM_Logo.svg", height: '30', class: "d-inline-block align-top", alt: "Seed Music logo" %>
-          Seed Music
+        <% if user_signed_in? %>
+          <%= link_to root_url(host: "#{current_user.account.subdomain}.#{current_host}"), class: 'navbar-brand' do %>
+            <%= image_tag "SM_Logo.svg", height: '30', class: "d-inline-block align-top", alt: "Seed Music logo" %>
+            Seed Music
+          <% end %>
+        <% else %>
+          <%= link_to root_url(host: "www.#{current_host}"), class: 'navbar-brand' do %>
+            <%= image_tag "SM_Logo.svg", height: '30', class: "d-inline-block align-top", alt: "Seed Music logo" %>
+            Seed Music
+          <% end %>
         <% end %>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-sm-0">
             <% if user_signed_in? %>
               <li class="nav-item">
-                <%= link_to rooms_path(host: "#{current_user.account.subdomain}.#{current_host}"), class: 'nav-link mx-1' do %>
+                <%= link_to rooms_url(host: "#{current_user.account.subdomain}.#{current_host}"), class: 'nav-link mx-1' do %>
                   <i class="fa fa-map-marker" aria-hidden="true"></i> Rooms
                 <% end %>
               </li>
@@ -47,17 +54,17 @@
                   <i class="fa fa-users" aria-hidden="true"></i> Community
                 </a>
                 <div class="dropdown-menu background-pink" aria-labelledby="CommunityDropdownMenuLink">
-                  <%= link_to users_path(host: "#{current_user.account.subdomain}.#{current_host}"), class: "dropdown-item text-white" do %>
+                  <%= link_to users_url(host: "#{current_user.account.subdomain}.#{current_host}"), class: "dropdown-item text-white" do %>
                     <i class="fa fa-user-circle" aria-hidden="true"></i> People
                   <% end %>
-                  <%= link_to posts_path(host: "#{current_user.account.subdomain}.#{current_host}"), class: "dropdown-item text-white" do %>
+                  <%= link_to posts_url(host: "#{current_user.account.subdomain}.#{current_host}"), class: "dropdown-item text-white" do %>
                     <i class="fa fa-comments" aria-hidden="true"></i> Forum
                   <% end %>
                 </div>
               </li>
             <% else %>
               <li class="nav-item">
-                <%= link_to "University Scheme", unis_path(host: "www.#{current_host}"), class: "nav-link" %>
+                <%= link_to "University Scheme", unis_url(host: "www.#{current_host}"), class: "nav-link" %>
               </li>
             <% end %>
           </ul>
@@ -68,17 +75,17 @@
                   <i class="fa fa-smile-o" aria-hidden="true"></i> &nbsp<%= current_user.firstname %>
                 </a>
                 <div class="dropdown-menu background-mint" aria-labelledby="ProfileDropdownMenuLink">
-                  <%= link_to user_path(current_user, host: "#{current_user.account.subdomain}.#{current_host}"), class: "dropdown-item text-white" do %>
+                  <%= link_to user_url(current_user, host: "#{current_user.account.subdomain}.#{current_host}"), class: "dropdown-item text-white" do %>
                     <i class="fa fa-user" aria-hidden="true"></i> Profile
                   <% end %>
-                  <%= link_to destroy_user_session_path(host: "#{current_user.account.subdomain}.#{current_host}"), method: :delete, class: "dropdown-item text-white" do %>
+                  <%= link_to destroy_user_session_url(host: "#{current_user.account.subdomain}.#{current_host}"), method: :delete, class: "dropdown-item text-white" do %>
                     <i class="fa fa-sign-out" aria-hidden="true"></i> Sign out
                   <% end %>
                 </div>
               </li>
             <% else %>
               <li class="nav-item">
-                <%= link_to 'Log in or Sign up', select_account_path(host: "www.#{current_host}"), class: 'btn btn-yellow mx-md-2' %>
+                <%= link_to 'Log in or Sign up', select_account_url(host: "www.#{current_host}"), class: 'btn btn-yellow mx-md-2' %>
               </li>
               <li class = "nav-item">
                 <%= mail_to "hello@seedmusic.co.uk" do %>
