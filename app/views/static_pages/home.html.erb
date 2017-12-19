@@ -1,8 +1,8 @@
 <% if current_user.present? %>
   <div class = "row background-purple">
     <div class = "col-12 text-center">
-      <h4 class = "my-4"><%= "Hi, #{current_user.firstname}, you are currently logged in to #{current_user.account.subdomain}." %></h4>
-      <%= link_to "Go there", home_url(subdomain: current_user.account.subdomain), class: "btn btn-primary my-3" %>
+      <h4 class = "my-4 text-white"><%= "Hi, #{current_user.firstname}, you are currently logged in to #{current_user.account.subdomain}." %></h4>
+      <%= link_to "Go there", home_url(host: "#{current_user.account.subdomain}.#{current_host}"), class: "btn btn-primary my-3" %>
     </div>
   </div>
 <% end %>
