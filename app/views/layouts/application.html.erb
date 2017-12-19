@@ -108,11 +108,13 @@
       <div class="container">
         <b>Useful links</b>
         <br />
-        <% if current_user.present? && current_user.admin %>
-          <%= link_to 'Admin dashboard', admin_dashboard_path(host: "#{current_user.account.subdomain}.#{current_host}") %>
+        <% if user_signed_in? && current_user.admin %>
+          <%= link_to 'Admin dashboard', admin_dashboard_url(host: "#{current_user.account.subdomain}.#{current_host}") %>
         <br />
         <% end %>
-        <%= link_to 'Give feedback', new_feedback_path %>
+        <% if user_signed_in? %>
+          <%= link_to 'Give feedback', new_feedback_url(host: "#{current_user.account.subdomain}.#{current_host}") %>
+        <% end %>
       </div>
     </div>
   </body>
