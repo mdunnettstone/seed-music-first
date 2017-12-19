@@ -78,7 +78,7 @@
                   <%= link_to user_url(current_user, host: "#{current_user.account.subdomain}.#{current_host}"), class: "dropdown-item text-white" do %>
                     <i class="fa fa-user" aria-hidden="true"></i> Profile
                   <% end %>
-                  <%= link_to destroy_user_session_url(host: "#{current_user.account.subdomain}.#{current_host}"), method: :delete, class: "dropdown-item text-white" do %>
+                  <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item text-white" do %>
                     <i class="fa fa-sign-out" aria-hidden="true"></i> Sign out
                   <% end %>
                 </div>
