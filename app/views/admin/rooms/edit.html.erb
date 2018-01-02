@@ -1,6 +1,6 @@
 <div class = "container my-3">
   <div class = "booyah-box col-10 offset-1 col-md-6 offset-md-3 pt-3">
-    <h1 class = "">New room</h1>
+    <h1 class = "">Edit room</h1>
     <%= simple_form_for @room, url: admin_room_path do |f| %>
       <div class="form-inputs">
         <%= f.input :name, hint: "Must be unique" %>
@@ -15,7 +15,7 @@
           <li><%= facility.full_facility %></li>
         <% end %>
       </ul>
-      <%= link_to 'Add a facility', new_room_room_facility_path(current_room), class: "btn btn-primary my-3" %>
+      <%= link_to 'Add a facility', new_admin_room_room_facility_path(current_room), class: "btn btn-primary my-3" %>
       <div class="form-actions">
         <%= f.button :submit, "Update", class: 'btn btn-primary col-12' %>
       </div>

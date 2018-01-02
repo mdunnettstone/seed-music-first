@@ -1,4 +1,12 @@
 <div class = "container my-3">
+  <% if current_user.admin %>
+    <h3>Admin options</h3>
+    <div class = "row">
+      <%= link_to "Edit room", edit_admin_room_path(@room), class: "btn btn-primary col-md-6" %>
+      <%= link_to "Add a facility", new_admin_room_room_facility_path(@room), class: "btn btn-pink col-md-6" %>
+    </div>
+  <% end %>    
+
   <div class = "row top-half-booyah-box">
     <div class = "col-12 px-0 text-center mb-4">
       <% if @room.photo.present? %>
@@ -28,7 +36,7 @@
         <div class = "col-12">
           <hr class = "mt-0 mb-3">
         </div>
-        <p>Address: <%= @room.address %></p>
+        <p>Location: <%= @room.address %></p>
       </div>
     </div>
     <div class = "col-12">
