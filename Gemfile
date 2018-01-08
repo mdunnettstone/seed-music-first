@@ -86,3 +86,5 @@ gem 'fog-aws'
 gem 'chartkick'
 
 gem 'social-share-button'
+
+gem 'will_paginate', '~> 3.1.0'

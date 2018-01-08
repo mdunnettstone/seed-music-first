@@ -80,6 +80,9 @@
         </div>
         <br />
       <% end %>
+      <div class = "digg_pagination">
+        <%= will_paginate @posts, :page_links => false %>
+      </div>
     </div>
   </div>
 </div>
