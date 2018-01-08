@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :check_account_matches_user, only: [:index, :show]
 
   def index
-    @users = current_account.users.where.not(id: current_user.id).search(search_params).paginate(:page => params[:page], :per_page => 6)
+    @users = current_account.users.where.not(id: current_user.id).search(search_params).paginate(:page => params[:page], :per_page => 20)
     @recent_bookings = current_account.bookings.where("(start_time > ?)", Time.now - 6.month).order(:start_time)
 
 
