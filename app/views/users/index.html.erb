@@ -80,8 +80,12 @@
         </div>
         <br />
       <% end %>
-      <div class = "digg_pagination">
-        <%= will_paginate @posts, :page_links => false %>
+    </div>
+    <div class = "row">
+      <div class = "text-center">
+        <div class = "digg_pagination py-2">
+          <%= will_paginate @posts, :page_links => false %>
+        </div>
       </div>
     </div>
   </div>
