@@ -353,7 +353,7 @@ $(function () {
         $.each(data.responseJSON.errors, function(index, error){
           $('#errors').append("<li>" + error + "</li>")
         });
-        $('#errors').toggle("highlight");
+        // $( '#errors' ).effect( "shake" );
       }
     });
   });
