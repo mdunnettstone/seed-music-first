@@ -9,6 +9,7 @@ class Booking < ApplicationRecord
   validate :end_time_after_start_time
   validate :start_time_in_future
   validate :no_longer_than_2_hours_unless_admin
+  validate :no_longer_than_2_hours_booked_that_day
   validate :not_already_booked
 
   scope :within, ->(start_time, end_time) {
@@ -49,6 +50,12 @@ class Booking < ApplicationRecord
     end
   end
 
+  def no_longer_than_2_hours_booked_that_day
+    if self.total_time_booked_on_day > 7200
+      errors.add(:start_time, "The maximum time you can book for 1 day is 2 hours") unless self.users.last.admin
+    end
+  end
+
   def not_already_booked
     if overlapping_bookings.exists?
       errors.add(:room_id, "A booking already exists for this room")  
@@ -57,6 +64,19 @@ class Booking < ApplicationRecord
 
   def overlapping_bookings
     Booking.within(start_time, end_time).where(room: room)
+  end
+
+  def bookings_on_same_day_by_same_person
+    Booking.within(start_time.beginning_of_day, start_time.end_of_day).where(creator_user_id: creator.id)
+  end
+
+  def total_time_booked_on_day
+    total_time = 0
+    bookings_on_same_day_by_same_person.each do |booking|
+      length = booking.end_time - booking.start_time
+      total_time += length
+    end
+    return total_time
   end
 
   def queue_booking_created_email
