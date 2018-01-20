@@ -346,9 +346,6 @@ $(function () {
           user_ids: selectedUserIds
         },
       },
-      success: function() {
-        swal("Booking confirmed!", "We'll show you your booking details now", "success")
-      },
       error: function(data) {
         $.each(data.responseJSON.errors, function(index, error){
           $('#errors').append("<li>" + error + "</li>")
