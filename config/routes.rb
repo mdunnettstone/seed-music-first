@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get "/yes", :controller => "interested_users", :action => "new"
     resources :interested_users, only: [:create]
     get "/leaderboard", :controller => "interested_users", :action => "index"
+    get "/feedback", :controller => "feedbacks", :action => "index"
   end
 
   constraints(HasSubdomain) do

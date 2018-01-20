@@ -43,8 +43,8 @@
     </div>
     <div class = "col-6 col-md-4">
       <div class = "booyah-box background-pink text-center py-3">
-        <h2 class = "text-white"><%= @recent_bookings.length %></h2>
-        <p class = "text-white">Bookings in past 3 months</p>
+        <h2 class = "text-white"><%= distance_of_time_in_words(@recent_bookings.map(&:duration).inject(0, &:+)) %></h2>
+        <p class = "text-white">booked in past 3 months</p>
       </div>
     </div>
     <div class = "col-6 col-md-4">

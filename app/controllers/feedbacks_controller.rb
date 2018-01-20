@@ -1,4 +1,5 @@
 class FeedbacksController < ApplicationController
+  before_action :authenticate_user!, :authenticate_is_admin, only: [:index]
   after_action :save_previous_url, only: [:new]
 
   def new
@@ -17,6 +18,10 @@ class FeedbacksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def index
+    @feedbacks = Feedback.order(created_at: :desc)
   end
 
   private

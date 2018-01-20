@@ -13,8 +13,8 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.create(post_params)
-    @post.account = current_account
-    if @post.valid?
+    @post.assign_attributes(account: current_account)
+    if @post.save
       redirect_to posts_path
     else
       # should probably do some proper error validation here

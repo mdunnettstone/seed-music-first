@@ -1,0 +1,13 @@
+<div class = "container">
+  <h3>All feedback</h3>
+    <div class = "row">
+    <% @feedbacks.each do |feedback| %>
+      <div class = "col-md-4">
+        <div class = "booyah-box my-2 px-2">
+          <h5><%= feedback.title %></h6>
+          <p><%= feedback.message %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

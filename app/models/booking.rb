@@ -28,6 +28,10 @@ class Booking < ApplicationRecord
   usernames.to_sentence
   end
 
+  def duration
+    end_time - start_time
+  end
+
   def creator
     User.find(creator_user_id)
   end
@@ -45,7 +49,7 @@ class Booking < ApplicationRecord
   end
 
   def no_longer_than_2_hours_unless_admin
-    if (end_time - start_time) > 2.hour
+    if duration > 2.hour
       errors.add(:end_time, "You may only book for a maximum of 2 hours") unless users.last.admin
     end
   end
