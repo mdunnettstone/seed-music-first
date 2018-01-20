@@ -51,14 +51,14 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" id="CommunityDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-users" aria-hidden="true"></i> Community
+                  <i class="fa fa-users" aria-hidden="true"></i> Community <span class="badge badge-info">New</span>
                 </a>
                 <div class="dropdown-menu background-pink" aria-labelledby="CommunityDropdownMenuLink">
                   <%= link_to users_url(host: "#{current_user.account.subdomain}.#{current_host}"), class: "dropdown-item text-white" do %>
                     <i class="fa fa-user-circle" aria-hidden="true"></i> People
                   <% end %>
                   <%= link_to posts_url(host: "#{current_user.account.subdomain}.#{current_host}"), class: "dropdown-item text-white" do %>
-                    <i class="fa fa-comments" aria-hidden="true"></i> Forum
+                    <i class="fa fa-comments" aria-hidden="true"></i> Forum <span class="badge badge-info">New</span>
                   <% end %>
                 </div>
               </li>
