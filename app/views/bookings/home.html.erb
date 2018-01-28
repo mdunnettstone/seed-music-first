@@ -3,19 +3,21 @@
     <p class="alert alert-info col-md-4 offset-md-4 text-center">Bookmark this page!</p>
     <div class = "row">
       <div class = "col-12 col-md-6 text-right">
-        <h1 class = "text-white mega-title">Book a music room</h1>
+        <h1 class = "text-white mega-title">Find available rooms</h1>
       </div>
       <div class = "col-12 col-md-6">
         <div class = "row">
           <%= form_tag(new_booking_path, method: :get, class: "col-12 col-md-6 frosty pb-2") do %>
             <h3 class = "mb-1 mt-0"><span class = "badge">Date</span></h3>
             <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"), class: "date col-12 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => "0d", "data-disable-touch-keyboard" => true, readonly: true %>
-            <h3 class = "mb-1 mt-2"><span class = "badge">Time</span></h3>
-            <%= select_time @prepopulated_search, {:time_separator => ":", :minute_step => 15}, class: "time col-3 pr-0 pl-0 mx-0 d-inline" %>
+            <h3 class = "mb-1 mt-2"><span class = "badge">Between...</span></h3>
+            <%= select_time @prepopulated_search, {:time_separator => ":", :minute_step => 15, prefix: :start_time} %>
+            <h3 class = "mb-1 mt-0"><span class = "badge">...and</span></h3>
+            <%= select_time @prepopulated_search+2.hour, {:time_separator => ":", :minute_step => 15, prefix: :end_time} %>
             <div class = "my-1"><a class = "room-search-toggle text-white" href = "#">+ Search by room</a></div>
             <span class = "room-search show-hide">
             <h3 class = "my-0"><span class = "badge">Rooms</span></h3>
-              <%= select_tag "room_ids", options_from_collection_for_select(@rooms, :id, :name), multiple: true, class: "multiselect col-12" %>
+            <%= select_tag "room_ids", options_from_collection_for_select(@rooms, :id, :name), multiple: true, class: "multiselect col-12" %>
             </span>
             <%= submit_tag "Search", class: "btn btn-primary col form-button d-inline my-1" %>
           <% end %>
@@ -131,6 +133,27 @@
     $('.multiselect').multiselect({
       enableFiltering: true,
       enableCaseInsensitiveFiltering: true
+    });
+
+    function appendzeros(num) {
+      if (num < 10) {
+        for_populating = "0".concat(num);
+      }
+      else {
+        for_populating = num;
+      }
+    }
+
+    $('#start_time_hour').change(function(){
+      var start_hour = $('#start_time_hour').val();
+      appendzeros(parseInt(start_hour) + 2);
+      console.log(for_populating);
+      $('#end_time_hour').val(for_populating);
+    });
+
+    $('#start_time_minute').change(function(){
+      var start_minute = $('#start_time_minute').val();
+      $('#end_time_minute').val(parseInt(start_minute, 10));
     });
 
     $(".room-search-toggle").click(function(evt){

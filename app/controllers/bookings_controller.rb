@@ -9,25 +9,19 @@ class BookingsController < ApplicationController
   end
 
   def new
-    if params[:start_date] && params[:date]
-      parsed_datetime = DateTime.parse("#{params[:start_date]} #{params[:date][:hour]}:#{params[:date][:minute]}")
+    @search_start = DateTime.parse("#{params[:start_date]} #{params[:start_time][:hour]}:#{params[:start_time][:minute]}")
+    if params[:end_time]
+      @search_end = DateTime.parse("#{params[:start_date]} #{params[:end_time][:hour]}:#{params[:end_time][:minute]}")
     else
-      parsed_datetime = rounded_datetime(DateTime.now) + 1.hour
+      @search_end = search_start + 2.hour
     end
-
-    @searched_start_time = rounded_datetime(parsed_datetime)
-
-
     @rooms = current_account.rooms.order(:id)
     if params[:room_ids].present?
       @rooms = @rooms.where(id: params[:room_ids])
     end
-
-    search_start         = @searched_start_time - 30.minute
-    search_end           = @searched_start_time + 90.minute
     
-    @timeslots           = build_room_times(search_start, search_end)
-    @bookings            = current_account.bookings.within(search_start, search_end)
+    @timeslots           = build_room_times(@search_start, @search_end)
+    @bookings            = current_account.bookings.within(@search_start, @search_end)
     @users               = current_account.users.where.not(id: current_user.id)
   end
 

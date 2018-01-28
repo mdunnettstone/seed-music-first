@@ -1,14 +1,20 @@
 <div class = "container">
   <div class = "row first-section">
     <div class = "col-12 col-md-8 offset-md-2">
-      <h3 class = "d-inline"><%= "#{@searched_start_time.strftime("%A, %e %b %Y")}, around #{@searched_start_time.strftime("%H:%M")}" %></h3>
+      <h3 class = "d-inline"><%= "#{@search_start.strftime("%A, %e %b %Y")}, between #{@search_start.strftime("%H:%M")} and #{@search_end.strftime("%H:%M")}" %></h3>
       <a class = "toggle-form btn btn-secondary mb-3 ml-3"><i class="fa fa-random" aria-hidden="true"></i> Change</a>
       <div class = "search-form-show-hide">
-        <%= form_tag(new_booking_path, method: :get) do %>
-          <%= text_field_tag :start_date, @searched_start_time.strftime("%d-%m-%Y"), class: "date col-12 col-md-5 mx-md-2 mb-1 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => Date.today %>
-          <%= select_time @searched_start_time, minute_step: 15, class: "time col-5 col-md-3 mx-1 d-inline" %>
-          <%= submit_tag "Search", class: "btn btn-primary" %>
-        <% end %>
+        <%= form_tag(new_booking_path, method: :get, class: "col-12 col-md-6 frosty pb-2") do %>
+            <h3 class = "mb-1 mt-0"><span class = "badge">Date</span></h3>
+            <%= text_field_tag :start_date, @search_start.strftime("%d-%m-%Y"), class: "date col-12 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => "0d", "data-disable-touch-keyboard" => true, readonly: true %>
+            <h3 class = "mb-1 mt-2"><span class = "badge">Time</span></h3>
+            <%= select_time @search_start, {:time_separator => ":", :minute_step => 15, prefix: :start_time} %>
+            <%= select_time @search_end, {:time_separator => ":", :minute_step => 15, prefix: :end_time} %>
+            <h3 class = "my-0"><span class = "badge">Rooms</span></h3>
+            <%= select_tag "room_ids", options_from_collection_for_select(@rooms, :id, :name), multiple: true, class: "multiselect col-12" %>
+            </span>
+            <%= submit_tag "Search", class: "btn btn-primary col form-button d-inline my-1" %>
+          <% end %>
       </div>
     </div>
   </div>
