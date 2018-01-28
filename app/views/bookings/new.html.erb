@@ -5,16 +5,19 @@
       <a class = "toggle-form btn btn-secondary mb-3 ml-3"><i class="fa fa-random" aria-hidden="true"></i> Change</a>
       <div class = "search-form-show-hide">
         <%= form_tag(new_booking_path, method: :get, class: "col-12 col-md-6 frosty pb-2") do %>
-            <h3 class = "mb-1 mt-0"><span class = "badge">Date</span></h3>
-            <%= text_field_tag :start_date, @search_start.strftime("%d-%m-%Y"), class: "date col-12 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => "0d", "data-disable-touch-keyboard" => true, readonly: true %>
-            <h3 class = "mb-1 mt-2"><span class = "badge">Time</span></h3>
-            <%= select_time @search_start, {:time_separator => ":", :minute_step => 15, prefix: :start_time} %>
-            <%= select_time @search_end, {:time_separator => ":", :minute_step => 15, prefix: :end_time} %>
-            <h3 class = "my-0"><span class = "badge">Rooms</span></h3>
-            <%= select_tag "room_ids", options_from_collection_for_select(@rooms, :id, :name), multiple: true, class: "multiselect col-12" %>
-            </span>
-            <%= submit_tag "Search", class: "btn btn-primary col form-button d-inline my-1" %>
-          <% end %>
+          <h3 class = "mb-1 mt-0"><span class = "badge">Date</span></h3>
+          <%= text_field_tag :start_date, @search_start.strftime("%d-%m-%Y"), class: "date col-12 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => "0d", "data-disable-touch-keyboard" => true, readonly: true %>
+          <h3 class = "mb-1 mt-2"><span class = "badge">Between...</span></h3>
+          <%= select_time @search_start, {:time_separator => ":", :minute_step => 15, prefix: :start_time} %>
+          <h3 class = "mb-1 mt-0"><span class = "badge">...and</span></h3>
+          <%= select_time @search_end, {:time_separator => ":", :minute_step => 15, prefix: :end_time} %>
+          <div class = "my-1"><a class = "room-search-toggle text-white" href = "#">+ Search by room</a></div>
+          <span class = "room-search show-hide">
+          <h3 class = "my-0"><span class = "badge">Rooms</span></h3>
+          <%= select_tag "room_ids", options_from_collection_for_select(@rooms, :id, :name), multiple: true, class: "multiselect col-12" %>
+          </span>
+          <%= submit_tag "Search", class: "btn btn-primary col form-button d-inline my-1" %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -128,6 +131,38 @@
 </div>
 
 <script>
+  $(function() {
+    $('.multiselect').multiselect({
+      enableFiltering: true,
+      enableCaseInsensitiveFiltering: true
+    });
+
+    function appendzeros(num) {
+      if (num < 10) {
+        for_populating = "0".concat(num);
+      }
+      else {
+        for_populating = num;
+      }
+    }
+
+    $('#start_time_hour').change(function(){
+      var start_hour = $('#start_time_hour').val();
+      appendzeros(parseInt(start_hour) + 2);
+      console.log(for_populating);
+      $('#end_time_hour').val(for_populating);
+    });
+
+    $('#start_time_minute').change(function(){
+      var start_minute = $('#start_time_minute').val();
+      $('#end_time_minute').val(parseInt(start_minute, 10));
+    });
+
+    $(".room-search-toggle").click(function(evt){
+      evt.preventDefault();
+      $(".room-search").slideToggle();
+    });
+  });
 $(function () {
   //Dealing with all items that are selectable
   $('.selectable-timeslot').click(function(e) {
