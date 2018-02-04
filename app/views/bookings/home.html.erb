@@ -1,19 +1,24 @@
 <div class = "hero pt-5">
   <div class = "container">
-    <p class="alert alert-info col-md-4 offset-md-4 text-center">Bookmark this page!</p>
     <div class = "row">
-      <div class = "col-12 col-md-6 text-right">
+      <div class = "col-12 col-md-4 text-right">
         <h1 class = "text-white mega-title">Find available rooms</h1>
       </div>
-      <div class = "col-12 col-md-6">
+      <div class = "col-12 col-md-8">
         <div class = "row">
-          <%= form_tag(new_booking_path, method: :get, class: "col-12 col-md-6 frosty pb-2") do %>
+          <%= form_tag(new_booking_path, method: :get, class: "col-12 frosty pb-2") do %>
             <h3 class = "mb-1 mt-0"><span class = "badge">Date</span></h3>
-            <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"), class: "date col-12 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => "0d", "data-disable-touch-keyboard" => true, readonly: true %>
-            <h3 class = "mb-1 mt-2"><span class = "badge">Between...</span></h3>
-            <%= select_time @prepopulated_search, {:time_separator => ":", :minute_step => 15, prefix: :start_time} %>
-            <h3 class = "mb-1 mt-0"><span class = "badge">...and</span></h3>
-            <%= select_time @prepopulated_search+2.hour, {:time_separator => ":", :minute_step => 15, prefix: :end_time} %>
+            <%= text_field_tag :start_date, @prepopulated_search.strftime("%d-%m-%Y"), class: "date col-md-6 d-inline", "data-provide" => 'datepicker', "data-date-format" => "dd/mm/yyyy", "data-date-autoclose" => "true", "data-date-start-date" => "0d", "data-disable-touch-keyboard" => true, readonly: true %>
+            <div class = "row">
+              <div class = "ml-3">
+                <h3 class = "mb-1 mt-2"><span class = "badge">Between...</span></h3>
+                <%= select_time @prepopulated_search, {:time_separator => ":", :minute_step => 15, prefix: :start_time} %>
+              </div>
+              <div class = 'ml-3'>
+                <h3 class = "mb-1 mt-2"><span class = "badge">...and</span></h3>
+                <%= select_time @prepopulated_search+2.hour, {:time_separator => ":", :minute_step => 15, prefix: :end_time} %>
+              </div>
+            </div>
             <div class = "my-1"><a class = "room-search-toggle text-white" href = "#">+ Search by room</a></div>
             <span class = "room-search show-hide">
             <h3 class = "my-0"><span class = "badge">Rooms</span></h3>

@@ -3,6 +3,9 @@
   Your Seed Music booking for <b><%= "#{@date}, from #{@start_time} to #{@end_time} in #{@room_name}" %></b> has been confirmed.
 </p>
 <p>
+  Remember, the forum is your friend - you can start discussions, find bandmates and see what's going on in your university, <%= link_to 'here', posts_url(host: "#{@booking.account.subdomain}.#{current_host}") %>.
+</p>
+<p>
   You can manage your booking and add it to your calendar, <%= link_to 'here', booking_url(@booking, host: "#{@booking.account.subdomain}.#{current_host}") %>.
 </p>
 <p>
